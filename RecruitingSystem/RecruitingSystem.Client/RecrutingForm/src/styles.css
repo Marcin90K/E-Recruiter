@@ -1,0 +1,34 @@
+/* font-family: 'Source Sans Pro', sans-serif;
+font-family: 'Montserrat', sans-serif; */
+
+.body {
+  /* font-family: 'Montserrat', sans-serif; */
+  padding: 0;
+  margin: 0;
+}
+
+.element-title {
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 2px;
+  font-size: 24px;
+}
+
+form {
+  font-family: 'Source Sans Pro', sans-serif;
+  padding-top: 10px;
+}
+
+label {
+   font-family: 'Montserrat', sans-serif;
+}
+
+.nested-form-container {
+  margin-top: 20px;
+}
+
+.button-submit {
+  width: 65px;
+  height: 40px;
+  font-size: 20px;
+}
