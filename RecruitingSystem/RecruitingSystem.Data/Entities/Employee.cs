@@ -10,8 +10,8 @@ namespace RecruitingSystem.Data.Entities
     {
         public string EmployeeCompanyId { get; set; }
 
-        public virtual PersonBasicData PersonBasicData { get; set; }
+        public Guid PersonBasicDataId { get; set; }
 
-        public EmployeeFunction EmployeeFunction { get; set; }
+        public virtual PersonBasicData PersonBasicData { get; set; }
     }
 }

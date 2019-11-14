@@ -12,6 +12,8 @@ namespace RecruitingSystem.Data.Entities
         [DefaultValue(0)]
         public int ReferenceNumber { get; set; }
 
+        public Guid JobPositionId { get; set; }
+
         public virtual JobPosition JobPosition { get; set; }
 
         [Required]
@@ -24,7 +26,7 @@ namespace RecruitingSystem.Data.Entities
         public Guid EmployeeId { get; set; }
 
         [ForeignKey("EmployeeId")]
-        public virtual Employee Owner { get; set; }
+        public virtual Recruiter Owner { get; set; }
 
         public virtual ICollection<CandidateJobOffer> CandidateJobOffers { get; set; } = new List<CandidateJobOffer>();
     }
