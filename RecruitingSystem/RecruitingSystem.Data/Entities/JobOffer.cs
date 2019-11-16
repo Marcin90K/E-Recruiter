@@ -21,6 +21,12 @@ namespace RecruitingSystem.Data.Entities
         public string Description { get; set; }
 
         [Required]
+        public DateTime DateOfAdding { get; set; }
+
+        [Required]
+        public DateTime DateOfExpiration { get; set; }
+
+        [Required]
         public virtual ICollection<string> Requirements { get; set; } = new List<string>();
 
         public Guid EmployeeId { get; set; }
