@@ -27,7 +27,7 @@ namespace RecruitingSystem.Data.Entities
         public DateTime DateOfExpiration { get; set; }
 
         [Required]
-        public virtual ICollection<string> Requirements { get; set; } = new List<string>();
+        public string Requirements { get; set; }
 
         public Guid EmployeeId { get; set; }
 

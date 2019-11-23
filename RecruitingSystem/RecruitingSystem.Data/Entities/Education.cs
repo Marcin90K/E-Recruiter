@@ -18,7 +18,7 @@ namespace RecruitingSystem.Data.Entities
         public DateTime EndDate { get; set; }
 
         [Required]
-        public string Coursename { get; set; }
+        public string CourseName { get; set; }
 
         public Guid CandidateId { get; set; }
 
