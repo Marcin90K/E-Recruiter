@@ -22,10 +22,5 @@ namespace RecruitingSystem.Data.Entities
 
         [Required]
         public string Zip { get; set; }
-
-        public Guid BasicDataId { get; set; }
-
-        [ForeignKey("BasicDataId")]
-        public virtual CandidateBasicData BasicData { get; set; }
     }
 }
