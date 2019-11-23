@@ -11,11 +11,9 @@ namespace RecruitingSystem.Data.Entities
 
         [ForeignKey(nameof(Employee))]
         public Guid EmployeeId { get; set; }
+
         public Employee Employee { get; set; }
 
-        //public Guid ManagerId { get; set; }
-
-        //[ForeignKey("ManagerId")]
         public virtual Manager Manager { get; set; }
     }
 }
