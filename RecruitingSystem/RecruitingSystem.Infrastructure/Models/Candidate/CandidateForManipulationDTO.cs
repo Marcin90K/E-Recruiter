@@ -7,11 +7,11 @@ using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Models.Candidate
 {
-    public class CandidateForCreationDTO
+    public class CandidateForManipulationDTO
     {
-        public CandidateBasicDataForCreationDTO CandidateBasicData { get; set; }
-        public ICollection<EducationForCreationDTO> Educations { get; set; }
-        public ICollection<ExperienceForCreationDTO> Experiences { get; set; }
+        public CandidateBasicDataForManipulationDTO CandidateBasicData { get; set; }
+        public ICollection<EducationForManipulationDTO> Educations { get; set; }
+        public ICollection<ExperienceForManipulationDTO> Experiences { get; set; }
         public decimal ExpectedSalary { get; set; }
     }
 }

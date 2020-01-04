@@ -7,7 +7,7 @@ using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Models.Candidate
 {
-    public class CanditateDTO
+    public class CandidateDTO
     {
         public Guid Id { get; set; }
         //public Guid CandidateBasicDataId { get; set; }

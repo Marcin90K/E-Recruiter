@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Models.Experience
 {
-    public class ExperienceForCreationDTO
+    public class ExperienceForManipulationDTO
     {
         public string CompanyName { get; set; }
         public DateTime StartDate { get; set; }

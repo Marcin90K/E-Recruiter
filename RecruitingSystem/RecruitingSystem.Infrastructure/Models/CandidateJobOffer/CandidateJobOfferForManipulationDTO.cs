@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Models.CandidateJobOffer
 {
-    class CandidateJobOfferForCreationDTO
+    class CandidateJobOfferForManipulationDTO
     {
         public Guid CandidateId { get; set; }
         public Guid JobOfferId { get; set; }

@@ -5,11 +5,11 @@ using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Models.JobOffer
 {
-    public class JobOfferForCreationDTO
+    public class JobOfferForManipulationDTO
     {
         public int ReferenceNumber { get; set; }
 
-        public JobPositionForCreationDTO JobPosition { get; set; }
+        public JobPositionForManipulationDTO JobPosition { get; set; }
 
         public string Description { get; set; }
 

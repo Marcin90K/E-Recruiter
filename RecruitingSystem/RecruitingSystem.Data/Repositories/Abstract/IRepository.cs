@@ -15,7 +15,7 @@ namespace RecruitingSystem.Data.Repositories.Abstract
         /// </summary>
         /// <param name="id">Id of item.</param>
         /// <returns></returns>
-        T GetSingle(Guid id);
+        T GetSingleById(Guid id);
 
         /// <summary>
         /// Method for getting a single resource by any predicate.

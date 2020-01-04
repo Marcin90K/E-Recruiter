@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Models.PersonBasicData
 {
-    public class PersonBasicDataForCreationDTO
+    public class PersonBasicDataForManipulationDTO
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -6,10 +6,10 @@ using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Models.Recruiter
 {
-    public class RecruiterForCreationDTO
+    public class RecruiterForManipulationDTO
     {
-        public ICollection<JobOfferForCreationDTO> OwnedJobOffers { get; set; }
-        public EmployeeForCreationDTO Employee { get; set; }
+        public ICollection<JobOfferForManipulationDTO> OwnedJobOffers { get; set; }
+        public EmployeeForManipulationDTO Employee { get; set; }
         public Guid ManagerId { get; set; }
     }
 }

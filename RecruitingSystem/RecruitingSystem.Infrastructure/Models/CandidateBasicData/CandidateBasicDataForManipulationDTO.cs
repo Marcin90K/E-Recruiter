@@ -7,11 +7,11 @@ using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Models.CandidateBasicData
 {
-    public class CandidateBasicDataForCreationDTO
+    public class CandidateBasicDataForManipulationDTO
     {
-        public PersonBasicDataForCreationDTO PersonBasicData { get; set; }
+        public PersonBasicDataForManipulationDTO PersonBasicData { get; set; }
         public int PhoneNumber { get; set; }
-        public AddressForCreationDTO Address { get; set; }
+        public AddressForManipulationDTO Address { get; set; }
         public Guid CandidateId { get; set; }
     }
 }

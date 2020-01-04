@@ -23,40 +23,40 @@ namespace RecruitingSystem.Infrastructure.Configuration
         public AutoMapperProfile()
         {
             CreateMap<Address, AddressDTO>();
-            CreateMap<AddressForCreationDTO, Address>();
+            CreateMap<AddressForManipulationDTO, Address>();
 
-            CreateMap<Candidate, CanditateDTO>();
-            CreateMap<CandidateForCreationDTO, Candidate>();
+            CreateMap<Candidate, CandidateDTO>();
+            CreateMap<CandidateForManipulationDTO, Candidate>();
 
             CreateMap<CandidateBasicData, CandidateBasicDataDTO>();
-            CreateMap<CandidateBasicDataForCreationDTO, CandidateBasicData>();
+            CreateMap<CandidateBasicDataForManipulationDTO, CandidateBasicData>();
 
             CreateMap<CandidateJobOffer, CandidateJobOfferDTO>();
-            CreateMap<CandidateJobOfferForCreationDTO, CandidateJobOffer>();
+            CreateMap<CandidateJobOfferForManipulationDTO, CandidateJobOffer>();
 
             CreateMap<Education, EducationDTO>();
-            CreateMap<EducationForCreationDTO, Education>();
+            CreateMap<EducationForManipulationDTO, Education>();
 
             CreateMap<Employee, EmployeeDTO>();
-            CreateMap<EmployeeForCreationDTO, Employee>();
+            CreateMap<EmployeeForManipulationDTO, Employee>();
 
             CreateMap<Experience, ExperienceDTO>();
-            CreateMap<ExperienceForCreationDTO, Experience>();
+            CreateMap<ExperienceForManipulationDTO, Experience>();
 
             CreateMap<JobOffer, JobOfferDTO>();
-            CreateMap<JobOfferForCreationDTO, JobOffer>();
+            CreateMap<JobOfferForManipulationDTO, JobOffer>();
 
             CreateMap<JobPosition, JobPositionDTO>();
-            CreateMap<JobPositionForCreationDTO, JobPosition>();
+            CreateMap<JobPositionForManipulationDTO, JobPosition>();
 
             CreateMap<Manager, ManagerDTO>();
-            CreateMap<ManagerForCreationDTO, Manager>();
+            CreateMap<ManagerForManipulationDTO, Manager>();
 
             CreateMap<PersonBasicData, PersonBasicDataDTO>();
-            CreateMap<PersonBasicDataForCreationDTO, PersonBasicData>();
+            CreateMap<PersonBasicDataForManipulationDTO, PersonBasicData>();
 
             CreateMap<Recruiter, RecruiterDTO>();
-            CreateMap<RecruiterForCreationDTO, Recruiter>();
+            CreateMap<RecruiterForManipulationDTO, Recruiter>();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace RecruitingSystem.Infrastructure.Utils
 
         public PagingInformationWrapper CreateInfo()
         {
-            return new PagingInformationWrapper(CurrentPage, TotalPages, PageSize, TotalCount, HasPrevious, HasNext)
+            return new PagingInformationWrapper(CurrentPage, TotalPages, PageSize, TotalCount, HasPrevious, HasNext);
         }
     }
 }

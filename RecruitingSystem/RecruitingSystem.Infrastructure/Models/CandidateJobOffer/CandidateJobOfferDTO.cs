@@ -9,7 +9,7 @@ namespace RecruitingSystem.Infrastructure.Models.CandidateJobOffer
     public class CandidateJobOfferDTO
     {
         public Guid Id { get; set; }
-        public CanditateDTO Candidate { get; set; }
+        public CandidateDTO Candidate { get; set; }
         public JobOfferDTO JobOffer { get; set; }
     }
 }

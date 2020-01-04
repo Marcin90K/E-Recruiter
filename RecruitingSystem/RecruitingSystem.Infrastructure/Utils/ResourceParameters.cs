@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Utils
 {
-    public class ResurceParameters
+    public class ResourceParameters
     {
         const int maxPageSize = 20;
         private int pageSize;

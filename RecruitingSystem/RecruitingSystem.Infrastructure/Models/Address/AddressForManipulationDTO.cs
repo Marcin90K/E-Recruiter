@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Models.Address
 {
-    public class AddressForCreationDTO
+    public class AddressForManipulationDTO
     {
         public string City { get; set; }
         public string Street { get; set; }

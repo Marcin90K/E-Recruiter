@@ -5,9 +5,9 @@ using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Models.Employee
 {
-    public class EmployeeForCreationDTO
+    public class EmployeeForManipulationDTO
     {
         public string EmployeeCompanyId { get; set; }
-        public PersonBasicDataForCreationDTO PersonBasicData { get; set; }
+        public PersonBasicDataForManipulationDTO PersonBasicData { get; set; }
     }
 }

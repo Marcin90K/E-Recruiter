@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Models.Education
 {
-    public class EducationForCreationDTO
+    public class EducationForManipulationDTO
     {
         public string SchoolName { get; set; }
         public DateTime StartDate { get; set; }

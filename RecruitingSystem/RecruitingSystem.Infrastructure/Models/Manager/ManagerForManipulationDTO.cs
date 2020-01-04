@@ -7,12 +7,12 @@ using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Models.Manager
 {
-    public class ManagerForCreationDTO
+    public class ManagerForManipulationDTO
     {
-        public EmployeeForCreationDTO Employee { get; set; }
+        public EmployeeForManipulationDTO Employee { get; set; }
 
         public Department Department { get; set; }
 
-        public ICollection<RecruiterForCreationDTO> Recruiters { get; set; }
+        public ICollection<RecruiterForManipulationDTO> Recruiters { get; set; }
     }
 }
