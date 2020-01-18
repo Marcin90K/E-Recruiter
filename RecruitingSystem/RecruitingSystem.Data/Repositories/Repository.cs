@@ -29,7 +29,7 @@ namespace RecruitingSystem.Data.Repositories
             return _context.Set<T>().Where(predicate);
         }
 
-        public T GetSingle(Guid id)
+        public T GetSingleById(Guid id)
         {
             return _context.Set<T>().FirstOrDefault(x => x.Id == id);
         }
