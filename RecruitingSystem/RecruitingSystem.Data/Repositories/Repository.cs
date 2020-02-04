@@ -1,4 +1,5 @@
-﻿using RecruitingSystem.Data.Contexts;
+﻿using Microsoft.EntityFrameworkCore;
+using RecruitingSystem.Data.Contexts;
 using RecruitingSystem.Data.Entities;
 using RecruitingSystem.Data.Repositories.Abstract;
 using System;

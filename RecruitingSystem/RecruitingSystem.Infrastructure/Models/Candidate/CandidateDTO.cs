@@ -11,7 +11,7 @@ namespace RecruitingSystem.Infrastructure.Models.Candidate
     {
         public Guid Id { get; set; }
         //public Guid CandidateBasicDataId { get; set; }
-        public CandidateBasicDataDTO CandidateBasicData { get; set; }
+        public  CandidateBasicDataDTO CandidateBasicData { get; set; }
         public ICollection<EducationDTO> Educations { get; set; }
         public ICollection<ExperienceDTO> Experiences { get; set; }
         public decimal  ExpectedSalary { get; set; }

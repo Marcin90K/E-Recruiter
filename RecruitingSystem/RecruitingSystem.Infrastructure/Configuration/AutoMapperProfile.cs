@@ -25,7 +25,8 @@ namespace RecruitingSystem.Infrastructure.Configuration
             CreateMap<Address, AddressDTO>();
             CreateMap<AddressForManipulationDTO, Address>();
 
-            CreateMap<Candidate, CandidateDTO>();
+            CreateMap<Candidate, CandidateDTO>()
+                .ForMember(dest => dest.CandidateBasicData, opt => opt.MapFrom(src => src.BasicData));
             CreateMap<CandidateForManipulationDTO, Candidate>();
 
             CreateMap<CandidateBasicData, CandidateBasicDataDTO>();

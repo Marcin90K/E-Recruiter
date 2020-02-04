@@ -62,5 +62,7 @@ namespace RecruitingSystem.Data.Repositories.Abstract
         /// </summary>
         /// <returns>True when saving suceeed or false when saving failed.</returns>
         bool Save();
+
+        
     }
 }

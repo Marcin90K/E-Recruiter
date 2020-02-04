@@ -13,18 +13,20 @@ namespace RecruitingSystem.Infrastructure.Service
 {
     public class JobOfferService : IJobOfferService
     {
-        private IRepository<JobOffer> _repository;
+        //private IRepository<JobOffer> _repository;
+        private IJobOfferRepository _jobOfferRepository;
         private IMapper _mapper;
 
-        public JobOfferService(IRepository<JobOffer> repository, IMapper mapper)
+        public JobOfferService(IJobOfferRepository repository, IMapper mapper)
         {
-            _repository = repository;
+            _jobOfferRepository = repository;
             _mapper = mapper;
         }
 
         public CollectionWithPaginationMetadata<JobOfferDTO> GetJobOffers(ResourceParameters resourceParameters)
         {
-            var jobOffersFromRepo = _repository.GetAll();
+            //var jobOffersFromRepo = _repository.GetAll();
+            var jobOffersFromRepo = _jobOfferRepository.GetAllJobOffersWithFullData();
 
             if (resourceParameters.SearchQuery != null)
             {
@@ -39,7 +41,8 @@ namespace RecruitingSystem.Infrastructure.Service
 
         public JobOfferDTO GetJobOffer(Guid id)
         {
-            var jobOffer = _repository.GetSingleById(id);
+            //var jobOffer = _jobOfferRepository.GetSingleById(id);
+            var jobOffer = _jobOfferRepository.GetJobOfferWithFullData(id);
             JobOfferDTO jobOfferToReturn = _mapper.Map<JobOfferDTO>(jobOffer);
             return jobOfferToReturn;
         }
@@ -48,8 +51,8 @@ namespace RecruitingSystem.Infrastructure.Service
         {
             var jobOfferToAdd = _mapper.Map<JobOffer>(jobOffer);
 
-            _repository.Add(jobOfferToAdd);
-            if (!_repository.Save())
+            _jobOfferRepository.Add(jobOfferToAdd);
+            if (!_jobOfferRepository.Save())
             {
                 throw new Exception("Adding Job Offer has been failed!");
             }
@@ -64,11 +67,11 @@ namespace RecruitingSystem.Infrastructure.Service
 
         public void DeleteJobOffer(Guid id)
         {
-            var jobOfferToDelete = _repository.GetSingleById(id);
+            var jobOfferToDelete = _jobOfferRepository.GetSingleById(id);
             if (jobOfferToDelete != null)
             {
-                _repository.Delete(jobOfferToDelete);
-                if (!_repository.Save())
+                _jobOfferRepository.Delete(jobOfferToDelete);
+                if (!_jobOfferRepository.Save())
                 {
                     throw new Exception("Deleting job offer failed!");
                 }
