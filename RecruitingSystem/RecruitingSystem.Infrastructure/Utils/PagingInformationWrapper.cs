@@ -19,6 +19,7 @@ namespace RecruitingSystem.Infrastructure.Utils
             CurrentPage = currentPage;
             TotalCount = totalCount;
             PageSize = pageSize;
+            TotalPages = totalPages;
             TotalCount = totalCount;
             HasPrevious = hasPrev;
             HasNext = hasNext;

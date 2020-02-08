@@ -6,9 +6,9 @@ namespace RecruitingSystem.Infrastructure.Utils
 {
     public class ResourceParameters
     {
-        const int maxPageSize = 20;
-        private int pageSize;
-        public int PageNumber
+        private const int maxPageSize = 20;
+        private int pageSize = 10;
+        public int PageSize
         {
             get { return pageSize; }
             set
@@ -17,7 +17,7 @@ namespace RecruitingSystem.Infrastructure.Utils
                 else pageSize = value;
             }
         }
-        public int PageSize { get; set; } = 10;
-        public string SearchQuery { get; set; }
+        public int PageNumber { get; set; } = 1;
+        public string Search { get; set; }
     }
 }

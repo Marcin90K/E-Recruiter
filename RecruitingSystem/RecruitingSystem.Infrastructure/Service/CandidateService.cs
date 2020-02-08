@@ -31,15 +31,15 @@ namespace RecruitingSystem.Infrastructure.Service
 
         public CollectionWithPaginationMetadata<CandidateDTO> GetCandidates(ResourceParameters resourceParameters)
         {
-            var candidatesAFromRepo = _candidateRepository.GetAllCandidatesWithFullData();
+            var candidatesFromRepo = _candidateRepository.GetAllCandidatesWithFullData();
 
-            if (resourceParameters.SearchQuery != null)
+            if (resourceParameters.Search != null)
             {
-                candidatesAFromRepo = ApplySearch(candidatesAFromRepo, resourceParameters.SearchQuery);
+                candidatesFromRepo = ApplySearch(candidatesFromRepo, resourceParameters.Search);
             }
 
-            var pagedCandidates = new PagedList<Candidate>(candidatesAFromRepo, resourceParameters.PageNumber, resourceParameters.PageSize);
-            var candidatesToReturn = _mapper.Map<PagedList<CandidateDTO>>(pagedCandidates);
+            var pagedCandidates = new PagedList<Candidate>(candidatesFromRepo, resourceParameters.PageNumber, resourceParameters.PageSize);
+            var candidatesToReturn = _mapper.Map<IEnumerable<CandidateDTO>>(pagedCandidates);
 
             return new CollectionWithPaginationMetadata<CandidateDTO>(candidatesToReturn, pagedCandidates.CreateInfo());
 
@@ -73,8 +73,7 @@ namespace RecruitingSystem.Infrastructure.Service
 
         private IQueryable<Candidate> ApplySearch(IQueryable<Candidate> candidates, string searchQuery)
         {
-            return candidates.Where(c => c.ExpectedSalary == Int32.Parse(searchQuery)
-                  || c.BasicData.PersonBasicData.LastName == searchQuery
+            return candidates.Where(c => c.BasicData.PersonBasicData.LastName == searchQuery
                   || c.BasicData.PersonBasicData.FirstName == searchQuery
                   );
         }

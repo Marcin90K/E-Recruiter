@@ -26,13 +26,13 @@ namespace RecruitingSystem.Infrastructure.Service
         {
             var jobOffersFromRepo = _jobOfferRepository.GetAllJobOffersWithFullData();
 
-            if (resourceParameters.SearchQuery != null)
+            if (resourceParameters.Search != null)
             {
-                jobOffersFromRepo = ApplySearch(jobOffersFromRepo, resourceParameters.SearchQuery);
+                jobOffersFromRepo = ApplySearch(jobOffersFromRepo, resourceParameters.Search);
             }
 
             var pagedJobOffers = new PagedList<JobOffer>(jobOffersFromRepo, resourceParameters.PageNumber, resourceParameters.PageSize);
-            var jobOffersToReturn = _mapper.Map<PagedList<JobOfferDTO>>(pagedJobOffers);
+            var jobOffersToReturn = _mapper.Map<IEnumerable<JobOfferDTO>>(pagedJobOffers);
 
             return new CollectionWithPaginationMetadata<JobOfferDTO>(jobOffersToReturn, pagedJobOffers.CreateInfo());
         }
