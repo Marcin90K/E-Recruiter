@@ -19,14 +19,28 @@ namespace RecruitingSystem.Data.Repositories
         public JobOffer GetJobOfferWithFullData(Guid id)
         {
             return _context.Set<JobOffer>().Where(j => j.Id == id).Include(j => j.JobPosition)
+                                                                  .Include(j => j.CandidateJobOffers)
                                                                   .Include(j => j.Owner)
+                                                                  .ThenInclude(j => j.Employee)
+                                                                  .ThenInclude(j=> j.PersonBasicData)
+                                                                  .Include(j => j.Owner)
+                                                                  .ThenInclude(j => j.Manager)
+                                                                  .ThenInclude(j => j.Employee)
+                                                                  .ThenInclude(j => j.PersonBasicData)
                                                                   .FirstOrDefault();
         }
 
         public IQueryable<JobOffer> GetAllJobOffersWithFullData()
         {
             return _context.Set<JobOffer>().Include(j => j.JobPosition)
-                                           .Include(j => j.Owner);
+                                           .Include(j => j.CandidateJobOffers)
+                                           .Include(j => j.Owner)
+                                           .ThenInclude(j => j.Employee)
+                                           .ThenInclude(j => j.PersonBasicData)
+                                           .Include(j => j.Owner)
+                                           .ThenInclude(j => j.Manager)
+                                           .ThenInclude(j => j.Employee)
+                                           .ThenInclude(j => j.PersonBasicData);
         }
     }
 }

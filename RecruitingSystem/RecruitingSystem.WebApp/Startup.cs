@@ -52,6 +52,7 @@ namespace RecruitingSystem.WebApp
             services.AddScoped<IExperienceService, ExperienceService>();
             services.AddScoped<IJobOfferService, JobOfferService>();
             services.AddScoped<ICandidateRepository, CandidateRepository>();
+            services.AddScoped<IJobOfferRepository, JobOfferRepository>();
             
         }
 

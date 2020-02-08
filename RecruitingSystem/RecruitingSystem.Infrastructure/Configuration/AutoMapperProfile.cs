@@ -14,6 +14,7 @@ using RecruitingSystem.Infrastructure.Models.PersonBasicData;
 using RecruitingSystem.Infrastructure.Models.Recruiter;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace RecruitingSystem.Infrastructure.Configuration
@@ -44,7 +45,8 @@ namespace RecruitingSystem.Infrastructure.Configuration
             CreateMap<Experience, ExperienceDTO>();
             CreateMap<ExperienceForManipulationDTO, Experience>();
 
-            CreateMap<JobOffer, JobOfferDTO>();
+            CreateMap<JobOffer, JobOfferDTO>()
+                .ForMember(dest => dest.CandidateIds, opt => opt.MapFrom(src => src.CandidateJobOffers.Select(c => c.CandidateId)));
             CreateMap<JobOfferForManipulationDTO, JobOffer>();
 
             CreateMap<JobPosition, JobPositionDTO>();

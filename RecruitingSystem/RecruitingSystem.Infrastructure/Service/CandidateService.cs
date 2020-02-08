@@ -24,8 +24,7 @@ namespace RecruitingSystem.Infrastructure.Service
 
         public CandidateDTO GetCandidate(Guid id)
         {
-            //var candidate = _repository.GetSingleById(id);
-            var candidate = _candidateRepository.GetCandidateWithFullData(id); // GetSingleById(id);
+            var candidate = _candidateRepository.GetCandidateWithFullData(id);
             var candidateToReturn = _mapper.Map<CandidateDTO>(candidate);
             return candidateToReturn;
         }

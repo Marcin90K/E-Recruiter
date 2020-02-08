@@ -13,7 +13,6 @@ namespace RecruitingSystem.Infrastructure.Service
 {
     public class JobOfferService : IJobOfferService
     {
-        //private IRepository<JobOffer> _repository;
         private IJobOfferRepository _jobOfferRepository;
         private IMapper _mapper;
 
@@ -25,7 +24,6 @@ namespace RecruitingSystem.Infrastructure.Service
 
         public CollectionWithPaginationMetadata<JobOfferDTO> GetJobOffers(ResourceParameters resourceParameters)
         {
-            //var jobOffersFromRepo = _repository.GetAll();
             var jobOffersFromRepo = _jobOfferRepository.GetAllJobOffersWithFullData();
 
             if (resourceParameters.SearchQuery != null)
@@ -41,7 +39,6 @@ namespace RecruitingSystem.Infrastructure.Service
 
         public JobOfferDTO GetJobOffer(Guid id)
         {
-            //var jobOffer = _jobOfferRepository.GetSingleById(id);
             var jobOffer = _jobOfferRepository.GetJobOfferWithFullData(id);
             JobOfferDTO jobOfferToReturn = _mapper.Map<JobOfferDTO>(jobOffer);
             return jobOfferToReturn;

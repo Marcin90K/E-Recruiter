@@ -11,10 +11,10 @@ namespace RecruitingSystem.Data.Entities
         [ForeignKey(nameof(Employee))]
         public Guid EmployeeId { get; set; }
 
-        public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
 
         public Department Department { get; set; }
 
-        public ICollection<Recruiter> Recruiters { get; set; }
+        public virtual ICollection<Recruiter> Recruiters { get; set; }
     }
 }
