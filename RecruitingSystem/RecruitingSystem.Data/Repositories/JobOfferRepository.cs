@@ -27,6 +27,8 @@ namespace RecruitingSystem.Data.Repositories
                                                                   .ThenInclude(j => j.Manager)
                                                                   .ThenInclude(j => j.Employee)
                                                                   .ThenInclude(j => j.PersonBasicData)
+                                                                  .Include(j => j.Owner)
+                                                                  .ThenInclude(j => j.OwnedJobOffers)
                                                                   .FirstOrDefault();
         }
 
@@ -40,7 +42,9 @@ namespace RecruitingSystem.Data.Repositories
                                            .Include(j => j.Owner)
                                            .ThenInclude(j => j.Manager)
                                            .ThenInclude(j => j.Employee)
-                                           .ThenInclude(j => j.PersonBasicData);
+                                           .ThenInclude(j => j.PersonBasicData)
+                                           .Include(j => j.Owner)
+                                           .ThenInclude(j => j.OwnedJobOffers);
         }
     }
 }

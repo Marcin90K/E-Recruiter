@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RecruitingSystem.Infrastructure.Models.JobOffer;
 using RecruitingSystem.Infrastructure.Service.Abstract;
 using RecruitingSystem.Infrastructure.Utils;
 
@@ -25,8 +26,8 @@ namespace RecruitingSystem.API.Controllers
             return Ok(jobOffers);
         }
 
-        [HttpGet("joboffer/{id}")]
-        public ActionResult GetJobOffer(Guid id)
+        [HttpGet("joboffers/{id}", Name = "GetJobOffer")]
+        public IActionResult GetJobOffer(Guid id)
         {
             var jobOffer = _jobOfferService.GetJobOffer(id);
 
@@ -36,6 +37,33 @@ namespace RecruitingSystem.API.Controllers
             }
 
             return Ok(jobOffer);
+        }
+
+        [HttpPost("joboffers")]
+        public IActionResult CreateJobOffer([FromBody]JobOfferForManipulationDTO jobOffer)
+        {
+            if (jobOffer == null)
+            {
+                return BadRequest();
+            }
+
+            var jobOfferCreated = _jobOfferService.AddJobOffer(jobOffer);
+
+            return CreatedAtRoute("GetJobOffer", new { jobOfferCreated.Id }, jobOfferCreated);
+        }
+
+        [HttpDelete("joboffers/{id}")]
+        public IActionResult DeleteJobOffer(Guid id)
+        {
+            var jobOfferToDelete = _jobOfferService.GetJobOffer(id);
+            if (jobOfferToDelete == null)
+            {
+                return NotFound();
+            }
+
+            _jobOfferService.DeleteJobOffer(id);
+
+            return NoContent();
         }
     }
 }

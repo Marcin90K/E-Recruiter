@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RecruitingSystem.Infrastructure.Models.Candidate;
 using RecruitingSystem.Infrastructure.Service.Abstract;
 using RecruitingSystem.Infrastructure.Utils;
 
@@ -26,7 +27,7 @@ namespace RecruitingSystem.API.Controllers
             return Ok(candidates);
         }
 
-        [HttpGet("candidate/{id}")]
+        [HttpGet("candidates/{id}", Name = "GetCandidate")]
         public IActionResult GetCandidate(Guid id)
         {
             var candidate = _candidateService.GetCandidate(id);
@@ -38,5 +39,34 @@ namespace RecruitingSystem.API.Controllers
 
             return Ok(candidate);
         }
+
+        [HttpPost("candidates")]
+        public IActionResult CreateCandidate([FromBody]CandidateForManipulationDTO candidate)
+        {
+            if (candidate == null)
+            {
+                return BadRequest();
+            }
+
+            var candidateCreated = _candidateService.AddCandidate(candidate);
+
+            return CreatedAtRoute("GetCandidate", new { candidateCreated.Id }, candidateCreated);
+        }
+
+        [HttpDelete("candidates/{id}")]
+        public IActionResult DeleteCandidate(Guid id)
+        {
+            var candidateToDelete = _candidateService.GetCandidate(id);
+            if (candidateToDelete == null)
+            {
+                return BadRequest();
+            }
+
+            _candidateService.DeleteCandidate(id);
+
+            return NoContent();
+        }
+
+
     }
 }

@@ -28,7 +28,8 @@ namespace RecruitingSystem.Infrastructure.Configuration
 
             CreateMap<Candidate, CandidateDTO>()
                 .ForMember(dest => dest.CandidateBasicData, opt => opt.MapFrom(src => src.BasicData));
-            CreateMap<CandidateForManipulationDTO, Candidate>();
+            CreateMap<CandidateForManipulationDTO, Candidate>()
+                .ForMember(dest => dest.BasicData, opt => opt.MapFrom(src => src.CandidateBasicData));
 
             CreateMap<CandidateBasicData, CandidateBasicDataDTO>();
             CreateMap<CandidateBasicDataForManipulationDTO, CandidateBasicData>();
@@ -46,8 +47,10 @@ namespace RecruitingSystem.Infrastructure.Configuration
             CreateMap<ExperienceForManipulationDTO, Experience>();
 
             CreateMap<JobOffer, JobOfferDTO>()
-                .ForMember(dest => dest.CandidateIds, opt => opt.MapFrom(src => src.CandidateJobOffers.Select(c => c.CandidateId)));
-            CreateMap<JobOfferForManipulationDTO, JobOffer>();
+                .ForMember(dest => dest.CandidateIds, opt => opt.MapFrom(src => src.CandidateJobOffers.Select(c => c.CandidateId)))
+                .ForMember(dest => dest.Owner, opt => opt.MapFrom(src => src.Owner));
+            CreateMap<JobOfferForManipulationDTO, JobOffer>()
+                .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.OwnerId));
 
             CreateMap<JobPosition, JobPositionDTO>();
             CreateMap<JobPositionForManipulationDTO, JobPosition>();

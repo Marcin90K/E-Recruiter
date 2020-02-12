@@ -12,6 +12,5 @@ namespace RecruitingSystem.Infrastructure.Models.CandidateBasicData
         public PersonBasicDataForManipulationDTO PersonBasicData { get; set; }
         public int PhoneNumber { get; set; }
         public AddressForManipulationDTO Address { get; set; }
-        public Guid CandidateId { get; set; }
     }
 }

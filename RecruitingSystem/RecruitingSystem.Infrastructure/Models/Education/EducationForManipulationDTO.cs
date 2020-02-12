@@ -11,7 +11,5 @@ namespace RecruitingSystem.Infrastructure.Models.Education
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string CourseName { get; set; }
-        public Guid CandidateId { get; set; }
-
     }
 }

@@ -47,6 +47,7 @@ namespace RecruitingSystem.Infrastructure.Service
         public JobOfferDTO AddJobOffer(JobOfferForManipulationDTO jobOffer)
         {
             var jobOfferToAdd = _mapper.Map<JobOffer>(jobOffer);
+            jobOfferToAdd.DateOfAdding = DateTime.Now;
 
             _jobOfferRepository.Add(jobOfferToAdd);
             if (!_jobOfferRepository.Save())

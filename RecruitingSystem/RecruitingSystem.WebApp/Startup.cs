@@ -18,6 +18,7 @@ using RecruitingSystem.Infrastructure.Service;
 using RecruitingSystem.Infrastructure.Service.Abstract;
 using AutoMapper;
 using RecruitingSystem.Infrastructure.Configuration;
+using Newtonsoft.Json;
 
 namespace RecruitingSystem.WebApp
 {
@@ -42,7 +43,11 @@ namespace RecruitingSystem.WebApp
             services.AddSingleton(mapper);
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
 
             services.AddDbContext<AppDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
