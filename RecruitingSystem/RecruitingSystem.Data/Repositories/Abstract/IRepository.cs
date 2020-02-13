@@ -58,6 +58,12 @@ namespace RecruitingSystem.Data.Repositories.Abstract
         void Delete(T item);
 
         /// <summary>
+        /// Method for checking if resource with given id exists
+        /// </summary>
+        /// <param name="id">Id of item to be checked.</param>
+        bool IfExists(Guid id);
+
+        /// <summary>
         /// Method for executing saving changes on database.
         /// </summary>
         /// <returns>True when saving suceeed or false when saving failed.</returns>

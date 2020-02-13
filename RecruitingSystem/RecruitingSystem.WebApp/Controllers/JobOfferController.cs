@@ -55,8 +55,8 @@ namespace RecruitingSystem.API.Controllers
         [HttpDelete("joboffers/{id}")]
         public IActionResult DeleteJobOffer(Guid id)
         {
-            var jobOfferToDelete = _jobOfferService.GetJobOffer(id);
-            if (jobOfferToDelete == null)
+            bool jobOfferExists = _jobOfferService.CheckIfJobOfferExists(id);
+            if (!jobOfferExists)
             {
                 return NotFound();
             }

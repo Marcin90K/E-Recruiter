@@ -71,6 +71,11 @@ namespace RecruitingSystem.Infrastructure.Service
             }
         }
 
+        public bool CheckIfCandidateExists(Guid id)
+        {
+            return _candidateRepository.IfExists(id);
+        }
+
         private IQueryable<Candidate> ApplySearch(IQueryable<Candidate> candidates, string searchQuery)
         {
             return candidates.Where(c => c.BasicData.PersonBasicData.LastName == searchQuery

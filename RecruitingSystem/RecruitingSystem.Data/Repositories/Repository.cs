@@ -55,6 +55,11 @@ namespace RecruitingSystem.Data.Repositories
             _context.Set<T>().Remove(item);
         }
 
+        public bool IfExists(Guid id)
+        {
+            return _context.Set<T>().Where(c => c.Id == id).Any();
+        }
+
         public bool Save()
         {
             return _context.SaveChanges() > 0;

@@ -76,6 +76,11 @@ namespace RecruitingSystem.Infrastructure.Service
             }
         }
 
+        public bool CheckIfJobOfferExists(Guid id)
+        {
+            return _jobOfferRepository.IfExists(id);
+        }
+
         private IQueryable<JobOffer> ApplySearch(IQueryable<JobOffer> jobOffers, string searchQuery)
         {
             return jobOffers.Where(j => j.JobPosition.Name.ToLowerInvariant().Contains(searchQuery) ||

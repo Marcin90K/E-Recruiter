@@ -56,10 +56,10 @@ namespace RecruitingSystem.API.Controllers
         [HttpDelete("candidates/{id}")]
         public IActionResult DeleteCandidate(Guid id)
         {
-            var candidateToDelete = _candidateService.GetCandidate(id);
-            if (candidateToDelete == null)
+            var candidateExists = _candidateService.CheckIfCandidateExists(id);
+            if (!candidateExists)
             {
-                return BadRequest();
+                return NotFound();
             }
 
             _candidateService.DeleteCandidate(id);

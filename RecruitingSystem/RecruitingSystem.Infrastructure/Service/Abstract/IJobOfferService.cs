@@ -13,5 +13,6 @@ namespace RecruitingSystem.Infrastructure.Service.Abstract
         JobOfferDTO AddJobOffer(JobOfferForManipulationDTO jobOffer);
         JobOfferDTO UpdateJobOffer(JobOfferForManipulationDTO jobOffer);
         void DeleteJobOffer(Guid id);
+        bool CheckIfJobOfferExists(Guid id);
     }
 }
