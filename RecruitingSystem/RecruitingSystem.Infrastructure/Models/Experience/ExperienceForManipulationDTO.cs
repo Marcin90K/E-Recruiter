@@ -12,6 +12,5 @@ namespace RecruitingSystem.Infrastructure.Models.Experience
         public DateTime EndDate { get; set; }
         public string JobTitle { get; set; }
         public string Duties { get; set; }
-        public Guid CandidateId { get; set; }
     }
 }

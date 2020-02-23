@@ -1,4 +1,5 @@
-﻿using RecruitingSystem.Infrastructure.Models.JobPosition;
+﻿using Newtonsoft.Json;
+using RecruitingSystem.Infrastructure.Models.JobPosition;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,14 +14,11 @@ namespace RecruitingSystem.Infrastructure.Models.JobOffer
 
         public string Description { get; set; }
 
-        public DateTime DateOfAdding { get; set; }
-
         public DateTime DateOfExpiration { get; set; }
 
         public string Requirements { get; set; }
 
-        public Guid EmployeeId { get; set; }
+        public Guid OwnerId { get; set; }
 
-        public ICollection<Guid> CandidateIds { get; set; } = new List<Guid>();
     }
 }

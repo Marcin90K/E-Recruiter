@@ -1,4 +1,5 @@
-﻿using RecruitingSystem.Data.Contexts;
+﻿using Microsoft.EntityFrameworkCore;
+using RecruitingSystem.Data.Contexts;
 using RecruitingSystem.Data.Entities;
 using RecruitingSystem.Data.Repositories.Abstract;
 using System;
@@ -44,7 +45,7 @@ namespace RecruitingSystem.Data.Repositories
             _context.Set<T>().Add(item);
         }
 
-        public void Update(Guid id, T item)
+        public void Update(T item)
         {
             _context.Set<T>().Update(item);
         }
@@ -52,6 +53,11 @@ namespace RecruitingSystem.Data.Repositories
         public void Delete(T item)
         {
             _context.Set<T>().Remove(item);
+        }
+
+        public bool IfExists(Guid id)
+        {
+            return _context.Set<T>().Where(c => c.Id == id).Any();
         }
 
         public bool Save()

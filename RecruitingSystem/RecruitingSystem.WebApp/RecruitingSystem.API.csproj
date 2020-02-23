@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -16,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RecruitingSystem.Data\RecruitingSystem.Data.csproj" />
+    <ProjectReference Include="..\RecruitingSystem.Infrastructure\RecruitingSystem.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

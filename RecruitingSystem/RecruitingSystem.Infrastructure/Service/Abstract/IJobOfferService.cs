@@ -11,7 +11,8 @@ namespace RecruitingSystem.Infrastructure.Service.Abstract
         CollectionWithPaginationMetadata<JobOfferDTO> GetJobOffers(ResourceParameters resourceParameters);
         JobOfferDTO GetJobOffer(Guid id);
         JobOfferDTO AddJobOffer(JobOfferForManipulationDTO jobOffer);
-        JobOfferDTO UpdateJobOffer(JobOfferForManipulationDTO jobOffer);
+        JobOfferDTO UpdateJobOffer(JobOfferForManipulationDTO jobOffer, Guid id);
         void DeleteJobOffer(Guid id);
+        bool CheckIfJobOfferExists(Guid id);
     }
 }

@@ -13,33 +13,33 @@ namespace RecruitingSystem.Infrastructure.Service
 {
     public class JobOfferService : IJobOfferService
     {
-        private IRepository<JobOffer> _repository;
+        private IJobOfferRepository _jobOfferRepository;
         private IMapper _mapper;
 
-        public JobOfferService(IRepository<JobOffer> repository, IMapper mapper)
+        public JobOfferService(IJobOfferRepository repository, IMapper mapper)
         {
-            _repository = repository;
+            _jobOfferRepository = repository;
             _mapper = mapper;
         }
 
         public CollectionWithPaginationMetadata<JobOfferDTO> GetJobOffers(ResourceParameters resourceParameters)
         {
-            var jobOffersFromRepo = _repository.GetAll();
+            var jobOffersFromRepo = _jobOfferRepository.GetAllJobOffersWithFullData();
 
-            if (resourceParameters.SearchQuery != null)
+            if (resourceParameters.Search != null)
             {
-                jobOffersFromRepo = ApplySearch(jobOffersFromRepo, resourceParameters.SearchQuery);
+                jobOffersFromRepo = ApplySearch(jobOffersFromRepo, resourceParameters.Search);
             }
 
             var pagedJobOffers = new PagedList<JobOffer>(jobOffersFromRepo, resourceParameters.PageNumber, resourceParameters.PageSize);
-            var jobOffersToReturn = _mapper.Map<PagedList<JobOfferDTO>>(pagedJobOffers);
+            var jobOffersToReturn = _mapper.Map<IEnumerable<JobOfferDTO>>(pagedJobOffers);
 
             return new CollectionWithPaginationMetadata<JobOfferDTO>(jobOffersToReturn, pagedJobOffers.CreateInfo());
         }
 
         public JobOfferDTO GetJobOffer(Guid id)
         {
-            var jobOffer = _repository.GetSingleById(id);
+            var jobOffer = _jobOfferRepository.GetJobOfferWithFullData(id);
             JobOfferDTO jobOfferToReturn = _mapper.Map<JobOfferDTO>(jobOffer);
             return jobOfferToReturn;
         }
@@ -47,9 +47,10 @@ namespace RecruitingSystem.Infrastructure.Service
         public JobOfferDTO AddJobOffer(JobOfferForManipulationDTO jobOffer)
         {
             var jobOfferToAdd = _mapper.Map<JobOffer>(jobOffer);
+            jobOfferToAdd.DateOfAdding = DateTime.Now;
 
-            _repository.Add(jobOfferToAdd);
-            if (!_repository.Save())
+            _jobOfferRepository.Add(jobOfferToAdd);
+            if (!_jobOfferRepository.Save())
             {
                 throw new Exception("Adding Job Offer has been failed!");
             }
@@ -57,22 +58,56 @@ namespace RecruitingSystem.Infrastructure.Service
             return _mapper.Map<JobOfferDTO>(jobOfferToAdd);
         }
 
-        public JobOfferDTO UpdateJobOffer(JobOfferForManipulationDTO jobOffer)
+        public JobOfferDTO UpdateJobOffer(JobOfferForManipulationDTO jobOffer, Guid id)
         {
-            throw new NotImplementedException();
+            var jobOfferFromDb = _jobOfferRepository.GetJobOfferWithFullData(id);
+            if (jobOfferFromDb == null)
+            {
+                var jobOfferToAdd = _mapper.Map<JobOffer>(jobOffer);
+                jobOfferToAdd.Id = id;
+                jobOfferToAdd.DateOfAdding = DateTime.Now;
+
+                _jobOfferRepository.Add(jobOfferToAdd);
+                if (!_jobOfferRepository.Save())
+                {
+                    throw new Exception("Error during Job offer upserting!");
+
+                }
+
+                var jobOfferUpserted = _mapper.Map<JobOfferDTO>(jobOfferToAdd);
+                return jobOfferUpserted;
+            }
+            else
+            {
+                var jobOfferForUpdate = _mapper.Map(jobOffer, jobOfferFromDb);
+                _jobOfferRepository.Update(jobOfferForUpdate);
+
+                if (!_jobOfferRepository.Save())
+                {
+                    throw new Exception("Error during Job offer updating...");
+                }
+
+                var jobOfferUpdated = _mapper.Map<JobOfferDTO>(jobOfferForUpdate);
+                return jobOfferUpdated;
+            }  
         }
 
         public void DeleteJobOffer(Guid id)
         {
-            var jobOfferToDelete = _repository.GetSingleById(id);
+            var jobOfferToDelete = _jobOfferRepository.GetSingleById(id);
             if (jobOfferToDelete != null)
             {
-                _repository.Delete(jobOfferToDelete);
-                if (!_repository.Save())
+                _jobOfferRepository.Delete(jobOfferToDelete);
+                if (!_jobOfferRepository.Save())
                 {
                     throw new Exception("Deleting job offer failed!");
                 }
             }
+        }
+
+        public bool CheckIfJobOfferExists(Guid id)
+        {
+            return _jobOfferRepository.IfExists(id);
         }
 
         private IQueryable<JobOffer> ApplySearch(IQueryable<JobOffer> jobOffers, string searchQuery)
