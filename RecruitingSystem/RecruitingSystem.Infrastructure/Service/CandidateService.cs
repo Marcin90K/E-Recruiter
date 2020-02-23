@@ -58,6 +58,39 @@ namespace RecruitingSystem.Infrastructure.Service
             return _mapper.Map<CandidateDTO>(candidateToAdd);
         }
 
+        public CandidateDTO UpdateCandidate(CandidateForManipulationDTO candidate, Guid id)
+        {
+            var candidateFromDB = _candidateRepository.GetCandidateWithFullData(id);
+
+            if (candidateFromDB == null)
+            {
+                var candidateToAdd = _mapper.Map<Candidate>(candidate);
+                candidateToAdd.Id = id;
+
+                _candidateRepository.Add(candidateToAdd);
+                if (!_candidateRepository.Save())
+                {
+                    throw new Exception("Error during candidate upserting!");
+                }
+
+                var candidateUpserted = _mapper.Map<CandidateDTO>(candidateToAdd);
+                return candidateUpserted;
+            }
+            else
+            {
+                var candidateToUpdate = _mapper.Map(candidate, candidateFromDB);
+
+                _candidateRepository.Update(candidateToUpdate);
+                if (!_candidateRepository.Save())
+                {
+                    throw new Exception("Error during Candidate updating!");
+                }
+
+                var candidateUpdated = _mapper.Map<CandidateDTO>(candidateToUpdate);
+                return candidateUpdated;
+            }
+        }
+
         public void DeleteCandidate(Guid id)
         {
             var candidateToDelete = _candidateRepository.GetSingleById(id);

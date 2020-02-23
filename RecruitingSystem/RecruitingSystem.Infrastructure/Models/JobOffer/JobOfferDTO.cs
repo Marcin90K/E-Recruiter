@@ -9,6 +9,7 @@ namespace RecruitingSystem.Infrastructure.Models.JobOffer
     public class JobOfferDTO
     {
         public Guid Id { get; set; }
+
         public int ReferenceNumber { get; set; }
 
         public JobPositionDTO JobPosition { get; set; }

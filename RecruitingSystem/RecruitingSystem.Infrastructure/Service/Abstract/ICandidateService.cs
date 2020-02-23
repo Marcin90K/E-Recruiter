@@ -11,6 +11,7 @@ namespace RecruitingSystem.Infrastructure.Service.Abstract
         CandidateDTO GetCandidate(Guid id);
         CollectionWithPaginationMetadata<CandidateDTO> GetCandidates(ResourceParameters resourceParameters);
         CandidateDTO AddCandidate(CandidateForManipulationDTO candidate);
+        CandidateDTO UpdateCandidate(CandidateForManipulationDTO candidate, Guid id);
         void DeleteCandidate(Guid id);
         bool CheckIfCandidateExists(Guid id);
     }

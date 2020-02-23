@@ -45,7 +45,7 @@ namespace RecruitingSystem.Data.Repositories
             _context.Set<T>().Add(item);
         }
 
-        public void Update(Guid id, T item)
+        public void Update(T item)
         {
             _context.Set<T>().Update(item);
         }

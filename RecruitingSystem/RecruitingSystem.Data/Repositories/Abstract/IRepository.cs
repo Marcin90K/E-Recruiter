@@ -49,7 +49,7 @@ namespace RecruitingSystem.Data.Repositories.Abstract
         /// <param name="id">Resource Id</param>
         /// <param name="item">Resource object with updates.</param>
         /// <returns></returns>
-        void Update(Guid id, T item);
+        void Update(T item);
 
         /// <summary>
         /// Method for removing given resource

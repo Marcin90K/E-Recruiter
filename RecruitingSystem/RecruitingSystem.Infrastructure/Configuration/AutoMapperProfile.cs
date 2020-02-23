@@ -47,8 +47,7 @@ namespace RecruitingSystem.Infrastructure.Configuration
             CreateMap<ExperienceForManipulationDTO, Experience>();
 
             CreateMap<JobOffer, JobOfferDTO>()
-                .ForMember(dest => dest.CandidateIds, opt => opt.MapFrom(src => src.CandidateJobOffers.Select(c => c.CandidateId)))
-                .ForMember(dest => dest.Owner, opt => opt.MapFrom(src => src.Owner));
+                .ForMember(dest => dest.CandidateIds, opt => opt.MapFrom(src => src.CandidateJobOffers.Select(c => c.CandidateId)));
             CreateMap<JobOfferForManipulationDTO, JobOffer>()
                 .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.OwnerId));
 

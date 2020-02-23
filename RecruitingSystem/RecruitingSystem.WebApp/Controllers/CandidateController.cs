@@ -53,6 +53,18 @@ namespace RecruitingSystem.API.Controllers
             return CreatedAtRoute("GetCandidate", new { candidateCreated.Id }, candidateCreated);
         }
 
+        [HttpPut("candidates/{id}")]
+        public IActionResult UpdateCandidate(CandidateForManipulationDTO candidate, Guid id)
+        {
+            if (candidate == null)
+            {
+                return BadRequest();
+            }
+
+            var candidateUpdated = _candidateService.UpdateCandidate(candidate, id);
+            return Ok(candidateUpdated);
+        }
+
         [HttpDelete("candidates/{id}")]
         public IActionResult DeleteCandidate(Guid id)
         {

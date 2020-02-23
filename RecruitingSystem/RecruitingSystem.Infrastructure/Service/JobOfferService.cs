@@ -58,9 +58,38 @@ namespace RecruitingSystem.Infrastructure.Service
             return _mapper.Map<JobOfferDTO>(jobOfferToAdd);
         }
 
-        public JobOfferDTO UpdateJobOffer(JobOfferForManipulationDTO jobOffer)
+        public JobOfferDTO UpdateJobOffer(JobOfferForManipulationDTO jobOffer, Guid id)
         {
-            throw new NotImplementedException();
+            var jobOfferFromDb = _jobOfferRepository.GetJobOfferWithFullData(id);
+            if (jobOfferFromDb == null)
+            {
+                var jobOfferToAdd = _mapper.Map<JobOffer>(jobOffer);
+                jobOfferToAdd.Id = id;
+                jobOfferToAdd.DateOfAdding = DateTime.Now;
+
+                _jobOfferRepository.Add(jobOfferToAdd);
+                if (!_jobOfferRepository.Save())
+                {
+                    throw new Exception("Error during Job offer upserting!");
+
+                }
+
+                var jobOfferUpserted = _mapper.Map<JobOfferDTO>(jobOfferToAdd);
+                return jobOfferUpserted;
+            }
+            else
+            {
+                var jobOfferForUpdate = _mapper.Map(jobOffer, jobOfferFromDb);
+                _jobOfferRepository.Update(jobOfferForUpdate);
+
+                if (!_jobOfferRepository.Save())
+                {
+                    throw new Exception("Error during Job offer updating...");
+                }
+
+                var jobOfferUpdated = _mapper.Map<JobOfferDTO>(jobOfferForUpdate);
+                return jobOfferUpdated;
+            }  
         }
 
         public void DeleteJobOffer(Guid id)

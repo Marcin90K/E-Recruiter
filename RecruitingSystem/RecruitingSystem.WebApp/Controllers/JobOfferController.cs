@@ -52,6 +52,19 @@ namespace RecruitingSystem.API.Controllers
             return CreatedAtRoute("GetJobOffer", new { jobOfferCreated.Id }, jobOfferCreated);
         }
 
+        [HttpPut("joboffers/{id}")]
+        public IActionResult UpdateJobOffer([FromBody]JobOfferForManipulationDTO jobOffer, Guid id)
+        {
+            if (jobOffer == null)
+            {
+                return BadRequest();
+            }
+
+            var jobOfferUpdated = _jobOfferService.UpdateJobOffer(jobOffer, id);
+
+            return Ok(jobOfferUpdated);
+        }
+
         [HttpDelete("joboffers/{id}")]
         public IActionResult DeleteJobOffer(Guid id)
         {
