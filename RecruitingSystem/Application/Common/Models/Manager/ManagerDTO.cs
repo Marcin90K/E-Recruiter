@@ -1,11 +1,10 @@
-﻿using RecruitingSystem.Data.Enums;
-using RecruitingSystem.Infrastructure.Models.Employee;
-using RecruitingSystem.Infrastructure.Models.Recruiter;
+﻿using Application.Common.Models.Employee;
+using Application.Common.Models.Recruiter;
+using Common.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace RecruitingSystem.Infrastructure.Models.Manager
+namespace Application.Common.Models.Manager
 {
     public class ManagerDTO
     {

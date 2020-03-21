@@ -1,11 +1,8 @@
-﻿using RecruitingSystem.Infrastructure.Models.Address;
-using RecruitingSystem.Infrastructure.Models.Candidate;
-using RecruitingSystem.Infrastructure.Models.PersonBasicData;
+﻿using Application.Common.Models.Address;
+using Application.Common.Models.PersonBasicData;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace RecruitingSystem.Infrastructure.Models.CandidateBasicData
+namespace Application.Common.Models.CandidateBasicData
 {
     public class CandidateBasicDataDTO
     {

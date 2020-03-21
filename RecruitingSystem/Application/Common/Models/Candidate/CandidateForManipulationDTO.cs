@@ -1,11 +1,9 @@
-﻿using RecruitingSystem.Infrastructure.Models.CandidateBasicData;
-using RecruitingSystem.Infrastructure.Models.Education;
-using RecruitingSystem.Infrastructure.Models.Experience;
-using System;
+﻿using Application.Common.Models.CandidateBasicData;
+using Application.Common.Models.Education;
+using Application.Common.Models.Experience;
 using System.Collections.Generic;
-using System.Text;
 
-namespace RecruitingSystem.Infrastructure.Models.Candidate
+namespace Application.Common.Models.Candidate
 {
     public class CandidateForManipulationDTO
     {

@@ -1,10 +1,7 @@
-﻿using Newtonsoft.Json;
-using RecruitingSystem.Infrastructure.Models.JobPosition;
+﻿using Application.Common.Models.JobPosition;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace RecruitingSystem.Infrastructure.Models.JobOffer
+namespace Application.Common.Models.JobOffer
 {
     public class JobOfferForManipulationDTO
     {

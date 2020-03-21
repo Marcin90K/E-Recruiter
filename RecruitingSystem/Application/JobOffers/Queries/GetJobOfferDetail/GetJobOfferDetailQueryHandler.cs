@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Application.Common.Models.JobOffer;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -1,4 +1,5 @@
 ﻿using Application.Common.Models.Employee;
+using Application.Common.Models.Recruiter;
 using Common.Enums;
 using System.Collections.Generic;
 

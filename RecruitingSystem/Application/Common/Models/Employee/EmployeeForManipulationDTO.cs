@@ -1,9 +1,6 @@
-﻿using RecruitingSystem.Infrastructure.Models.PersonBasicData;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Application.Common.Models.PersonBasicData;
 
-namespace RecruitingSystem.Infrastructure.Models.Employee
+namespace Application.Common.Models.Employee
 {
     public class EmployeeForManipulationDTO
     {

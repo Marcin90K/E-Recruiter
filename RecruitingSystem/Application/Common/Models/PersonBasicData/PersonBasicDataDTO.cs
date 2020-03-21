@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace RecruitingSystem.Infrastructure.Models.PersonBasicData
+namespace Application.Common.Models.PersonBasicData
 {
     public class PersonBasicDataDTO
     {

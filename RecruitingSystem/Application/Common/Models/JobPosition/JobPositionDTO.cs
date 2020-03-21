@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace RecruitingSystem.Infrastructure.Models.JobPosition
+namespace Application.Common.Models.JobPosition
 {
     public class JobPositionDTO
     {

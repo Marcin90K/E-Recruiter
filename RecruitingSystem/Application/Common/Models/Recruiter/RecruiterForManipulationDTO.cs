@@ -1,10 +1,9 @@
-﻿using RecruitingSystem.Infrastructure.Models.Employee;
-using RecruitingSystem.Infrastructure.Models.JobOffer;
+﻿using Application.Common.Models.Employee;
+using Application.Common.Models.JobOffer;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace RecruitingSystem.Infrastructure.Models.Recruiter
+namespace Application.Common.Models.Recruiter
 {
     public class RecruiterForManipulationDTO
     {

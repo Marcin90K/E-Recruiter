@@ -1,10 +1,8 @@
-﻿using RecruitingSystem.Infrastructure.Models.Candidate;
-using RecruitingSystem.Infrastructure.Models.JobOffer;
+﻿using Application.Common.Models.Candidate;
+using Application.Common.Models.JobOffer;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace RecruitingSystem.Infrastructure.Models.CandidateJobOffer
+namespace Application.Common.Models.CandidateJobOffer
 {
     public class CandidateJobOfferDTO
     {

@@ -1,9 +1,6 @@
-﻿using RecruitingSystem.Infrastructure.Models.Candidate;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
-namespace RecruitingSystem.Infrastructure.Models.Experience
+namespace Application.Common.Models.Experience
 {
     public class ExperienceForManipulationDTO
     {
