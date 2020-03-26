@@ -12,7 +12,9 @@ using Application.Common.Models.PersonBasicData;
 using Application.Common.Models.Recruiter;
 using AutoMapper;
 using Domain.Entities;
+using System;
 using System.Linq;
+using System.Reflection;
 
 namespace Application.Common.Mapping
 {
@@ -20,45 +22,22 @@ namespace Application.Common.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<Address, AddressDTO>();
-            CreateMap<AddressForManipulationDTO, Address>();
+            ApplyMappingFromAssembly(Assembly.GetExecutingAssembly());
+        }
 
-            CreateMap<Candidate, CandidateDTO>()
-                .ForMember(dest => dest.CandidateBasicData, opt => opt.MapFrom(src => src.BasicData));
-            CreateMap<CandidateForManipulationDTO, Candidate>()
-                .ForMember(dest => dest.BasicData, opt => opt.MapFrom(src => src.CandidateBasicData));
+        private void ApplyMappingFromAssembly(Assembly assembly)
+        {
+            var types = assembly.GetExportedTypes()
+                .Where(t => t.GetInterfaces().Any(
+                    i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
+                .ToList();
 
-            CreateMap<CandidateBasicData, CandidateBasicDataDTO>();
-            CreateMap<CandidateBasicDataForManipulationDTO, CandidateBasicData>();
-
-            CreateMap<CandidateJobOffer, CandidateJobOfferDTO>();
-            CreateMap<CandidateJobOfferForManipulationDTO, CandidateJobOffer>();
-
-            CreateMap<Education, EducationDTO>();
-            CreateMap<EducationForManipulationDTO, Education>();
-
-            CreateMap<Employee, EmployeeDTO>();
-            CreateMap<EmployeeForManipulationDTO, Employee>();
-
-            CreateMap<Experience, ExperienceDTO>();
-            CreateMap<ExperienceForManipulationDTO, Experience>();
-
-            CreateMap<JobOffer, JobOfferDTO>()
-                .ForMember(dest => dest.CandidateIds, opt => opt.MapFrom(src => src.CandidateJobOffers.Select(c => c.CandidateId)));
-            CreateMap<JobOfferForManipulationDTO, JobOffer>()
-                .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.OwnerId));
-
-            CreateMap<JobPosition, JobPositionDTO>();
-            CreateMap<JobPositionForManipulationDTO, JobPosition>();
-
-            CreateMap<Manager, ManagerDTO>();
-            CreateMap<ManagerForManipulationDTO, Manager>();
-
-            CreateMap<PersonBasicData, PersonBasicDataDTO>();
-            CreateMap<PersonBasicDataForManipulationDTO, PersonBasicData>();
-
-            CreateMap<Recruiter, RecruiterDTO>();
-            CreateMap<RecruiterForManipulationDTO, Recruiter>();
+            foreach (var type in types)
+            {
+                var instance = Activator.CreateInstance(type);
+                var methodInfo = type.GetMethod("Mapping");
+                methodInfo?.Invoke(instance, new object[] { this });
+            }
         }
     }
 }
