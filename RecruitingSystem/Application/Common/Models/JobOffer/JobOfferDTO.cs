@@ -4,6 +4,7 @@ using Application.Common.Models.Recruiter;
 using System;
 using System.Collections.Generic;
 using Domain.Entities;
+using System.Linq;
 
 namespace Application.Common.Models.JobOffer
 {
@@ -27,6 +28,11 @@ namespace Application.Common.Models.JobOffer
 
         public ICollection<Guid> CandidateIds { get; set; } = new List<Guid>();
 
-
+        public void Mapping(MappingProfile profile)
+        {
+            profile.CreateMap<Domain.Entities.JobOffer, JobOfferDTO>()
+                .ForMember(dest => dest.CandidateIds, opt => opt.MapFrom(src => src.CandidateJobOffers.Select(
+                    cj => cj.CandidateId)));
+        }
     }
 }
