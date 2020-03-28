@@ -1,4 +1,5 @@
-﻿using Application.Common.Interfaces;
+﻿using Application.Common.Exceptions;
+using Application.Common.Interfaces;
 using Application.Common.Models.JobOffer;
 using AutoMapper;
 using MediatR;
@@ -28,7 +29,7 @@ namespace Application.JobOffers.Queries.GetJobOfferDetail
 
             if (entity == null)
             {
-                throw new Exception("Not found Job offer with given Id");
+                throw new ResourceNotFoundException($"Not found Job offer with id: {request.Id}");
             }
 
             return _mapper.Map<JobOfferDTO>(entity);

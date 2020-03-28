@@ -1,11 +1,13 @@
-﻿using Application.Common.Models.JobPosition;
+﻿using Application.Common.Mapping;
+using Application.Common.Models.JobPosition;
 using Application.Common.Models.Recruiter;
 using System;
 using System.Collections.Generic;
+using Domain.Entities;
 
 namespace Application.Common.Models.JobOffer
 {
-    public class JobOfferDTO
+    public class JobOfferDTO : IMapFrom<Domain.Entities.JobOffer>
     {
         public Guid Id { get; set; }
 
@@ -24,5 +26,7 @@ namespace Application.Common.Models.JobOffer
         public RecruiterDTO Owner { get; set; }
 
         public ICollection<Guid> CandidateIds { get; set; } = new List<Guid>();
+
+
     }
 }
