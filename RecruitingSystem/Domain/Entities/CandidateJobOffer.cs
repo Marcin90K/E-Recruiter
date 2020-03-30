@@ -8,11 +8,11 @@ namespace Domain.Entities
     public class CandidateJobOffer
     {
         public Guid CandidateId { get; set; }
-        [ForeignKey("CandidateId")]
+
         public virtual Candidate Candidate { get; set; }
 
         public Guid JobOfferId { get; set; }
-        [ForeignKey("JobOfferId")]
+
         public virtual JobOffer JobOffer { get; set; }
     }
 }

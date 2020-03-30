@@ -7,7 +7,7 @@ namespace Domain.Entities
 {
     public class Employee : Entity
     {
-        public string EmployeeCompanyId{ get; set; }
+        public string EmployeeCompanyId { get; set; }
 
         public Guid PersonBasicDataId { get; set; }
 

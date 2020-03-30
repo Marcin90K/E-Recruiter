@@ -8,21 +8,16 @@ namespace Domain.Entities
 {
     public class Education : Entity
     {
-        [Required]
         public string SchoolName { get; set; }
 
-        [Required]
         public DateTime StartDate { get; set; }
 
-        [Required]
         public DateTime EndDate { get; set; }
 
-        [Required]
         public string CourseName { get; set; }
 
         public Guid CandidateId { get; set; }
 
-        [ForeignKey("CandidateId")]
         public virtual Candidate Candidate { get; set; }
     }
 }
