@@ -33,5 +33,10 @@ namespace Persistance
         {
             return base.SaveChanges();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(RecruitingSystemDbContext).Assembly);
+        }
     }
 }
