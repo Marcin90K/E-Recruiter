@@ -11,8 +11,6 @@ namespace Persistance.Configurations
             builder.HasMany(m => m.Recruiters)
                    .WithOne(r => r.Manager)
                    .OnDelete(DeleteBehavior.Restrict);
-            
-                   //.HasForeignKey(m => m.EmployeeId);
         }
     }
 }

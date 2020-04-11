@@ -7,16 +7,13 @@ namespace Domain.Entities
 {
     public class Recruiter : Entity
     {
-        //public virtual ICollection<JobOffer> OwnedJobOffers { get; set; }
         public ICollection<JobOffer> OwnedJobOffers { get; set; }
 
         [ForeignKey(nameof(Employee))]
         public Guid EmployeeId { get; set; }
 
-        //public virtual Employee Employee { get; set; }
         public Employee Employee { get; set; }
 
-        //public virtual Manager Manager { get; set; }
         public Manager Manager { get; set; }
     }
 }

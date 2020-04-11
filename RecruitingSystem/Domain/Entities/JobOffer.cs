@@ -11,7 +11,6 @@ namespace Domain.Entities
     {
         public Guid JobPositionId { get; set; }
 
-        //public virtual JobPosition JobPosition { get; set; }
         public JobPosition JobPosition { get; set; }
 
         public string Description { get; set; }
@@ -24,7 +23,6 @@ namespace Domain.Entities
 
         public Guid EmployeeId { get; set; }
 
-        //public virtual Recruiter Owner { get; set; }
         public Recruiter Owner { get; set; }
 
         public virtual ICollection<CandidateJobOffer> CandidateJobOffers { get; set; } = new List<CandidateJobOffer>();

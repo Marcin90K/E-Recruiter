@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Application;
+﻿using Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Persistance;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore;
-using Application.Common.Interfaces;
 
 namespace WebAPI
 {
@@ -33,15 +23,7 @@ namespace WebAPI
             services.AddApplicationDependencies();
             services.AddPersistanceDependencies(Configuration);
 
-            //services.AddScoped<IReqruitingSystemDbContext, RecruitingSystemDbContext>();
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            //var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            //services.AddDbContext<RecruitingSystemDbContext>(opt => opt.UseSqlServer(connectionString));
-
-
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

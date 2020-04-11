@@ -11,8 +11,6 @@ namespace Domain.Entities
 
         public Guid PersonBasicDataId { get; set; }
 
-        //public virtual PersonBasicData PersonBasicData { get; set; }
-
         public PersonBasicData PersonBasicData { get; set; }
     }
 }
