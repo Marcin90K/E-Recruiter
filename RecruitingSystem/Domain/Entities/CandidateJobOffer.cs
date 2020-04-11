@@ -9,10 +9,13 @@ namespace Domain.Entities
     {
         public Guid CandidateId { get; set; }
 
-        public virtual Candidate Candidate { get; set; }
+        //public virtual Candidate Candidate { get; set; }
+
+        public Candidate Candidate { get; set; }
 
         public Guid JobOfferId { get; set; }
 
-        public virtual JobOffer JobOffer { get; set; }
+        //public virtual JobOffer JobOffer { get; set; }
+        public JobOffer JobOffer { get; set; }
     }
 }

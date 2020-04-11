@@ -8,16 +8,19 @@ namespace Persistance.Configurations
     {
         public void Configure(EntityTypeBuilder<CandidateBasicData> builder)
         {
-            builder.Property(c => c.PersonBasicData).IsRequired();
-            builder.Property(c => c.Address).IsRequired();
+            //builder.Property(c => c.PersonBasicData).IsRequired();
+            //builder.Property(c => c.Address).IsRequired();
 
-            builder.HasOne(c => c.PersonBasicData);
+            //builder.HasOne(c => c.PersonBasicData);
 
-            builder.HasOne(c => c.Address);
+            //builder.HasOne(c => c.Address);
+            builder.HasOne(c => c.Address)
+                   .WithMany()
+                   .IsRequired();
 
             builder.HasOne(c => c.Candidate)
-                   .WithOne(c => c.BasicData)
-                   .HasForeignKey("CandidateId");
+                   .WithOne(c => c.BasicData);
+                   //.HasForeignKey("CandidateId");
         }
     }
 }

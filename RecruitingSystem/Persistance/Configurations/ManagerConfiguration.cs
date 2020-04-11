@@ -10,7 +10,9 @@ namespace Persistance.Configurations
         {
             builder.HasMany(m => m.Recruiters)
                    .WithOne(r => r.Manager)
-                   .HasForeignKey(m => m.EmployeeId);
+                   .OnDelete(DeleteBehavior.Restrict);
+            
+                   //.HasForeignKey(m => m.EmployeeId);
         }
     }
 }

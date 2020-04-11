@@ -12,7 +12,8 @@ namespace Persistance.Configurations
                    .WithOne(jo => jo.Owner);
 
             builder.HasOne(r => r.Manager)
-                   .WithMany(m => m.Recruiters);
+                   .WithMany(m => m.Recruiters)
+                   .HasForeignKey(r => r.EmployeeId);
         }
     }
 }
