@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Application.Common.Mapping;
+using System;
 
 namespace Application.Common.Models.Experience
 {
-    public class ExperienceDTO
+    public class ExperienceDTO : IMapFrom<Domain.Entities.Experience>
     {
         public Guid Id { get; set; }
         public string CompanyName { get; set; }
@@ -11,5 +12,10 @@ namespace Application.Common.Models.Experience
         public string JobTitle { get; set; }
         public string Duties { get; set; }
         public Guid CandidateId { get; set; }
+
+        public void Mapping(MappingProfile profile)
+        {
+            profile.CreateMap<Domain.Entities.Experience, ExperienceDTO>();
+        }
     }
 }

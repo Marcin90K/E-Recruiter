@@ -3,6 +3,7 @@ using Application.Common.Interfaces;
 using Application.Common.Models.JobOffer;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,10 @@ namespace Application.JobOffers.Queries.GetJobOfferDetail
 
         public async Task<JobOfferDTO> Handle(GetJobOfferDetailQuery request, CancellationToken cancellationToken)
         {
-            var entity = _context.JobOffers.Where(j => j.Id == request.Id).FirstOrDefault();
+            var entity = _context.JobOffers.Where(j => j.Id == request.Id)
+                .Include(j => j.JobPosition)
+                .Include(j => j.Owner)
+                .FirstOrDefault();
 
             if (entity == null)
             {

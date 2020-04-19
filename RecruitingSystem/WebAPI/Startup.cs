@@ -25,9 +25,13 @@ namespace WebAPI
             services.AddPersistanceDependencies(Configuration);
             services.AddApplicationDependencies();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddMvcOptions(opt =>
                     opt.EnableEndpointRouting = false
+                );
+
+            services.AddControllers().AddNewtonsoftJson(opt =>
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
         }
 
