@@ -1,5 +1,7 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Application.Common.Interfaces
 {
@@ -18,6 +20,6 @@ namespace Application.Common.Interfaces
         DbSet<PersonBasicData> PersonBasicDatas { get; set; }
         DbSet<Recruiter> Recruiters { get; set; }
 
-        int SaveChanges();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

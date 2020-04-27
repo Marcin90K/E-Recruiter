@@ -1,4 +1,5 @@
 ﻿using Application.Common.Utilities;
+using Application.JobOffers.Commands.CreateJobOffer;
 using Application.JobOffers.Queries.GetJobOfferDetail;
 using Application.JobOffers.Queries.GetJobOfferList;
 using MediatR;
@@ -33,6 +34,13 @@ namespace WebAPI.Controllers
             var query = new GetJobOfferListQuery { ResourceParameters = resourceParameters };
             var jobOffers = await _mediator.Send(query);
             return Ok(jobOffers);
+        }
+
+        [HttpPost("jobOffers")]
+        public async Task<IActionResult> CreateJobOffer([FromBody] CreateJobOfferCommand command)
+        {
+            var jobOfferCreated = await _mediator.Send(command);
+            return Ok(jobOfferCreated);
         }
     }
 }

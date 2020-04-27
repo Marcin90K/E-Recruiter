@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Persistance
 {
@@ -29,9 +31,9 @@ namespace Persistance
         public DbSet<PersonBasicData> PersonBasicDatas { get; set; }
         public DbSet<Recruiter> Recruiters { get; set; }
 
-        public override int SaveChanges()
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            return base.SaveChanges();
+            return base.SaveChangesAsync(cancellationToken);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
