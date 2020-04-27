@@ -17,7 +17,7 @@ namespace Application.Common.Utilities
                 else pageSize = value;
             }
         }
-        public int PageNumber { get; set; }
+        public int PageNumber { get; set; } = 1;
         public string Search { get; set; }
     }
 }

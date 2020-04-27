@@ -1,4 +1,6 @@
-﻿using Application.JobOffers.Queries.GetJobOfferDetail;
+﻿using Application.Common.Utilities;
+using Application.JobOffers.Queries.GetJobOfferDetail;
+using Application.JobOffers.Queries.GetJobOfferList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,11 +20,19 @@ namespace WebAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("joboffer/{id}")]
+        [HttpGet("joboffers/{id}")]
         public async Task<IActionResult> GetJobOffer(Guid id)
         {
             var jobOffer = await _mediator.Send(new GetJobOfferDetailQuery { Id = id });
             return Ok(jobOffer);
+        }
+
+        [HttpGet("joboffers")]
+        public async Task<IActionResult> GetJobOffers([FromQuery]ResourceParameters resourceParameters)
+        {
+            var query = new GetJobOfferListQuery { ResourceParameters = resourceParameters };
+            var jobOffers = await _mediator.Send(query);
+            return Ok(jobOffers);
         }
     }
 }
