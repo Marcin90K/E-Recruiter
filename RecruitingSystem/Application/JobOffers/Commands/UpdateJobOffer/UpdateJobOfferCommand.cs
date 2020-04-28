@@ -1,16 +1,15 @@
 ﻿using Application.Common.Mapping;
-using Application.Common.Models.JobOffer;
-using Application.Common.Models.JobPosition;
 using Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.JobOffers.Commands.CreateJobOffer
+namespace Application.JobOffers.Commands.UpdateJobOffer
 {
-    public class CreateJobOfferCommand : IRequest<JobOfferCreatedVm>, IMapFrom<JobOffer>
+    public class UpdateJobOfferCommand : IRequest<JobOfferUpdatedVm>, IMapFrom<JobOffer>
     {
+        public Guid Id { get; set; }
         public Guid JobPositionId { get; set; }
         public string Description { get; set; }
         public DateTime DateOfExpiration { get; set; }
@@ -19,7 +18,7 @@ namespace Application.JobOffers.Commands.CreateJobOffer
 
         public void Mapping(MappingProfile profile)
         {
-            profile.CreateMap<CreateJobOfferCommand, JobOffer>()
+            profile.CreateMap<UpdateJobOfferCommand, JobOffer>()
                  .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.OwnerId));
         }
     }

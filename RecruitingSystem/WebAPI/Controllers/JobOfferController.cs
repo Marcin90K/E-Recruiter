@@ -1,5 +1,6 @@
 ﻿using Application.Common.Utilities;
 using Application.JobOffers.Commands.CreateJobOffer;
+using Application.JobOffers.Commands.UpdateJobOffer;
 using Application.JobOffers.Queries.GetJobOfferDetail;
 using Application.JobOffers.Queries.GetJobOfferList;
 using MediatR;
@@ -41,6 +42,13 @@ namespace WebAPI.Controllers
         {
             var jobOfferCreated = await _mediator.Send(command);
             return Ok(jobOfferCreated);
+        }
+
+        [HttpPut("jobOffers/{id}")]
+        public async Task<IActionResult> UpdateJobOffer([FromBody] UpdateJobOfferCommand command)
+        {
+            var jobOfferUpdated = await _mediator.Send(command);
+            return Ok(jobOfferUpdated);
         }
     }
 }
