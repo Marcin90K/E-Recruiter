@@ -45,8 +45,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("jobOffers/{id}")]
-        public async Task<IActionResult> UpdateJobOffer([FromBody] UpdateJobOfferCommand command)
+        public async Task<IActionResult> UpdateJobOffer([FromBody] UpdateJobOfferCommand command, Guid id)
         {
+            command.Id = id;
             var jobOfferUpdated = await _mediator.Send(command);
             return Ok(jobOfferUpdated);
         }
