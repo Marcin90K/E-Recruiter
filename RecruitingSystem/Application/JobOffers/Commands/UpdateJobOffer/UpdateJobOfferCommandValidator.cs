@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.JobOffers.Commands.CreateJobOffer
+namespace Application.JobOffers.Commands.UpdateJobOffer
 {
-    public class CreateJobOfferCommandValidator : AbstractValidator<CreateJobOfferCommand>
+    public class UpdateJobOfferCommandValidator : AbstractValidator<UpdateJobOfferCommand>
     {
-        public CreateJobOfferCommandValidator()
+        public UpdateJobOfferCommandValidator()
         {
             RuleFor(j => j.Description).MaximumLength(1000);
             RuleFor(j => j.Requirements).MaximumLength(1000);
