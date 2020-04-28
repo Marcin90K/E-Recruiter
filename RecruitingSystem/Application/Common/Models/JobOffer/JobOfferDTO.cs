@@ -12,8 +12,6 @@ namespace Application.Common.Models.JobOffer
     {
         public Guid Id { get; set; }
 
-        public int ReferenceNumber { get; set; }
-
         public JobPositionDTO JobPosition { get; set; }
 
         public string Description { get; set; }

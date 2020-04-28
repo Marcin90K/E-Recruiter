@@ -9,10 +9,10 @@ using System.Text;
 
 namespace Application.JobOffers.Commands.CreateJobOffer
 {
-    public class CreateJobOfferCommand : IRequest<JobOfferDTO>, IMapFrom<JobOffer>
+    public class CreateJobOfferCommand : IRequest<JobOfferCreatedVm>, IMapFrom<JobOffer>
     {
         public int ReferenceNumber { get; set; }
-        public JobPositionForManipulationDTO JobPosition { get; set; }
+        public Guid JobPositionId { get; set; }
         public string Description { get; set; }
         public DateTime DateOfExpiration { get; set; }
         public string Requirements { get; set; }

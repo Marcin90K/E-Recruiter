@@ -1,4 +1,5 @@
-﻿using Application.Common.Interfaces;
+﻿using Application.Common.Exceptions;
+using Application.Common.Interfaces;
 using Application.Common.Models.JobOffer;
 using AutoMapper;
 using Domain.Entities;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Application.JobOffers.Commands.CreateJobOffer
 {
-    public class CreateJobOfferCommandHandler : IRequestHandler<CreateJobOfferCommand, JobOfferDTO>
+    public class CreateJobOfferCommandHandler : IRequestHandler<CreateJobOfferCommand, JobOfferCreatedVm>
     {
         private readonly IReqruitingSystemDbContext _context;
         private readonly IMediator _mediator;
@@ -25,15 +26,18 @@ namespace Application.JobOffers.Commands.CreateJobOffer
             _mapper = mapper;
         }
 
-        public async Task<JobOfferDTO> Handle(CreateJobOfferCommand request, CancellationToken cancellationToken)
+        public async Task<JobOfferCreatedVm> Handle(CreateJobOfferCommand request, CancellationToken cancellationToken)
         {
             var jobOfferEntity = _mapper.Map<JobOffer>(request);
             jobOfferEntity.DateOfAdding = DateTime.Now;
 
             _context.JobOffers.Add(jobOfferEntity);
-            await _context.SaveChangesAsync(cancellationToken);
+            if (!(await _context.SaveChangesAsync(cancellationToken) > 0))
+            {
+                throw new ResourceManipulationException("Error during JobOffer creating.");
+            }
 
-            var jobOfferToReturn = _mapper.Map<JobOfferDTO>(jobOfferEntity);
+            var jobOfferToReturn = _mapper.Map<JobOfferCreatedVm>(jobOfferEntity);
             return jobOfferToReturn;
         }
     }
