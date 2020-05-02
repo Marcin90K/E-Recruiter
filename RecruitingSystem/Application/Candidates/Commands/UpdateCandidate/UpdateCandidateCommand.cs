@@ -1,0 +1,27 @@
+﻿using Application.Common.Mapping;
+using Application.Common.Models.CandidateBasicData;
+using Application.Common.Models.Education;
+using Application.Common.Models.Experience;
+using Domain.Entities;
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Application.Candidates.Commands.UpdateCandidate
+{
+    public class UpdateCandidateCommand : IRequest<CandidateUpdatedVm>, IMapFrom<Candidate>
+    {
+        public Guid Id { get; set; }
+        public CandidateBasicDataForManipulationDTO CandidateBasicData { get; set; }
+        public ICollection<EducationForManipulationDTO> Educations { get; set; }
+        public ICollection<ExperienceForManipulationDTO> Experiences { get; set; }
+        public decimal ExpectedSalary { get; set; }
+
+        public void Mapping(MappingProfile profile)
+        {
+            profile.CreateMap<UpdateCandidateCommand, Candidate>()
+                .ForMember(dest => dest.BasicData, opt => opt.MapFrom(src => src.CandidateBasicData));
+        }
+    }
+}

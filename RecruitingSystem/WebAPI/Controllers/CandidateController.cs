@@ -1,4 +1,5 @@
 ﻿using Application.Candidates.Commands.CreateCandidate;
+using Application.Candidates.Commands.UpdateCandidate;
 using Application.Candidates.Queries.GetCandidateDetail;
 using Application.Candidates.Queries.GetCandidateList;
 using Application.Common.Utilities;
@@ -42,6 +43,14 @@ namespace WebAPI.Controllers
         {
             var candidateCreated = await _mediator.Send(command);
             return CreatedAtRoute("Getcandidate", new { candidateCreated.Id }, candidateCreated);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCandidate([FromBody]UpdateCandidateCommand command, Guid id)
+        {
+            command.Id = id;
+            var candidateUpdated = await _mediator.Send(command);
+            return Ok(candidateUpdated);
         }
     }
 }
