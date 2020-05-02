@@ -4,9 +4,7 @@ using Application.Common.Models.Education;
 using Application.Common.Models.Experience;
 using Domain.Entities;
 using MediatR;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Application.Candidates.Commands.CreateCandidate
 {

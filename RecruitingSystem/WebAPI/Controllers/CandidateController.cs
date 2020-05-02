@@ -1,4 +1,5 @@
-﻿using Application.Candidates.Queries.GetCandidateDetail;
+﻿using Application.Candidates.Commands.CreateCandidate;
+using Application.Candidates.Queries.GetCandidateDetail;
 using Application.Candidates.Queries.GetCandidateList;
 using Application.Common.Utilities;
 using MediatR;
@@ -21,7 +22,7 @@ namespace WebAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetCandidate")]
         public async Task<IActionResult> GetCandidate(Guid id)
         {
             var candidate = await _mediator.Send(new GetCandidateDetailQuery() { Id = id });
@@ -34,6 +35,13 @@ namespace WebAPI.Controllers
             var query = new GetCandidateListQuery() { ResourceParameters = resourceParameters };
             var candidates = await _mediator.Send(query);
             return Ok(candidates);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCandidate([FromBody]CreateCandidateCommand command)
+        {
+            var candidateCreated = await _mediator.Send(command);
+            return CreatedAtRoute("Getcandidate", new { candidateCreated.Id }, candidateCreated);
         }
     }
 }
