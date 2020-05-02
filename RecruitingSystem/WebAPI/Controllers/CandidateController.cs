@@ -1,4 +1,5 @@
 ﻿using Application.Candidates.Commands.CreateCandidate;
+using Application.Candidates.Commands.DeleteCandidate;
 using Application.Candidates.Commands.UpdateCandidate;
 using Application.Candidates.Queries.GetCandidateDetail;
 using Application.Candidates.Queries.GetCandidateList;
@@ -42,7 +43,7 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> CreateCandidate([FromBody]CreateCandidateCommand command)
         {
             var candidateCreated = await _mediator.Send(command);
-            return CreatedAtRoute("Getcandidate", new { candidateCreated.Id }, candidateCreated);
+            return CreatedAtRoute("GetCandidate", new { candidateCreated.Id }, candidateCreated);
         }
 
         [HttpPut("{id}")]
@@ -51,6 +52,13 @@ namespace WebAPI.Controllers
             command.Id = id;
             var candidateUpdated = await _mediator.Send(command);
             return Ok(candidateUpdated);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCandidate(Guid id)
+        {
+            await _mediator.Send(new DeleteCandidateCommand() { Id = id });
+            return NoContent();
         }
     }
 }
