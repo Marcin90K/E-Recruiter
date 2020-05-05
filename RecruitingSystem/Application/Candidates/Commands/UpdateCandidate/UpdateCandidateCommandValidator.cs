@@ -9,7 +9,7 @@ namespace Application.Candidates.Commands.UpdateCandidate
     {
         public UpdateCandidateCommandValidator()
         {
-            RuleFor(c => c.Id).NotNull();
+            RuleFor(c => c.EntityId).NotNull();
         }
     }
 }

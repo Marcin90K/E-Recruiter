@@ -12,10 +12,13 @@ namespace Application.Candidates.Commands.UpdateCandidate
 {
     public class UpdateCandidateCommand : IRequest<CandidateUpdatedVm>, IMapFrom<Candidate>
     {
-        public Guid Id { get; set; }
-        public CandidateBasicDataForManipulationDTO CandidateBasicData { get; set; }
-        public ICollection<EducationForManipulationDTO> Educations { get; set; }
-        public ICollection<ExperienceForManipulationDTO> Experiences { get; set; }
+        public Guid EntityId { get; set; }
+        public CandidateBasicDataForUpdateDTO CandidateBasicData { get; set; }
+        //public CandidateBasicData CandidateBasicData { get; set; }
+        public ICollection<EducationForUpdateDTO> Educations { get; set; }
+        //public ICollection<Education> Educations { get; set; }
+        public ICollection<ExperienceForUpdateDTO> Experiences { get; set; }
+        // public ICollection<Experience> Experiences { get; set; }
         public decimal ExpectedSalary { get; set; }
 
         public void Mapping(MappingProfile profile)

@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCandidate([FromBody]UpdateCandidateCommand command, Guid id)
         {
-            command.Id = id;
+            command.EntityId = id;
             var candidateUpdated = await _mediator.Send(command);
             return Ok(candidateUpdated);
         }
