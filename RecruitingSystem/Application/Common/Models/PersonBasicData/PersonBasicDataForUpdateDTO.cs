@@ -7,7 +7,7 @@ namespace Application.Common.Models.PersonBasicData
 {
     public class PersonBasicDataForUpdateDTO : IMapFrom<Domain.Entities.PersonBasicData>
     {
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }

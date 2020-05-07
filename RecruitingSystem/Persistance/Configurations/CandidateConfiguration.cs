@@ -10,12 +10,14 @@ namespace Persistance.Configurations
         {
             builder.HasOne(c => c.BasicData)
                    .WithOne(b => b.Candidate);
+                   //.HasForeignKey(b => b.)
+            //.HasForeignKey(b => b.);
 
             builder.HasMany(c => c.Educations)
-                   .WithOne(e => e.Candidate);
+                   .WithOne(e => e.Candidate).HasForeignKey(c => c.CandidateId);
 
             builder.HasMany(c => c.Experiences)
-                   .WithOne(e => e.Candidate);
+                   .WithOne(e => e.Candidate).HasForeignKey(e => e.CandidateId);
         }
     }
 }

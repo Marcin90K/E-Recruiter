@@ -13,7 +13,8 @@ namespace Persistance.Configurations
                    .IsRequired();
 
             builder.HasOne(c => c.Candidate)
-                   .WithOne(c => c.BasicData);
+                   .WithOne(c => c.BasicData).HasForeignKey<CandidateBasicData>(b => b.CandidateId);
+
         }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistance;
+using WebAPI.Middlewares;
 
 namespace WebAPI
 {
@@ -49,6 +50,8 @@ namespace WebAPI
             }
 
             app.UseRouting();
+
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseHttpsRedirection();
             app.UseMvc();

@@ -7,7 +7,7 @@ namespace Application.Common.Models.Education
 {
     public class EducationForUpdateDTO : IMapFrom<Domain.Entities.Education>
     {
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
         public string SchoolName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
