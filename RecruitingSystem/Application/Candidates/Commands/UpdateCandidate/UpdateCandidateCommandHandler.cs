@@ -30,8 +30,8 @@ namespace Application.Candidates.Commands.UpdateCandidate
                 .Include(c => c.BasicData).ThenInclude(d => d.PersonBasicData)
                 .Include(c => c.BasicData).ThenInclude(d => d.Address)
                 .Include(c => c.CandidateJobOffers)
-                .Include(c => c.Educations)
-                .Include(c => c.Experiences)
+                .Include(c => c.Educations).ThenInclude(e => e.Candidate)
+                .Include(c => c.Experiences).ThenInclude(e => e.Candidate)
                 .FirstOrDefaultAsync();
             //var candidateEntity = _context.Candidates.SingleOrDefault(c => c.Id == request.Id);  //Where(c => c.Id == request.Id).FirstOrDefaultAsync();
             
@@ -62,13 +62,17 @@ namespace Application.Candidates.Commands.UpdateCandidate
                 //candidateEntity.Experiences = request.Experiences;
                 //candidateEntity.ExpectedSalary = request.ExpectedSalary;
 
+                int i = 0;
+                request.Educations.ToList().ForEach(e => { _mapper.Map(e, candidateEntity.Educations.ElementAt(i)); i++; });
+                //candidateToUpdate.Educations = candidateToUpdate.    _mapper.Map<ICollection<Education>>(request.Educations);
+
                 _context.Candidates.Update(candidateToUpdate);
                 if (!(await _context.SaveChangesAsync(cancellationToken) > 0))
                 {
                     throw new ResourceManipulationException($"Error during updating resource id: {request.Id}");
                 }
 
-                return _mapper.Map<CandidateUpdatedVm>(candidateEntity);
+                return _mapper.Map<CandidateUpdatedVm>(candidateToUpdate);
             }
         }
     }

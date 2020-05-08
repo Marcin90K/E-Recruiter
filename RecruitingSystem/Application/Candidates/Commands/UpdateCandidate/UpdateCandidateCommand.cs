@@ -24,7 +24,11 @@ namespace Application.Candidates.Commands.UpdateCandidate
         public void Mapping(MappingProfile profile)
         {
             profile.CreateMap<UpdateCandidateCommand, Candidate>()
-                .ForMember(dest => dest.BasicData, opt => opt.MapFrom(src => src.CandidateBasicData));
+                .ForMember(dest => dest.BasicData, opt => opt.MapFrom(src => src.CandidateBasicData))
+                //.ForMember(dest => dest.Educations, opt => opt.Ignore())
+                .ForMember(dest => dest.Experiences, opt => opt.Ignore())
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+                //.ForMember(dest => dest.BasicData, opt => opt.Ignore());
         }
     }
 }

@@ -12,11 +12,17 @@ namespace Application.Common.Models.Education
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string CourseName { get; set; }
-        public Guid CandidateId { get; set; }
+        //public Guid CandidateId { get; set; }
 
         public void Mapping(MappingProfile profile)
         {
-            profile.CreateMap<EducationForUpdateDTO, Domain.Entities.Education>();
+            profile.CreateMap<EducationForUpdateDTO, Domain.Entities.Education>()
+                .ForMember(dest => dest.Candidate, opt => opt.Ignore())
+                .ForMember(dest => dest.CandidateId, opt => opt.Ignore());
+
+            //profile.CreateMap<ICollection<EducationForUpdateDTO>, ICollection<Domain.Entities.Education>>();
+               //.ForMember(dest => dest.Candidate, opt => opt.Ignore())
+               //.ForMember(dest => dest.CandidateId, opt => opt.Ignore());
         }
     }
 }
