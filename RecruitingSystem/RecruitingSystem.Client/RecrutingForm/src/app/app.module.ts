@@ -15,6 +15,7 @@ import { IntroComponent } from './candidate-data/intro/intro.component';
 import { SummaryComponent } from './candidate-data/summary/summary.component';
 import { BasicInfoFormComponent } from './candidate-data/basic-info/basic-info-form/basic-info-form.component';
 import { SubmittedComponent } from './shared/submitted/submitted.component';
+import { MainTopBarComponent } from './navigations/main-top-bar/main-top-bar.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { SubmittedComponent } from './shared/submitted/submitted.component';
     IntroComponent,
     SummaryComponent,
     BasicInfoFormComponent,
-    SubmittedComponent
+    SubmittedComponent,
+    MainTopBarComponent
   ],
   imports: [
     BrowserModule,
