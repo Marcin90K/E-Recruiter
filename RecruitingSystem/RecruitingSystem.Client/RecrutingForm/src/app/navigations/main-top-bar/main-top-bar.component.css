@@ -1,0 +1,23 @@
+.navbar-column {
+  line-height: 200%;
+}
+
+.navbar {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.nav-button {
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  border-right: 1px solid #fff;
+}
+
+.nav-button:last-of-type {
+  border-right: none;
+}
+
+a.navbar-link {
+  text-decoration: none;
+}
