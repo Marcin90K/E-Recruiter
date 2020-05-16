@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CandidateBasicInfo } from '../../models/basic-candidate-info.model';
+import { CandidateBasicData } from '../../models/candidate-basic-data';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { CandidateDataService } from 'src/app/services/candidate-data.service';
 
@@ -11,7 +11,7 @@ import { CandidateDataService } from 'src/app/services/candidate-data.service';
 export class BasicInfoComponent implements OnInit {
 
   formBasicInfo: FormGroup;
-  model: CandidateBasicInfo;
+  model: CandidateBasicData;
 
 
   constructor(private formBuilder: FormBuilder,

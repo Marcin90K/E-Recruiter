@@ -9,6 +9,7 @@ namespace Application.Common.Models.PersonBasicData
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Email { get; set; }
+        public int PhoneNumber { get; set; }
 
         public void Mapping(MappingProfile profile)
         {

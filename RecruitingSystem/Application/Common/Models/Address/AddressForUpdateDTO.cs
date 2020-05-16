@@ -7,7 +7,6 @@ namespace Application.Common.Models.Address
 {
     public class AddressForUpdateDTO : IMapFrom<Domain.Entities.Address>
     {
-        //public Guid Id { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public int BuildingNumber { get; set; }

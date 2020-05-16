@@ -1,5 +1,6 @@
 ﻿using Application.Common.Mapping;
 using Application.Common.Models.CandidateBasicData;
+using Application.Common.Models.CandidateJobOffer;
 using Application.Common.Models.Education;
 using Application.Common.Models.Experience;
 using Domain.Entities;

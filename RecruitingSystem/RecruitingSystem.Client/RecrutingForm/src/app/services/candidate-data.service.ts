@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CandidateBasicInfo } from '../models/basic-candidate-info.model';
+import { CandidateBasicData } from '../models/candidate-basic-data';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { CandidateEducation } from '../models/candidate-education';
 import { CandidateExperience } from '../models/candidate-experience';
@@ -11,7 +11,7 @@ import { JobBasicInfo } from '../models/basic-job-info';
 export class CandidateDataService {
 
   private jobBasicInfo = new BehaviorSubject<JobBasicInfo>(null);
-  private candidateBasicData = new BehaviorSubject<CandidateBasicInfo>(null);
+  private candidateBasicData = new BehaviorSubject<CandidateBasicData>(null);
   private candidateEducationData = new BehaviorSubject<CandidateEducation[]>([]);
   private candidateExperienceData = new BehaviorSubject<CandidateExperience[]>([]);
 
@@ -29,13 +29,13 @@ export class CandidateDataService {
 
 
   // Updates candidate basic data after submitting changes
-  updateCandidateBasicData(basicData: CandidateBasicInfo) {
+  updateCandidateBasicData(basicData: CandidateBasicData) {
     // const basicData = this.candidateBasicData;
     this.candidateBasicData.next(basicData);
   }
 
   // Gets current candidate's basic data
-  getCandidateBasicData(): Observable<CandidateBasicInfo> {
+  getCandidateBasicData(): Observable<CandidateBasicData> {
     return this.candidateBasicData.asObservable();
   }
 

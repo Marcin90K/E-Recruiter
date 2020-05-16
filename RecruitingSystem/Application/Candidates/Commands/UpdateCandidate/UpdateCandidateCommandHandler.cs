@@ -33,12 +33,38 @@ namespace Application.Candidates.Commands.UpdateCandidate
                 .Include(c => c.Educations).ThenInclude(e => e.Candidate)
                 .Include(c => c.Experiences).ThenInclude(e => e.Candidate)
                 .FirstOrDefaultAsync();
-            //var candidateEntity = _context.Candidates.SingleOrDefault(c => c.Id == request.Id);  //Where(c => c.Id == request.Id).FirstOrDefaultAsync();
-            
+
             if (candidateEntity == null)
             {
                 candidateEntity = _mapper.Map<Candidate>(request);
                 candidateEntity.Id = request.Id;
+                request.Educations.ToList().ForEach(ed =>
+                {
+                    candidateEntity.Educations.Add(
+                        new Education()
+                        {
+                            CourseName = ed.CourseName,
+                            SchoolName = ed.SchoolName,
+                            StartDate = ed.StartDate,
+                            EndDate = ed.EndDate
+                        }
+                    );
+                });
+                request.Experiences.ToList().ForEach(ex =>
+                {
+                    candidateEntity.Experiences.Add(
+                        new Experience()
+                        {
+                            CompanyName = ex.CompanyName,
+                            Duties = ex.Duties,
+                            JobTitle = ex.JobTitle,
+                            StartDate = ex.StartDate,
+                            EndDate = ex.EndDate
+                        }
+                        );
+                });
+
+
                 await _context.Candidates.AddAsync(candidateEntity);
                 if (!(await _context.SaveChangesAsync(cancellationToken) > 0))
                 {
@@ -50,23 +76,31 @@ namespace Application.Candidates.Commands.UpdateCandidate
             else
             {
                 var candidateToUpdate = _mapper.Map<UpdateCandidateCommand, Candidate>(request, candidateEntity);//, candidateEntity);
-
-                //candidateEntity.Id = request.Id;
-                //candidateEntity.BasicData = request.CandidateBasicData;
-                //candidateEntity.BasicData.CandidateId = request.Id;
-                //candidateEntity.BasicData.Candidate = request.CandidateBasicData.Candidate;
-
-                //candidateEntity.BasicData.Address = request.CandidateBasicData.Address;
-                //candidateEntity.BasicData.PersonBasicData = request.CandidateBasicData.PersonBasicData;
-                //candidateEntity.Educations = request.Educations;
-                //candidateEntity.Experiences = request.Experiences;
-                //candidateEntity.ExpectedSalary = request.ExpectedSalary;
-
                 int i = 0;
-                request.Educations.ToList().ForEach(e => { _mapper.Map(e, candidateEntity.Educations.ElementAt(i)); i++; });
-                //candidateToUpdate.Educations = candidateToUpdate.    _mapper.Map<ICollection<Education>>(request.Educations);
+                request.Educations.ToList().ForEach(ed =>
+                {
+                    var entity = candidateEntity.Educations.ElementAt(i);
+                    entity.CourseName = ed.CourseName;
+                    entity.SchoolName = ed.SchoolName;
+                    entity.StartDate = ed.StartDate;
+                    entity.EndDate = ed.EndDate;
+                    i++;
+                });
 
-                _context.Candidates.Update(candidateToUpdate);
+                int j = 0;
+                request.Experiences.ToList().ForEach(ex =>
+                {
+                    var entity = candidateEntity.Experiences.ElementAt(j);
+                    entity.CompanyName = ex.CompanyName;
+                    entity.Duties = ex.Duties;
+                    entity.JobTitle = ex.JobTitle;
+                    entity.StartDate = ex.StartDate;
+                    entity.EndDate = ex.EndDate;
+                    j++;
+                });
+
+                //_context.Candidates.Update(candidateToUpdate);
+
                 if (!(await _context.SaveChangesAsync(cancellationToken) > 0))
                 {
                     throw new ResourceManipulationException($"Error during updating resource id: {request.Id}");

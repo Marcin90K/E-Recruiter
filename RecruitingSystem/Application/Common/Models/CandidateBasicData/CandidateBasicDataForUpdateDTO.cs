@@ -7,9 +7,7 @@ namespace Application.Common.Models.CandidateBasicData
 {
     public class CandidateBasicDataForUpdateDTO : IMapFrom<Domain.Entities.CandidateBasicData>
     {
-        //public Guid Id { get; set; }
         public PersonBasicDataForUpdateDTO PersonBasicData { get; set; }
-        public int PhoneNumber { get; set; }
         public AddressForUpdateDTO Address { get; set; }
         //public Guid CandidateId { get; set; }
 

@@ -7,7 +7,6 @@ namespace Application.Common.Models.CandidateBasicData
     public class CandidateBasicDataForManipulationDTO : IMapFrom<Domain.Entities.CandidateBasicData>
     {
         public PersonBasicDataForManipulationDTO PersonBasicData { get; set; }
-        public int PhoneNumber { get; set; }
         public AddressForManipulationDTO Address { get; set; }
 
         public void Mapping(MappingProfile profile)
