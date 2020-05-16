@@ -6,7 +6,7 @@ import { JobBasicInfo } from './basic-job-info';
 
 export interface CandidateProfile {
   id: string;
-  jobPosition: JobBasicInfo;
+  //jobPosition: JobBasicInfo;
   basicInfo: CandidateBasicData;
   educationInfo: CandidateEducation[];
   candidateExperience: CandidateExperience[];

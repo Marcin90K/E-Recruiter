@@ -33,7 +33,7 @@ export class SummaryComponent implements OnInit {
               private formBuilder: FormBuilder) {
                 this.candidateProfile = {
                   id: '',
-                  jobPosition: null,
+                  //jobPosition: null,
                   basicInfo: null,
                   educationInfo: null,
                   candidateExperience: null
@@ -45,8 +45,8 @@ export class SummaryComponent implements OnInit {
               }
 
   ngOnInit() {
-    this.candidateDataService.getJobBasicInfo().subscribe(job =>
-      this.candidateProfile.jobPosition = job);
+    // this.candidateDataService.getJobBasicInfo().subscribe(job =>
+    //   this.candidateProfile.jobPosition = job);
     this.candidateDataService.getCandidateBasicData().subscribe(basic =>
       this.candidateProfile.basicInfo = basic);
     this.candidateDataService.getCandidateEducationData().subscribe(education =>

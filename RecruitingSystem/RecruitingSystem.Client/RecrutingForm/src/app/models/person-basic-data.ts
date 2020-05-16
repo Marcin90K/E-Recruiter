@@ -3,4 +3,5 @@ export interface PersonBasicdata {
   lastName: string;
   dateOfBirth: Date;
   email: string;
+  phoneNumber: number;
 }

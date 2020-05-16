@@ -24,18 +24,20 @@ export class BasicInfoComponent implements OnInit {
 
   createFormGroup(fb: FormBuilder) {
     return fb.group({
-      firstName: [''],
-      lastName: [''],
-      dateOfBirth: Date.now(),
+      personBasicData: fb.group({
+        firstName: [''],
+        lastName: [''],
+        dateOfBirth: Date.now(),
+        email: [''],
+        phoneNumber: 0
+      }),
       address: fb.group({
         city: [''],
         street: [''],
         buildingNumber: 0,
         flatNumber: 0,
         zip: '00-000'
-      }),
-      email: [''],
-      phone: 0
+      })
     });
   }
 
