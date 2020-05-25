@@ -3,7 +3,7 @@ import { CandidataDataToBeSent } from 'src/app/models/candidate-data-to-be-sent'
 import { CandidateProfile } from 'src/app/models/candidate-profile';
 import { CandidateDataService } from 'src/app/services/candidate-data.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -30,6 +30,7 @@ export class SummaryComponent implements OnInit {
 
   constructor(private candidateDataService: CandidateDataService,
               private routeService: Router,
+              private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder) {
                 this.candidateProfile = {
                   id: '',
@@ -64,7 +65,7 @@ export class SummaryComponent implements OnInit {
       this.candidateDataToBeSent.candidateProfile = this.candidateProfile;
       this.candidateDataToBeSent.additionalNotes = this.additionalNotes;
       console.log(this.candidateDataToBeSent);
-      this.routeService.navigate(['/submitted']);
+      this.routeService.navigate(['../submitted'], { relativeTo: this.activatedRoute });
     }
     else {
       alert("Please tick Privacy clause");

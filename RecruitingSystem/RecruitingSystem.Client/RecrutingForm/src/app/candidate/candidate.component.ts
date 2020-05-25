@@ -8,11 +8,11 @@ import { CandidateProfile } from '../models/candidate-profile';
 
 
 @Component({
-  selector: 'app-candidate-data',
-  templateUrl: './candidate-data.component.html',
-  styleUrls: ['./candidate-data.component.css']
+  selector: 'app-candidate',
+  templateUrl: './candidate.component.html',
+  styleUrls: ['./candidate.component.css']
 })
-export class CandidateDataComponent implements OnInit {
+export class CandidateComponent implements OnInit {
 
   candidateData: CandidateProfile;
   jobPositionApplied: JobPosition;
