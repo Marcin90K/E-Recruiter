@@ -1,6 +1,6 @@
-import { CandidateProfile } from './candidate-profile';
+import { CandidateForCreation } from './Candidate/candidate-for-creation';
 
 export interface CandidataDataToBeSent {
-  candidateProfile: CandidateProfile;
+  candidateProfile: CandidateForCreation;
   additionalNotes: string;
 }

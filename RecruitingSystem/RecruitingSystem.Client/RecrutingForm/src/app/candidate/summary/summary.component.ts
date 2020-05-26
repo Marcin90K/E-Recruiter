@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CandidataDataToBeSent } from 'src/app/shared/models/candidate-data-to-be-sent';
-import { CandidateProfile } from 'src/app/shared/models/candidate-profile';
+import { CandidateForCreation } from 'src/app/shared/models/Candidate/candidate-for-creation';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -15,7 +15,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class SummaryComponent implements OnInit {
 
   companyName = 'IT Corporation';
-  candidateProfile: CandidateProfile;
+  candidateProfile: CandidateForCreation;
   candidateDataToBeSent: CandidataDataToBeSent;
   formSummary: FormGroup;
   objectKeys = Object.keys;
@@ -33,11 +33,11 @@ export class SummaryComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder) {
                 this.candidateProfile = {
-                  id: '',
+                  //id: '',
                   //jobPosition: null,
-                  basicInfo: null,
-                  educationInfo: null,
-                  candidateExperience: null
+                  candidateBasicData: null,
+                  educations: null,
+                  experiences: null
                 };
                 this.candidateDataToBeSent = {
                   candidateProfile: this.candidateProfile,
@@ -49,22 +49,32 @@ export class SummaryComponent implements OnInit {
     // this.candidateDataService.getJobBasicInfo().subscribe(job =>
     //   this.candidateProfile.jobPosition = job);
     this.candidateDataService.getCandidateBasicData().subscribe(basic =>
-      this.candidateProfile.basicInfo = basic);
+      this.candidateProfile.candidateBasicData = basic);
     this.candidateDataService.getCandidateEducationData().subscribe(education =>
-      this.candidateProfile.educationInfo = education);
+      this.candidateProfile.educations = education);
     this.candidateDataService.getCandidateExperienceData().subscribe(experience =>
-      this.candidateProfile.candidateExperience = experience);
+      this.candidateProfile.experiences = experience);
 
       console.log(this.candidateProfile);
   }
 
 
 
+  // submit() {
+  //   if (this.isAgreementChecked) {
+  //     this.candidateDataToBeSent.candidateProfile = this.candidateProfile;
+  //     this.candidateDataToBeSent.additionalNotes = this.additionalNotes;
+  //     console.log(this.candidateDataToBeSent);
+  //     this.routeService.navigate(['../submitted'], { relativeTo: this.activatedRoute });
+  //   }
+  //   else {
+  //     alert("Please tick Privacy clause");
+  //   }
+
   submit() {
     if (this.isAgreementChecked) {
-      this.candidateDataToBeSent.candidateProfile = this.candidateProfile;
-      this.candidateDataToBeSent.additionalNotes = this.additionalNotes;
-      console.log(this.candidateDataToBeSent);
+      this.candidateProfile = this.candidateProfile;
+      console.log(this.candidateProfile);
       this.routeService.navigate(['../submitted'], { relativeTo: this.activatedRoute });
     }
     else {

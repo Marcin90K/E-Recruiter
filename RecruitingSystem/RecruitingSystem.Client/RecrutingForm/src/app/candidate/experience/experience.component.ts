@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { CandidateExperience } from 'src/app/shared/models/candidate-experience';
+import { ExperienceForManipulation } from 'src/app/shared/models/experience/experience-for-manipulation';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 
 @Component({
@@ -12,12 +12,12 @@ export class ExperienceComponent implements OnInit {
 
   formExperienceWrapper: FormGroup;
   formExperienceItem: FormGroup;
-  model: CandidateExperience[];
+  model: ExperienceForManipulation[];
 
   constructor(private formBuilder: FormBuilder,
               private candidateDataService: CandidateSharingDataService) {
     this.formExperienceWrapper = this.createFormExperienceWrapper(this.formBuilder);
-    this.model = {} as CandidateExperience[];
+    this.model = {} as ExperienceForManipulation[];
   }
 
   ngOnInit() {
@@ -26,8 +26,8 @@ export class ExperienceComponent implements OnInit {
   createFormGroup(fb: FormBuilder) {
     return fb.group({
       companyName: [''],
-      startJob: Date.now(),
-      endJob: Date.now(),
+      startDate: Date.now(),
+      endDate: Date.now(),
       jobTitle: [''],
       duties: ['']
     });

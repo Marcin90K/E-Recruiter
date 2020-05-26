@@ -1,4 +1,4 @@
-export interface Address {
+export interface AddressForManipulation{
   city: string;
   street: string;
   buildingNumber: number;

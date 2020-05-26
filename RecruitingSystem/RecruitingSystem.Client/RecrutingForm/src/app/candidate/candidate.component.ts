@@ -4,7 +4,7 @@ import { JOBPOSITIONS } from '../shared/models/opened-jobs';
 import {FormControl, FormGroup, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {NgSelectModule, NgOption} from '@ng-select/ng-select';
 import { CandidateSharingDataService } from '../shared/services/candidate-sharing-data.service';
-import { CandidateProfile } from '../shared/models/candidate-profile';
+import { CandidateForCreation } from '../shared/models/Candidate/candidate-for-creation';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { CandidateProfile } from '../shared/models/candidate-profile';
 })
 export class CandidateComponent implements OnInit {
 
-  candidateData: CandidateProfile;
+  candidateData: CandidateForCreation;
   jobPositionApplied: JobPosition;
   salary: number;
   additionalNotes: string;
@@ -25,19 +25,19 @@ export class CandidateComponent implements OnInit {
     this.jobPositionApplied = {
       id: 0, name: ''
     }
-    this.candidateData = {} as CandidateProfile;
+    this.candidateData = {} as CandidateForCreation;
   }
 
   ngOnInit() {
     this.jobsAvailable = JOBPOSITIONS;
     this.candidateDataService.getCandidateBasicData().subscribe(res => {
-      this.candidateData.basicInfo = Object.assign({}, res);
+      this.candidateData.candidateBasicData = Object.assign({}, res);
     });
   }
 
   submit() {
      console.log("test");
-     console.log(this.candidateData.basicInfo);
+     console.log(this.candidateData.candidateBasicData);
   }
 
 }

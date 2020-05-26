@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CandidateBasicData } from '../../shared/models/candidate-basic-data';
+import { CandidateBasicDataForManipulation } from '../../shared/models/candidate-basic-data/candidate-basic-data-for-manipulation';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 
@@ -11,7 +11,7 @@ import { CandidateSharingDataService } from 'src/app/shared/services/candidate-s
 export class BasicInfoComponent implements OnInit {
 
   formBasicInfo: FormGroup;
-  model: CandidateBasicData;
+  model: CandidateBasicDataForManipulation;
 
 
   constructor(private formBuilder: FormBuilder,

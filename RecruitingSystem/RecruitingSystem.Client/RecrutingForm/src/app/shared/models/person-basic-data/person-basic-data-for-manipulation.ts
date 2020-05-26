@@ -1,4 +1,4 @@
-export interface PersonBasicdata {
+export interface PersonBasicDataForManipulation {
   firstName: string;
   lastName: string;
   dateOfBirth: Date;

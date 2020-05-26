@@ -1,25 +1,25 @@
 <h3>Your data:</h3>
-<ng-container *ngFor="let item of objectKeys(candidateProfile.basicInfo)">
+<ng-container *ngFor="let item of objectKeys(candidateProfile.candidateBasicData)">
   <ng-container *ngIf="item === 'personBasicData'">
-    <ng-container *ngFor="let prnData of objectKeys(candidateProfile.basicInfo.personBasicData)">
+    <ng-container *ngFor="let prnData of objectKeys(candidateProfile.candidateBasicData.personBasicData)">
       <div class="row">
         <div class="col-md-6">
           <div class="data-label">{{prnData}}</div>
         </div>
         <div class="col-md-6">
-          <div class="data-content">{{candidateProfile.basicInfo.personBasicData[prnData]}}</div>
+          <div class="data-content">{{candidateProfile.candidateBasicData.personBasicData[prnData]}}</div>
         </div>
       </div>
     </ng-container>
   </ng-container>
 <ng-container *ngIf="item === 'address'">
-  <ng-container *ngFor="let addr of objectKeys(candidateProfile.basicInfo.address)">
+  <ng-container *ngFor="let addr of objectKeys(candidateProfile.candidateBasicData.address)">
     <div class="row">
       <div class="col-md-6">
         <div class="data-label">{{addr}}</div>
       </div>
       <div class="col-md-6">
-        <div class="data-content">{{candidateProfile.basicInfo.address[addr]}}</div>
+        <div class="data-content">{{candidateProfile.candidateBasicData.address[addr]}}</div>
       </div>
     </div>
   </ng-container>
@@ -28,7 +28,7 @@
 
 
 <h3>Your education path:</h3>
-<ng-container *ngFor="let education of objectValues(candidateProfile.educationInfo.educationItems)">
+<ng-container *ngFor="let education of objectValues(candidateProfile.educations.educationItems)">
   <ng-container *ngFor="let item of objectKeys(education)">
     <div class="row">
     <div class="col-md-6">
@@ -45,7 +45,7 @@
 
 
 <h3>Your proffessional experience:</h3>
-<ng-container *ngFor="let experience of objectValues(candidateProfile.candidateExperience.experienceItems)">
+<ng-container *ngFor="let experience of objectValues(candidateProfile.experiences.experienceItems)">
   <ng-container *ngFor="let item of objectKeys(experience)">
     <div class="row">
       <div class="col-md-6">

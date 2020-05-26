@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { CandidateEducation } from 'src/app/shared/models/candidate-education';
+import { EducationForManipulation } from 'src/app/shared/models/education/education-for-manipulation';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 
 @Component({
@@ -12,12 +12,12 @@ export class EducationComponent implements OnInit {
 
   formEducationWrapper: FormGroup;
   formEducationItem: FormGroup;
-  model: CandidateEducation[];
+  model: EducationForManipulation[];
 
   constructor(private formBuilder: FormBuilder,
               private candidateDataService: CandidateSharingDataService) {
     this.formEducationWrapper = this.createFormEducationWrapper(this.formBuilder);
-    this.model = {} as CandidateEducation[];
+    this.model = {} as EducationForManipulation[];
    }
 
   ngOnInit() {
