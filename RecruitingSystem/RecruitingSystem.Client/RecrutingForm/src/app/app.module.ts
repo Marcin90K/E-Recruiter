@@ -12,6 +12,7 @@ import { CandidateSharingDataService } from './shared/services/candidate-sharing
 import { MainTopBarComponent } from './navigations/main-top-bar/main-top-bar.component';
 import { HomeComponent } from './home/home.component';
 import { CandidateModule } from './candidate/candidate.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { CandidateModule } from './candidate/candidate.module';
     FormsModule,
     ReactiveFormsModule,
     CandidateModule,
+    HttpClientModule,
     AppRoutingModule,
   ],
   providers: [CandidateSharingDataService],

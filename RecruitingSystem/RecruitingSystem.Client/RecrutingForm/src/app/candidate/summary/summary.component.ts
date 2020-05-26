@@ -4,6 +4,8 @@ import { CandidateForCreation } from 'src/app/shared/models/Candidate/candidate-
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CandidateService } from 'src/app/shared/services/candidate.service';
+import { CandidateCreated } from 'src/app/shared/models/candidate/candidate-created';
 
 
 @Component({
@@ -23,7 +25,7 @@ export class SummaryComponent implements OnInit {
   isAgreementChecked = false;
   additionalNotes: '';
 
-
+  candidateCreated: CandidateCreated;
 
   termsOfPrivacyText = 'I hereby consent to my personal data being processed by ' + this.companyName +
       ' for the purpose of considering my application for the vacancy advertised under reference number (123XX6 etc.)';
@@ -31,6 +33,7 @@ export class SummaryComponent implements OnInit {
   constructor(private candidateDataService: CandidateSharingDataService,
               private routeService: Router,
               private activatedRoute: ActivatedRoute,
+              private candidateService: CandidateService,
               private formBuilder: FormBuilder) {
                 this.candidateProfile = {
                   //id: '',
@@ -73,8 +76,12 @@ export class SummaryComponent implements OnInit {
 
   submit() {
     if (this.isAgreementChecked) {
-      this.candidateProfile = this.candidateProfile;
+      //this.candidateProfile = this.candidateProfile;
       console.log(this.candidateProfile);
+      this.candidateService.addCandidate(this.candidateProfile).subscribe(
+        candidate => this.candidateCreated = candidate
+      );
+      console.log('Candidate has been created: ' + this.candidateCreated );
       this.routeService.navigate(['../submitted'], { relativeTo: this.activatedRoute });
     }
     else {
