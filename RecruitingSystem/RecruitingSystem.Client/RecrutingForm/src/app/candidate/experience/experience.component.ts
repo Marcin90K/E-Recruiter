@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { CandidateExperience } from 'src/app/models/candidate-experience';
-import { CandidateDataService } from 'src/app/services/candidate-data.service';
+import { CandidateExperience } from 'src/app/shared/models/candidate-experience';
+import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 
 @Component({
   selector: 'app-experience',
@@ -15,7 +15,7 @@ export class ExperienceComponent implements OnInit {
   model: CandidateExperience[];
 
   constructor(private formBuilder: FormBuilder,
-              private candidateDataService: CandidateDataService) {
+              private candidateDataService: CandidateSharingDataService) {
     this.formExperienceWrapper = this.createFormExperienceWrapper(this.formBuilder);
     this.model = {} as CandidateExperience[];
   }

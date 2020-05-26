@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CandidataDataToBeSent } from 'src/app/models/candidate-data-to-be-sent';
-import { CandidateProfile } from 'src/app/models/candidate-profile';
-import { CandidateDataService } from 'src/app/services/candidate-data.service';
+import { CandidataDataToBeSent } from 'src/app/shared/models/candidate-data-to-be-sent';
+import { CandidateProfile } from 'src/app/shared/models/candidate-profile';
+import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -28,7 +28,7 @@ export class SummaryComponent implements OnInit {
   termsOfPrivacyText = 'I hereby consent to my personal data being processed by ' + this.companyName +
       ' for the purpose of considering my application for the vacancy advertised under reference number (123XX6 etc.)';
 
-  constructor(private candidateDataService: CandidateDataService,
+  constructor(private candidateDataService: CandidateSharingDataService,
               private routeService: Router,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder) {

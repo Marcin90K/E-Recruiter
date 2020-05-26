@@ -1,10 +1,10 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { JobPosition } from '../models/job-position';
-import { JOBPOSITIONS } from '../models/opened-jobs';
+import { JobPosition } from '../shared/models/job-position';
+import { JOBPOSITIONS } from '../shared/models/opened-jobs';
 import {FormControl, FormGroup, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {NgSelectModule, NgOption} from '@ng-select/ng-select';
-import { CandidateDataService } from '../services/candidate-data.service';
-import { CandidateProfile } from '../models/candidate-profile';
+import { CandidateSharingDataService } from '../shared/services/candidate-sharing-data.service';
+import { CandidateProfile } from '../shared/models/candidate-profile';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class CandidateComponent implements OnInit {
   personalDataProccedingAgreed: boolean;
   jobsAvailable: JobPosition[];
 
-  constructor(private candidateDataService: CandidateDataService) {
+  constructor(private candidateDataService: CandidateSharingDataService) {
     this.jobPositionApplied = {
       id: 0, name: ''
     }

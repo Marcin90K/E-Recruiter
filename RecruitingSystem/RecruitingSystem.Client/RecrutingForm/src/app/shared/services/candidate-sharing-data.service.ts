@@ -8,7 +8,7 @@ import { JobBasicInfo } from '../models/basic-job-info';
 @Injectable({
   providedIn: 'root'
 })
-export class CandidateDataService {
+export class CandidateSharingDataService {
 
   private jobBasicInfo = new BehaviorSubject<JobBasicInfo>(null);
   private candidateBasicData = new BehaviorSubject<CandidateBasicData>(null);

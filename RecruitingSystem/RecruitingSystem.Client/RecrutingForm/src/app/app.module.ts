@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CandidateDataService } from './services/candidate-data.service';
+import { CandidateSharingDataService } from './shared/services/candidate-sharing-data.service';
 
 import { MainTopBarComponent } from './navigations/main-top-bar/main-top-bar.component';
 import { HomeComponent } from './home/home.component';
@@ -28,7 +28,7 @@ import { CandidateModule } from './candidate/candidate.module';
     CandidateModule,
     AppRoutingModule,
   ],
-  providers: [CandidateDataService],
+  providers: [CandidateSharingDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

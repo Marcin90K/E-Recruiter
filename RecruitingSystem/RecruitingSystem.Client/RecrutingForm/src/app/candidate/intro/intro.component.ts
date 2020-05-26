@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { JobPosition } from 'src/app/models/job-position';
-import { JOBPOSITIONS } from 'src/app/models/opened-jobs';
-import { JobBasicInfo } from 'src/app/models/basic-job-info';
-import { CandidateDataService } from 'src/app/services/candidate-data.service';
+import { JobPosition } from 'src/app/shared/models/job-position';
+import { JOBPOSITIONS } from 'src/app/shared/models/opened-jobs';
+import { JobBasicInfo } from 'src/app/shared/models/basic-job-info';
+import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 
 @Component({
   selector: 'app-intro',
@@ -14,7 +14,7 @@ export class IntroComponent implements OnInit {
   jobsAvailable: JobPosition[];
   model: JobBasicInfo;
 
-  constructor(private candidateDataServive: CandidateDataService) {
+  constructor(private candidateDataServive: CandidateSharingDataService) {
     this.model = {
       jobPositionAppliedId: 0,
       expectedSalary: 0
