@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CandidateService } from 'src/app/shared/services/candidate.service';
 import { CandidateCreated } from 'src/app/shared/models/candidate/candidate-created';
+import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class SummaryComponent implements OnInit {
               private routeService: Router,
               private activatedRoute: ActivatedRoute,
               private candidateService: CandidateService,
+              private errorHandlerService: ErrorHandlerService,
               private formBuilder: FormBuilder) {
                 this.candidateProfile = {
                   //id: '',
@@ -54,34 +56,22 @@ export class SummaryComponent implements OnInit {
     this.candidateDataService.getCandidateBasicData().subscribe(basic =>
       this.candidateProfile.candidateBasicData = basic);
     this.candidateDataService.getCandidateEducationData().subscribe(education =>
-      this.candidateProfile.educations = education);
+      {
+        this.candidateProfile.educations = education
+      });
     this.candidateDataService.getCandidateExperienceData().subscribe(experience =>
       this.candidateProfile.experiences = experience);
 
       console.log(this.candidateProfile);
   }
 
-
-
-  // submit() {
-  //   if (this.isAgreementChecked) {
-  //     this.candidateDataToBeSent.candidateProfile = this.candidateProfile;
-  //     this.candidateDataToBeSent.additionalNotes = this.additionalNotes;
-  //     console.log(this.candidateDataToBeSent);
-  //     this.routeService.navigate(['../submitted'], { relativeTo: this.activatedRoute });
-  //   }
-  //   else {
-  //     alert("Please tick Privacy clause");
-  //   }
-
   submit() {
     if (this.isAgreementChecked) {
-      //this.candidateProfile = this.candidateProfile;
       console.log(this.candidateProfile);
       this.candidateService.addCandidate(this.candidateProfile).subscribe(
-        candidate => this.candidateCreated = candidate
+        candidate => this.candidateCreated = candidate,
+        error => this.errorHandlerService.handleHTTPError('Adding candidate', error)
       );
-      console.log('Candidate has been created: ' + this.candidateCreated );
       this.routeService.navigate(['../submitted'], { relativeTo: this.activatedRoute });
     }
     else {

@@ -26,8 +26,8 @@ export class ExperienceComponent implements OnInit {
   createFormGroup(fb: FormBuilder) {
     return fb.group({
       companyName: [''],
-      startDate: Date.now(),
-      endDate: Date.now(),
+      startDate: new Date(Date.now()),
+      endDate: new Date(Date.now()),
       jobTitle: [''],
       duties: ['']
     });
