@@ -3,6 +3,9 @@ import { JobPosition } from 'src/app/shared/models/job-position';
 import { JOBPOSITIONS } from 'src/app/shared/models/opened-jobs';
 import { JobBasicInfo } from 'src/app/shared/models/basic-job-info';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
+import { CandidateVM } from 'src/app/shared/models/candidate/candidate-vm';
+import { CandidateListVM } from 'src/app/shared/models/candidate/candidate-list-vm';
+import { CandidateService } from 'src/app/shared/services/candidate.service';
 
 @Component({
   selector: 'app-intro',
@@ -14,7 +17,13 @@ export class IntroComponent implements OnInit {
   jobsAvailable: JobPosition[];
   model: JobBasicInfo;
 
-  constructor(private candidateDataServive: CandidateSharingDataService) {
+  candidateTest: CandidateVM;
+  candidatesTest: CandidateListVM;
+  candidateTestString: string;
+  candidatesTestString: string;
+
+  constructor(private candidateDataServive: CandidateSharingDataService,
+              private candidateService: CandidateService) {
     this.model = {
       jobPositionAppliedId: 0,
       expectedSalary: 0

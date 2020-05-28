@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { CandidateForCreation } from '../models/Candidate/candidate-for-creation';
 import { CandidateCreated } from '../models/candidate/candidate-created';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { EducationForManipulation } from '../models/education/education-for-manipulation';
 import { ExperienceForManipulation } from '../models/experience/experience-for-manipulation';
-import { catchError } from 'rxjs/operators';
-import { ErrorHandlerService } from './error-handler.service';
+import { CandidateVM } from '../models/candidate/candidate-vm';
+import { CandidateListVM } from '../models/candidate/candidate-list-vm';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +16,30 @@ export class CandidateService {
 
   private baseUrl: string;
   private section = 'candidate';
+  private searchParam = 'search';
+  private pageNumber = 'pageNumber';
+  private pageSize = 'pageSize';
 
   constructor(private http: HttpClient) {
     this.baseUrl = environment.API_URL + this.section;
    }
+
+
+  getCandidate(id: string): Observable<CandidateVM> {
+    let url = this.baseUrl + '/' + id;
+    return this.http.get<CandidateVM>(url);
+  }
+
+
+  getCandidates(search = '' , pageNumber = 1, pageSize = 10): Observable<CandidateListVM> {
+    const options = {
+      params: new HttpParams().set(this.searchParam, search)
+                              .set(this.pageNumber, pageNumber.toString())
+                              .set(this.pageSize, pageSize.toString())
+    };
+    return this.http.get<CandidateListVM>(this.baseUrl, options);
+  }
+
 
   addCandidate(candidate: CandidateForCreation): Observable<CandidateCreated> {
     candidate.educations = candidate.educations['educationItems'] as EducationForManipulation[];
@@ -28,5 +48,10 @@ export class CandidateService {
     console.log('Candidate for sending: ' + JSON.stringify(candidate));
 
     return this.http.post<CandidateCreated>(this.baseUrl, candidate);
+  }
+
+  deleteCandidate(id: string): Observable<{}> {
+    let url = this.baseUrl + '/' + id;
+    return this.http.delete(url);
   }
 }
