@@ -13,6 +13,7 @@ import { MainTopBarComponent } from './navigations/main-top-bar/main-top-bar.com
 import { HomeComponent } from './home/home.component';
 import { CandidateModule } from './candidate/candidate.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthModule } from './auth/auth.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
+    AuthModule,
     CandidateModule,
     HttpClientModule,
     AppRoutingModule,

@@ -7,6 +7,7 @@ import { SummaryComponent } from './candidate/summary/summary.component';
 import { IntroComponent } from './candidate/intro/intro.component';
 import { SubmittedComponent } from './candidate/submitted/submitted.component';
 import { CandidateComponent } from './candidate/candidate.component';
+import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
   // { path: 'intro', component: IntroComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   // { path: 'experience', component: ExperienceComponent },
   // { path: 'summary', component: SummaryComponent},
   // { path: 'submitted', component: SubmittedComponent }
-  { path: 'candidate', component: CandidateComponent}
+  { path: 'candidate', component: CandidateComponent },
+  { path: 'auth', component: AuthComponent }
 ];
 
 @NgModule({
