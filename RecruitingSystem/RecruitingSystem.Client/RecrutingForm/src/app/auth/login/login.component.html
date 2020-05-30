@@ -1,3 +1,19 @@
-<p>
-  login works!
-</p>
+<div class="login-page">
+  <div [formGroup]="loginForm" class="form">
+    <div class="row form-group">
+      <input type="text" formControlName="username" name="username" class="form-control" placeholder="username">
+    </div>
+    <div class="row form-group">
+      <input type="password" formControlName="password" name="password" class="form-control" placeholder="password">
+    </div>
+
+
+    <div class="row form-group button-wrapper">
+      <button type="submit" class="btn button-submit" (click)="submit()">Login</button>
+    </div>
+    <div class="row form-group">
+      <p class="message">Are you not registered?<a href="#">Create account</a></p>
+    </div>
+
+  </div>
+</div>
