@@ -4,6 +4,7 @@ import { EducationForManipulation } from '../models/education/education-for-mani
 import { ExperienceForManipulation } from '../models/experience/experience-for-manipulation';
 import { JobBasicInfo } from '../models/basic-job-info';
 import { CandidateBasicDataForManipulation } from '../models/candidate-basic-data/candidate-basic-data-for-manipulation';
+import { CandidateVM } from '../models/candidate/candidate-vm';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,8 @@ export class CandidateSharingDataService {
   private candidateBasicData = new BehaviorSubject<CandidateBasicDataForManipulation>(null);
   private candidateEducationData = new BehaviorSubject<EducationForManipulation[]>([]);
   private candidateExperienceData = new BehaviorSubject<ExperienceForManipulation[]>([]);
+  private candidateViewModel = new BehaviorSubject<CandidateVM>(null);
+  private candidateId = new BehaviorSubject(null);
 
   constructor() { }
 
@@ -69,5 +72,32 @@ export class CandidateSharingDataService {
   }
 
 
+  // Updates candidate view model data
+  updateCandidateViewModel(candidate: CandidateVM) {
+    this.candidateViewModel.next(candidate);
+  }
+
+  // Gets candidate view model data
+  getCandidateViewModel(): Observable<CandidateVM> {
+    return this.candidateViewModel.asObservable();
+  }
+
+  // Updates candidate Id when editing candidate's profile
+  updateCandidateId(id: string) {
+    this.candidateId.next(id);
+  }
+
+  // Gets candidate id when editing candidate profile
+  getCandidateId(): Observable<string> {
+    return this.candidateId.asObservable();
+  }
+
+
+  clearAll() {
+    this.candidateBasicData.next(null);
+    this.candidateEducationData.next(null);
+    this.candidateExperienceData.next(null);
+    this.candidateViewModel.next(null);
+  }
 
 }

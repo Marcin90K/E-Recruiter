@@ -8,6 +8,8 @@ import { EducationForManipulation } from '../models/education/education-for-mani
 import { ExperienceForManipulation } from '../models/experience/experience-for-manipulation';
 import { CandidateVM } from '../models/candidate/candidate-vm';
 import { CandidateListVM } from '../models/candidate/candidate-list-vm';
+import { CandidateForUpdate } from '../models/candidate/candidate-for-update';
+import { CandidateUpdated } from '../models/candidate/candidate-updated';
 
 @Injectable({
   providedIn: 'root'
@@ -45,9 +47,19 @@ export class CandidateService {
     candidate.educations = candidate.educations['educationItems'] as EducationForManipulation[];
     candidate.experiences = candidate.experiences['experienceItems'] as ExperienceForManipulation[];
 
-    console.log('Candidate for sending: ' + JSON.stringify(candidate));
+    console.log('Candidate for creation: ' + JSON.stringify(candidate));
 
     return this.http.post<CandidateCreated>(this.baseUrl, candidate);
+  }
+
+  updateCandidate(candidate: CandidateForUpdate): Observable<CandidateUpdated> {
+    let url = this.baseUrl + '/' + candidate.id;
+    candidate.educations = candidate.educations['educationItems'] as EducationForManipulation[]
+    candidate.experiences = candidate.experiences['experienceItems'] as ExperienceForManipulation[];
+
+    console.log('Candidate for update: ' + JSON.stringify(candidate));
+
+    return this.http.put<CandidateUpdated>(url, candidate);
   }
 
   deleteCandidate(id: string): Observable<{}> {

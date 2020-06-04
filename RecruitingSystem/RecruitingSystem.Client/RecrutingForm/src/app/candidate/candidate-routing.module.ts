@@ -8,17 +8,22 @@ import { SummaryComponent } from './summary/summary.component';
 import { SubmittedComponent } from './submitted/submitted.component';
 import { CandidateComponent } from './candidate.component';
 
+const candidateChildRoutes: Routes = [
+  { path: 'intro', component: IntroComponent },
+  { path: 'basic-info', component: BasicInfoComponent },
+  { path: 'education', component: EducationComponent },
+  { path: 'experience', component: ExperienceComponent },
+  { path: 'summary', component: SummaryComponent},
+  { path: 'submitted', component: SubmittedComponent },
+  { path: '', redirectTo: '/intro', pathMatch: 'full' }
+]
+
 const routes: Routes = [
   { path: 'candidate', component: CandidateComponent,
-    children: [
-      { path: 'intro', component: IntroComponent },
-      { path: 'basic-info', component: BasicInfoComponent },
-      { path: 'education', component: EducationComponent },
-      { path: 'experience', component: ExperienceComponent },
-      { path: 'summary', component: SummaryComponent},
-      { path: 'submitted', component: SubmittedComponent },
-      { path: '', redirectTo: '/intro', pathMatch: 'full' }
-    ]
+    children: candidateChildRoutes
+  },
+  { path: 'candidate/:id', component: CandidateComponent,
+    children: candidateChildRoutes
   }
 ];
 

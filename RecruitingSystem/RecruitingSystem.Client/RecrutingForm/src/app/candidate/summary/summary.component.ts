@@ -7,6 +7,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CandidateService } from 'src/app/shared/services/candidate.service';
 import { CandidateCreated } from 'src/app/shared/models/candidate/candidate-created';
 import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
+import { CandidateVM } from 'src/app/shared/models/candidate/candidate-vm';
+import { CandidateForUpdate } from 'src/app/shared/models/candidate/candidate-for-update';
+import { CandidateUpdated } from 'src/app/shared/models/candidate/candidate-updated';
 
 
 @Component({
@@ -27,6 +30,10 @@ export class SummaryComponent implements OnInit {
   additionalNotes: '';
 
   candidateCreated: CandidateCreated;
+  candidateUpdated: CandidateUpdated;
+  candidateVM: CandidateVM;
+
+  isEditing: boolean;
 
   termsOfPrivacyText = 'I hereby consent to my personal data being processed by ' + this.companyName +
       ' for the purpose of considering my application for the vacancy advertised under reference number (123XX6 etc.)';
@@ -37,22 +44,29 @@ export class SummaryComponent implements OnInit {
               private candidateService: CandidateService,
               private errorHandlerService: ErrorHandlerService,
               private formBuilder: FormBuilder) {
-                this.candidateProfile = {
-                  //id: '',
-                  //jobPosition: null,
-                  candidateBasicData: null,
-                  educations: null,
-                  experiences: null
-                };
-                this.candidateDataToBeSent = {
-                  candidateProfile: this.candidateProfile,
-                  additionalNotes: '',
-                };
-              }
+
+    this.candidateProfile = {
+      //id: '',
+      //jobPosition: null,
+      candidateBasicData: null,
+      educations: null,
+      experiences: null
+    };
+
+    this.candidateDataToBeSent = {
+      candidateProfile: this.candidateProfile,
+      additionalNotes: '',
+    };
+
+    this.candidateDataService.getCandidateViewModel().subscribe(
+      vm => {
+        this.candidateVM = vm;
+        this.isEditing = this.candidateVM ? true : false;
+      }
+    );
+  }
 
   ngOnInit() {
-    // this.candidateDataService.getJobBasicInfo().subscribe(job =>
-    //   this.candidateProfile.jobPosition = job);
     this.candidateDataService.getCandidateBasicData().subscribe(basic =>
       this.candidateProfile.candidateBasicData = basic);
     this.candidateDataService.getCandidateEducationData().subscribe(education =>
@@ -67,11 +81,8 @@ export class SummaryComponent implements OnInit {
 
   submit() {
     if (this.isAgreementChecked) {
-      console.log(this.candidateProfile);
-      this.candidateService.addCandidate(this.candidateProfile).subscribe(
-        candidate => this.candidateCreated = candidate,
-        error => this.errorHandlerService.handleHTTPError('Adding candidate', error)
-      );
+      this.sendData();
+      this.candidateDataService.clearAll();
       this.routeService.navigate(['../submitted'], { relativeTo: this.activatedRoute });
     }
     else {
@@ -80,5 +91,20 @@ export class SummaryComponent implements OnInit {
 
   }
 
-
+  sendData() {
+    if (this.isEditing) {
+      let candidateForUpdate = this.candidateProfile as CandidateForUpdate;
+      candidateForUpdate.id = this.candidateVM.id;
+      this.candidateService.updateCandidate(candidateForUpdate).subscribe(
+        candidate => this.candidateUpdated = candidate,
+        error => this.errorHandlerService.handleHTTPError('Updating candidate', error)
+        );
+    }
+    else {
+      this.candidateService.addCandidate(this.candidateProfile).subscribe(
+        candidate => this.candidateCreated = candidate,
+        error => this.errorHandlerService.handleHTTPError('Adding candidate', error)
+      );
+    }
+  }
 }
