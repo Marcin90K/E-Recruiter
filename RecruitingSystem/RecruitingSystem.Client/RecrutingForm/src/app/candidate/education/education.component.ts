@@ -3,21 +3,25 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { EducationForManipulation } from 'src/app/shared/models/education/education-for-manipulation';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 import { EducationVM } from 'src/app/shared/models/education/education-vm';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-education',
   templateUrl: './education.component.html',
-  styleUrls: ['./education.component.css']
+  styleUrls: ['./education.component.css'],
+  //providers: [DatePipe]
 })
 export class EducationComponent implements OnInit {
 
   formEducationWrapper: FormGroup;
   formEducationItem: FormGroup;
   model: EducationForManipulation[];
-  private viewModel: EducationVM[];
+  viewModel: EducationVM[];
+  private dateFormat = 'yyyy-MM-dd';
 
   constructor(private formBuilder: FormBuilder,
-              private candidateDataService: CandidateSharingDataService) {
+              private candidateDataService: CandidateSharingDataService,
+              private datePipe: DatePipe) {
 
     this.model = {} as EducationForManipulation[];
     this.candidateDataService.getCandidateViewModel().subscribe(
@@ -40,8 +44,8 @@ export class EducationComponent implements OnInit {
   createFormGroup(fb: FormBuilder, vm: EducationVM) {
       return fb.group({
         schoolName: [vm ? vm.schoolName : ''],
-        startDate: [vm ? vm.startDate : new Date(Date.now())],
-        endDate: [vm ? vm.endDate : new Date(Date.now())],
+        startDate: [vm ? this.parseDate(vm.startDate) : null],
+        endDate: [vm ? this.parseDate(vm.endDate) : null],
         courseName: [vm ? vm.courseName : '']
       });
   }
@@ -85,4 +89,8 @@ export class EducationComponent implements OnInit {
     console.log(this.model);
   }
 
+
+  parseDate(date: Date): string {
+    return this.datePipe.transform(date, this.dateFormat);
+  }
 }

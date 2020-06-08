@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { ExperienceForManipulation } from 'src/app/shared/models/experience/experience-for-manipulation';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 import { ExperienceVM } from 'src/app/shared/models/experience/experience-vm';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-experience',
@@ -15,9 +16,11 @@ export class ExperienceComponent implements OnInit {
   formExperienceItem: FormGroup;
   model: ExperienceForManipulation[];
   viewModel: ExperienceVM[];
+  private dateFormat = 'yyyy-MM-dd';
 
   constructor(private formBuilder: FormBuilder,
-              private candidateDataService: CandidateSharingDataService) {
+              private candidateDataService: CandidateSharingDataService,
+              private datePipe: DatePipe) {
 
     this.candidateDataService.getCandidateViewModel().subscribe(
       vm => {
@@ -42,8 +45,8 @@ export class ExperienceComponent implements OnInit {
   createFormGroup(fb: FormBuilder, vm: ExperienceVM) {
     return fb.group({
       companyName: [vm ? vm.companyName : ''],
-      startDate: [vm ? vm.startDate : new Date(Date.now().toLocaleString())],
-      endDate: [vm ? vm.endDate : new Date(Date.now().toLocaleString())],
+      startDate: [vm ? this.parseDate(vm.startDate) : null],
+      endDate: [vm ? this.parseDate(vm.endDate) : null],
       jobTitle: [vm ? vm.jobTitle : ''],
       duties: [vm ? vm.duties : '']
     });
@@ -81,5 +84,10 @@ export class ExperienceComponent implements OnInit {
     this.model = this.formExperienceWrapper.value;
     this.candidateDataService.updateCandidateExperienceData(this.model);
     console.log(this.model);
+  }
+
+
+  parseDate(date: Date): string {
+    return this.datePipe.transform(date, this.dateFormat);
   }
 }

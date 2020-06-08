@@ -15,7 +15,7 @@
           <label for="startDate">Date of start</label>
         </div>
         <div class="col-md-6">
-          <input type="date" formControlname="startDate" name="startDate" class="form-control" />
+          <input type="date" formControlName="startDate" name="startDate" class="form-control" />
         </div>
       </div>
       <div class="row form-group">
@@ -34,12 +34,14 @@
           <input type="text" formControlName="courseName" name="courseName" class="form-control" />
         </div>
       </div>
-      <button class="btn btn-info mb-4 mt-0 ml-2 button-submit" (click)="removeEducationItem(i)">Remove</button>
+      <button class="btn btn-info mb-4 mt-0 ml-2 button-submit" [disabled]="viewModel"
+        (click)="removeEducationItem(i)">Remove</button>
     </div>
   </ng-container>
 
   <div class="row">
-    <button class="btn btn-info my-4 ml-2 button-submit" (click)="addEducationItem()">Add</button>
+    <button class="btn btn-info my-4 ml-2 button-submit" [disabled]="viewModel"
+      (click)="addEducationItem()">Add</button>
   </div>
 
   <div class="row justify-content-center">

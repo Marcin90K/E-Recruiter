@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CandidateBasicDataForManipulation } from '../../shared/models/candidate-basic-data/candidate-basic-data-for-manipulation';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
-import { Route } from '@angular/compiler/src/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UrlHelper } from 'src/app/shared/helpers/url-helper';
 import { CandidateBasicDataVM } from 'src/app/shared/models/candidate-basic-data/candidate-basic-data-vm';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-basic-info',
@@ -16,12 +15,14 @@ export class BasicInfoComponent implements OnInit {
 
   formBasicInfo: FormGroup;
   model: CandidateBasicDataForManipulation;
-  private viewModel: CandidateBasicDataVM;
+  viewModel: CandidateBasicDataVM;
+  private dateFormat = 'yyyy-MM-dd';
 
   constructor(private formBuilder: FormBuilder,
               private candidateDataService: CandidateSharingDataService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private datePipe: DatePipe) {
 
     this.candidateDataService.getCandidateViewModel().subscribe(
       vm => {
@@ -41,7 +42,7 @@ export class BasicInfoComponent implements OnInit {
       personBasicData: fb.group({
         firstName: [pb ? pb.firstName : ''],
         lastName: [pb ? pb.lastName : ''],
-        dateOfBirth: [pb ? pb.dateOfBirth : new Date(Date.now())],
+        dateOfBirth: [pb ? this.parseDate(pb.dateOfBirth) : null],
         email: [pb ? pb.email : ''],
         phoneNumber: [pb ? pb.phoneNumber : 0]
       }),
@@ -59,6 +60,12 @@ export class BasicInfoComponent implements OnInit {
     this.model = this.formBasicInfo.value;
     this.candidateDataService.updateCandidateBasicData(this.model);
     console.log(this.model);
+  }
+
+
+
+  parseDate(date: Date): string {
+    return this.datePipe.transform(date, this.dateFormat);
   }
 
 }
