@@ -11,6 +11,7 @@ import { SubmittedComponent } from './submitted/submitted.component';
 import { CandidateComponent } from './candidate.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SplitCamelcasePipe } from './pipes/split-camelcase.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     IntroComponent,
     SummaryComponent,
     SubmittedComponent,
-    CandidateComponent
+    CandidateComponent,
+    SplitCamelcasePipe
   ],
   imports: [
     NgSelectModule,

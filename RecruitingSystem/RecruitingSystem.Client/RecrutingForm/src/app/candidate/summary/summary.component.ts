@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { CandidataDataToBeSent } from 'src/app/shared/models/candidate-data-to-be-sent';
 import { CandidateForCreation } from 'src/app/shared/models/Candidate/candidate-for-creation';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
@@ -35,6 +35,14 @@ export class SummaryComponent implements OnInit {
 
   isEditing: boolean;
 
+  isPersonDetailsShown = false;
+  isEducationShown = false;
+  isExperienceShown = false;
+
+  @ViewChild('details') private detailsSection: ElementRef;
+  @ViewChild('education') private educationSection: ElementRef;
+  @ViewChild('experience') private experienceSection: ElementRef;
+
   termsOfPrivacyText = 'I hereby consent to my personal data being processed by ' + this.companyName +
       ' for the purpose of considering my application for the vacancy advertised under reference number (123XX6 etc.)';
 
@@ -43,7 +51,8 @@ export class SummaryComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private candidateService: CandidateService,
               private errorHandlerService: ErrorHandlerService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private renderer: Renderer2) {
 
     this.candidateProfile = {
       //id: '',
@@ -80,14 +89,14 @@ export class SummaryComponent implements OnInit {
   }
 
   submit() {
-    if (this.isAgreementChecked) {
+    //if (this.isAgreementChecked) {
       this.sendData();
       this.candidateDataService.clearAll();
       this.routeService.navigate(['../submitted'], { relativeTo: this.activatedRoute });
-    }
-    else {
-      alert("Please tick Privacy clause");
-    }
+    //}
+    // else {
+    //   alert("Please tick Privacy clause");
+    // }
 
   }
 
@@ -107,4 +116,33 @@ export class SummaryComponent implements OnInit {
       );
     }
   }
+
+  toggleContentSection(el) {
+    const element = el as HTMLElement;
+
+    switch(element.id) {
+      case 'detailsToggleBtn':
+        this.isPersonDetailsShown = !this.isPersonDetailsShown;
+        this.toggleClass(this.detailsSection, this.isPersonDetailsShown, 'show');
+        break;
+      case 'educationToggleBtn':
+        this.isEducationShown = !this.isEducationShown;
+        this.toggleClass(this.educationSection, this.isEducationShown, 'show');
+        break;
+      case 'experienceToggleBtn':
+        this.isExperienceShown = !this.isExperienceShown;
+        this.toggleClass(this.experienceSection, this.isExperienceShown, 'show');
+        break;
+    }
+  }
+
+  toggleClass(element: ElementRef, isShown: boolean, className: string) {
+    if (isShown) {
+      this.renderer.addClass(element.nativeElement, className);
+    }
+    else {
+      this.renderer.removeClass(element.nativeElement, className);
+    }
+  }
+
 }

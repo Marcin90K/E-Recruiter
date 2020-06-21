@@ -2,6 +2,18 @@ h3 {
   text-align: center;
 }
 
+button > span {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 18px;
+  font-weight: 600 !important;
+  border: none;
+}
+
+.card-header {
+  background-color: #A8D0E6;
+}
+
 .data-label {
 
 }
