@@ -15,6 +15,7 @@ import { CandidateModule } from './candidate/candidate.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { DatePipe } from '@angular/common';
+import { JobOfferModule } from './job-offer/job-offer.module';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { DatePipe } from '@angular/common';
     ReactiveFormsModule,
     AuthModule,
     CandidateModule,
+    JobOfferModule,
     HttpClientModule,
     AppRoutingModule,
   ],
