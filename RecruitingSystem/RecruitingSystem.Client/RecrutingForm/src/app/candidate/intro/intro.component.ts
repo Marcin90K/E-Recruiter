@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JobPosition } from 'src/app/shared/models/job-position';
+import { JobPositionVM } from 'src/app/shared/models/job-position/job-position-vm';
 import { JOBPOSITIONS } from 'src/app/shared/models/opened-jobs';
 import { JobBasicInfo } from 'src/app/shared/models/basic-job-info';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
@@ -14,7 +14,7 @@ import { CandidateService } from 'src/app/shared/services/candidate.service';
 })
 export class IntroComponent implements OnInit {
 
-  jobsAvailable: JobPosition[];
+  jobsAvailable: JobPositionVM[];
   model: JobBasicInfo;
 
   candidateTest: CandidateVM;

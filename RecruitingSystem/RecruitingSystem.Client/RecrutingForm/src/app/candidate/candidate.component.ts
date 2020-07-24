@@ -1,5 +1,5 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { JobPosition } from '../shared/models/job-position';
+import { JobPositionVM } from '../shared/models/job-position/job-position-vm';
 import { JOBPOSITIONS } from '../shared/models/opened-jobs';
 import {FormControl, FormGroup, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {NgSelectModule, NgOption} from '@ng-select/ng-select';
@@ -15,11 +15,11 @@ import { CandidateForCreation } from '../shared/models/Candidate/candidate-for-c
 export class CandidateComponent implements OnInit {
 
   candidateData: CandidateForCreation;
-  jobPositionApplied: JobPosition;
+  jobPositionApplied: JobPositionVM;
   salary: number;
   additionalNotes: string;
   personalDataProccedingAgreed: boolean;
-  jobsAvailable: JobPosition[];
+  jobsAvailable: JobPositionVM[];
 
   constructor(private candidateDataService: CandidateSharingDataService) {
     this.jobPositionApplied = {

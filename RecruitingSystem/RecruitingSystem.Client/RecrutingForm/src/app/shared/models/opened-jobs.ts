@@ -1,6 +1,6 @@
-import { JobPosition } from './job-position';
+import { JobPositionVM } from './job-position/job-position-vm';
 
-export const JOBPOSITIONS: JobPosition[] = [
+export const JOBPOSITIONS: JobPositionVM[] = [
   { id: 1, name: "HR Assistant" },
   { id: 2, name: "HR Manager" },
   { id: 3, name: "Junior Accountant" },
