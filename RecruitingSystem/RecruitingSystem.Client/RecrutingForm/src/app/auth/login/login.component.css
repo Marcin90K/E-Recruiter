@@ -1,0 +1,50 @@
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 1px 1px #24305E;
+}
+
+.form-control {
+  background: #F2F2F2;
+  margin: 0 0 15px;
+}
+
+.button-submit {
+  background: #374785;
+  width: 100%;
+  font-size: 14px;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  color: #fff;
+}
+
+.button-submit:hover, .button-submit:active, .button-submit:focus {
+  background: #263674;
+}
+
+.button-wrapper {
+  margin-bottom: 5px;
+}
+
+.message {
+  margin: 15px 0 0;
+  color: #B3B3B3;
+  font-size: 12px;
+}
+
+.message a {
+  color: #F76C6C;
+  text-decoration: none;
+  margin-left: 10px;
+}

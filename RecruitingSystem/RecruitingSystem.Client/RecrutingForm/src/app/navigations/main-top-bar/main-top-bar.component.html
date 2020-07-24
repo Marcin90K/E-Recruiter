@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col">
-    <nav class="navbar navbar-expand-md bg-info text-white navbar-light">
+    <nav class="navbar navbar-expand-md text-dark navbar-light navbar-container">
       <div class="col-md-4">
         <div class="row justify-content-center">
           <div class="navbar-brand">
@@ -22,10 +22,16 @@
               <a class="navbar-link" href="#">Recruitment</a>
             </li>
             <li class="navbar-item nav-button">
-              <a class="navbar-link" [routerLink]="['/intro']">Offers</a>
+              <a class="navbar-link" href="#">Offers</a>
             </li>
             <li class="navbar-item nav-button">
-              <a class="navbar-link" href="#">Log in</a>
+              <a class="navbar-link" [routerLink]="['/auth/login']">Log in</a>
+            </li>
+            <li class="navbar-item nav-button">
+              <a class="navbar-link" [routerLink]="['/candidate/intro']">Candidate Temp</a>
+            </li>
+            <li class="navbar-item nav-button">
+              <a class="navbar-link" [routerLink]="['/job-offers/form']">Job Offer Temp</a>
             </li>
           </ul>
         </div>

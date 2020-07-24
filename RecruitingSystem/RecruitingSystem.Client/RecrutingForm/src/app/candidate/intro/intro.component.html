@@ -1,0 +1,28 @@
+<div class="container mt-5">
+<div class="row mb-4 mt-3 pt-4">
+  <div class="col-md-3"></div>
+  <div class="col-sm-12 col-md-6">
+    <p class="element-title">Please select the position you want to apply for</p>
+    <ng-select [items]="jobsAvailable" bindValue="id" bindLabel="name" placeholder="Job position"
+               dropdownPosition="bottom" [(ngModel)]="model.jobPositionAppliedId" name="jobsAvailable"
+               class="job-ng-select">
+    </ng-select>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+<div class="row pt-4 pb-3">
+  <div class="col-md-2"></div>
+  <div class="col-sm-12 col-md-8 text-center">
+    <p class="element-title">Please enter expected salary</p>
+    <input type="text" class="form-control intro-control" [(ngModel)]="model.expectedSalary"
+        placeholder="Enter salary in PLN..."/>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row mt-5 pt-5">
+  <div class="col-12 text-center">
+    <button class="btn btn-info my-4 ml-2 button-submit" [routerLink]="['../basic-info']" routerLinkActive="router-link-active" (click)="apply()">Next</button>
+  </div>
+</div>
+</div>
