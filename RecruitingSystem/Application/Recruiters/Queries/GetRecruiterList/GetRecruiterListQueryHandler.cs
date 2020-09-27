@@ -43,6 +43,7 @@ namespace Application.Recruiters.Queries.GetRecruiterList
                 var recruitersFromDb = await _context.Recruiters
                     .Include(r => r.Manager)
                     .Include(r => r.OwnedJobOffers)
+                    .Include(r => r.Employee).ThenInclude(e => e.PersonBasicData)
                     .ProjectTo<RecruiterDTO>(_mapper.ConfigurationProvider)
                     .ToListAsync();
 

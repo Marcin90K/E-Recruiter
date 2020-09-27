@@ -29,6 +29,7 @@ namespace Application.Recruiters.Queries.GetRecruiterDetail
             var entity = _context.Recruiters.Where(r => r.Id == request.Id)
                 .Include(r => r.Manager)
                 .Include(r => r.OwnedJobOffers)
+                .Include(r => r.Employee).ThenInclude(e => e.PersonBasicData)
                 .FirstOrDefault();
 
             if (entity == null)
