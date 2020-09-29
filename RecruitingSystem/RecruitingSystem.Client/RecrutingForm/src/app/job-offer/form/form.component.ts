@@ -4,6 +4,8 @@ import { JobPositionVM } from 'src/app/shared/models/job-position/job-position-v
 import { RecruiterVM } from 'src/app/shared/models/recruiter/recruiter-vm';
 import { JOBPOSITIONS } from 'src/app/shared/models/opened-jobs';
 import { JobOfferForCreation } from 'src/app/shared/models/job-offer/job-offer-for-creation';
+import { RecruiterService } from 'src/app/shared/services/recruiter.service';
+import { RecruiterListVM } from 'src/app/shared/models/recruiter/recruiter-list-vm';
 
 @Component({
   selector: 'app-form',
@@ -17,10 +19,12 @@ export class FormComponent implements OnInit {
 
   jobPositions: JobPositionVM[];
   owners: RecruiterVM[];
+  ownerLabels: string[] = [];
   description: string;
   requirements: string[] = [];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private recruiterService: RecruiterService) {
     this.jobOfferForm = this.createFormGroup(this.formBuilder);
     this.model = {
       jobPosition: null,
@@ -33,6 +37,14 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     this.jobPositions = JOBPOSITIONS;
+    this.recruiterService.getRecruiters().subscribe(
+      rec => {
+        this.owners = this.owners = this.fillOwnersFullnames(rec.recruiters);
+        console.log(rec);
+      },
+      error => console.log(error)
+    );
+    // this.owners = this.fillRecruitersFullnames(this.owners);
   }
 
 
@@ -66,6 +78,14 @@ export class FormComponent implements OnInit {
 
   removeRequirement(i: number) {
     this.requirements.splice(i, 1);
+  }
+
+  fillOwnersFullnames(owners: RecruiterVM[]) {
+    for (let owner of owners) {
+      owner.fullName = owner.employee.personBasicData.firstName +
+        ' ' + owner.employee.personBasicData.lastName;
+    }
+    return owners;
   }
 
 }
