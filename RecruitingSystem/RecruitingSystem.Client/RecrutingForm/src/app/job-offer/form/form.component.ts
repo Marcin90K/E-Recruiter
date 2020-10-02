@@ -1,3 +1,4 @@
+import { JobOfferService } from './../../shared/services/job-offer.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { JobPositionVM } from 'src/app/shared/models/job-position/job-position-vm';
@@ -24,13 +25,14 @@ export class FormComponent implements OnInit {
   requirements: string[] = [];
 
   constructor(private formBuilder: FormBuilder,
-              private recruiterService: RecruiterService) {
+              private recruiterService: RecruiterService,
+              private jobOfferService: JobOfferService) {
     this.jobOfferForm = this.createFormGroup(this.formBuilder);
     this.model = {
-      jobPosition: null,
+      jobPositionId: '',
       description: '',
       requirements: '',
-      owner: null,
+      ownerId: '',
       dateOfExpiration: null
     };
    }
@@ -44,14 +46,13 @@ export class FormComponent implements OnInit {
       },
       error => console.log(error)
     );
-    // this.owners = this.fillRecruitersFullnames(this.owners);
   }
 
 
   createFormGroup(fb: FormBuilder) {
     return fb.group({
-      jobPositions: [null],
-      owner: [null],
+      jobPositionId: [''],
+      ownerId: [''],
       description: [''],
       requirements: [null],
       dateOfExpiration: [null]
@@ -60,12 +61,15 @@ export class FormComponent implements OnInit {
 
 
   apply() {
-    console.log(this.requirements);
     this.model = this.jobOfferForm.value;
     this.model.requirements = this.requirements.join('\n');
-    console.log(this.model.requirements);
-    console.log(this.model);
+    this.jobOfferService.addJobOffer(this.model).subscribe(
+      result => console.log("Job offer created: " + result.id),
+      error => console.log(error)
+    );
   }
+
+
 
   addRequirement(el) {
     const req = el.value.toString();
