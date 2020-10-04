@@ -2,9 +2,11 @@ import { JobPopsitionForManipulation } from '../job-position/job-position-for-ma
 import { RecruiterForManipulation } from '../recruiter/recruiter-for-manipulation';
 
 export interface JobOfferForCreation {
-  jobPosition: JobPopsitionForManipulation;
+  //jobPosition: JobPopsitionForManipulation;
+  jobPositionId: string;
   description: string;
   dateOfExpiration: Date;
   requirements: string;
-  owner: RecruiterForManipulation;
+  //owner: RecruiterForManipulation;
+  ownerId: string;
 }

@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-6">
         <ng-select [items]="jobPositions" bindValue="id" bindLabel="name" placeholder="Select job position..."
-          dropdownPosition="bottom" formControlName="jobPositions" name="jobPositions"></ng-select>
+          dropdownPosition="bottom" formControlName="jobPositionId" name="jobPositions"></ng-select>
     </div>
   </div>
 
@@ -16,8 +16,8 @@
       <label for="owner">Owner</label>
     </div>
     <div class="col-md-6">
-      <ng-select [items]="owners" bindValue="" bindLabel="" placeholder="Select recruiter..."
-        dropdownPosition="bottom" formControlName="owner" name="owner"></ng-select>
+      <ng-select [items]="owners" bindValue="id" bindLabel="fullName" placeholder="Select recruiter..."
+        dropdownPosition="bottom" formControlName="ownerId" name="owner"></ng-select>
     </div>
   </div>
 

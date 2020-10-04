@@ -23,7 +23,7 @@ export class CandidateComponent implements OnInit {
 
   constructor(private candidateDataService: CandidateSharingDataService) {
     this.jobPositionApplied = {
-      id: 0, name: ''
+      id: '', name: ''
     }
     this.candidateData = {} as CandidateForCreation;
   }

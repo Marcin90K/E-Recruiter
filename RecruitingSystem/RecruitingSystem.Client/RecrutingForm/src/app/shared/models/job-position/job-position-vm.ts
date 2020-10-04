@@ -1,4 +1,4 @@
 export interface JobPositionVM {
-  id: number;
+  id: string;
   name: string;
 }

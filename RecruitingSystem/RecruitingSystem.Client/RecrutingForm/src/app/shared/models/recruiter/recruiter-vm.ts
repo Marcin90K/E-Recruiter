@@ -6,4 +6,5 @@ export interface RecruiterVM {
   ownedJobOffers: JobOfferVM[];
   employee: EmployeeVM;
   managerId: string;
+  fullName: string;
 }
