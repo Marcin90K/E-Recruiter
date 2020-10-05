@@ -6,9 +6,10 @@ import { JobOfferComponent } from './job-offer.component';
 import { FormComponent } from './form/form.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormEditComponent } from './form-edit/form-edit.component';
 
 @NgModule({
-  declarations: [JobOfferComponent, FormComponent],
+  declarations: [JobOfferComponent, FormComponent, FormEditComponent],
   imports: [
     CommonModule,
     NgSelectModule,

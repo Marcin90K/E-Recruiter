@@ -1,10 +1,12 @@
+import { FormEditComponent } from './form-edit/form-edit.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { JobOfferComponent } from './job-offer.component';
 import { FormComponent } from './form/form.component';
 
 const jobOfferChildRoutes: Routes = [
-  { path: 'form', component: FormComponent }
+  { path: 'form', component: FormComponent },
+  { path: 'edit', component: FormEditComponent}
 ];
 
 const routes: Routes = [

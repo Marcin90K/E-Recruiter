@@ -1,0 +1,14 @@
+.button-close {
+  float: right;
+  border: none;
+  background-color: transparent;
+  font-size: 18px;
+}
+
+.button-close :hover{
+   color: #F76C6C;
+}
+
+.requirement-display {
+  overflow-wrap: break-word;
+}
