@@ -17,6 +17,7 @@ export class FormComponent implements OnInit {
 
   jobOfferForm: FormGroup;
   model: JobOfferForCreation;
+  //isEditing = false;
 
   jobPositions: JobPositionVM[];
   owners: RecruiterVM[];
@@ -28,6 +29,8 @@ export class FormComponent implements OnInit {
               private recruiterService: RecruiterService,
               private jobOfferService: JobOfferService) {
     this.jobOfferForm = this.createFormGroup(this.formBuilder);
+
+    // tu pobrać model a jak nie ma to null
     this.model = {
       jobPositionId: '',
       description: '',
