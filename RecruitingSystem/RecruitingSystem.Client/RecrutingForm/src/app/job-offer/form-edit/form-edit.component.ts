@@ -1,6 +1,5 @@
-import { JobOfferForUpdate } from './../../shared/models/job-offer/job-offer-for-update';
 import { JobOfferService } from './../../shared/services/job-offer.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { JobPositionVM } from 'src/app/shared/models/job-position/job-position-vm';
 import { RecruiterVM } from 'src/app/shared/models/recruiter/recruiter-vm';
@@ -9,20 +8,21 @@ import { JobOfferForCreation } from 'src/app/shared/models/job-offer/job-offer-f
 import { RecruiterService } from 'src/app/shared/services/recruiter.service';
 import { RecruiterListVM } from 'src/app/shared/models/recruiter/recruiter-list-vm';
 import { JobOfferVM } from 'src/app/shared/models/job-offer/job-offer-vm';
+import { JobOfferForUpdate } from 'src/app/shared/models/job-offer/job-offer-for-update';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  selector: 'app-form-edit',
+  templateUrl: './form-edit.component.html',
+  styleUrls: ['./form-edit.component.css']
 })
-export class FormComponent implements OnInit {
+export class FormEditComponent implements OnInit {
 
   jobOfferForm: FormGroup;
-  viewModel: JobOfferForCreation;
-  //viewModelForUpdate: JobOfferForUpdate;
-  //viewModelFromDB: JobOfferVM;
-  //isEditing = false;
-  jobOfferId: string;
+
+  viewModel: JobOfferForUpdate;
+
+  @Input() jobOfferId: string;
+  //jobOfferId = '';
 
   jobPositions: JobPositionVM[];
   owners: RecruiterVM[];
@@ -30,20 +30,17 @@ export class FormComponent implements OnInit {
   description: string;
   requirements: string[] = [];
 
+
   constructor(private formBuilder: FormBuilder,
               private recruiterService: RecruiterService,
               private jobOfferService: JobOfferService) {
+    this.jobOfferService.getJobOffer(this.jobOfferId).subscribe(
+      vm => vm ? this.viewModel = this.convertModelFromDBToUpdate(vm) : null,
+      error => console.log(error)
+    );
+
     this.jobOfferForm = this.createFormGroup(this.formBuilder);
-
-    this.viewModel = {
-      jobPositionId: '',
-      description: '',
-      requirements: '',
-      ownerId: '',
-      dateOfExpiration: null
-    };
   }
-
 
   ngOnInit() {
     this.jobPositions = JOBPOSITIONS;
@@ -59,11 +56,11 @@ export class FormComponent implements OnInit {
 
   createFormGroup(fb: FormBuilder) {
     return fb.group({
-      jobPositionId: [''],
-      ownerId: [''],
-      description: [''],
-      requirements: [null],
-      dateOfExpiration: [null]
+      jobPositionId: [this.viewModel ? this.viewModel.jobPositionId : ''],
+      ownerId: [this.viewModel ? this.viewModel.ownerId : ''],
+      description: [this.viewModel ? this.viewModel.description : ''],
+      requirements: [this.viewModel ? this.viewModel.requirements : null],
+      dateOfExpiration: [this.viewModel ? this.viewModel.dateOfExpiration : null]
     });
   }
 
@@ -72,7 +69,7 @@ export class FormComponent implements OnInit {
     this.viewModel = this.jobOfferForm.value;
     this.viewModel.requirements = this.requirements.join('\n');
     this.jobOfferService.addJobOffer(this.viewModel).subscribe(
-      result => console.log("Job offer created: " + result.id),
+      result => console.log("Job offer updated: " + result.id),
       error => console.log(error)
     );
   }
@@ -100,4 +97,17 @@ export class FormComponent implements OnInit {
     return owners;
   }
 
+  convertModelFromDBToUpdate(model: JobOfferVM): JobOfferForUpdate {
+    let modelResult: JobOfferForUpdate;
+
+    modelResult.dateOfExpiration = model.dateOfExpiration;
+    modelResult.description = model.description;
+    modelResult.jobPositionId = model.jobPosition.id;
+    modelResult.ownerId = model.owner.id;
+    modelResult.requirements = model.requirements;
+
+    return modelResult;
+  }
+
 }
+
