@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { JobOfferForCreation } from '../models/job-offer/job-offer-for-creation';
 import { JobOfferCreated } from '../models/job-offer/job-offer-created';
 import { Observable } from 'rxjs';
+import { JobOfferListVM } from '../models/job-offer/job-offer-list-vm';
 
 @Injectable({
   providedIn: 'root'
@@ -29,14 +30,14 @@ export class JobOfferService {
     return this.http.get<JobOfferVM>(url);
   }
 
-  getJobOffers(search = '' , pageNumber = 1, pageSize = 10): Observable<JobOfferVM[]> {
+  getJobOffers(search = '' , pageNumber = 1, pageSize = 10): Observable<JobOfferListVM> {
     const options = {
       params: new HttpParams().set(this.searchParam, search)
                               .set(this.pageNumber, pageNumber.toString())
                               .set(this.pageSize, pageSize.toString())
     };
 
-    return this.http.get<JobOfferVM[]>(this.baseUrl, options);
+    return this.http.get<JobOfferListVM>(this.baseUrl, options);
   }
 
   addJobOffer(jobOffer: JobOfferForCreation): Observable<JobOfferCreated>  {
