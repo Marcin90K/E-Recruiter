@@ -1,3 +1,4 @@
+import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BasicInfoComponent } from './candidate/basic-info/basic-info.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   // { path: 'submitted', component: SubmittedComponent }
   { path: 'candidate', component: CandidateComponent },
   { path: 'job-offers', component: JobOfferComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'auth', component: AuthComponent }
 ];
 

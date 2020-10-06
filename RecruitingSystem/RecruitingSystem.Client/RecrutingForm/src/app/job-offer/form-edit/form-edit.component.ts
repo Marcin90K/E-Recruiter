@@ -1,14 +1,14 @@
 import { JobOfferService } from './../../shared/services/job-offer.service';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { JobPositionVM } from 'src/app/shared/models/job-position/job-position-vm';
-import { RecruiterVM } from 'src/app/shared/models/recruiter/recruiter-vm';
-import { JOBPOSITIONS } from 'src/app/shared/models/opened-jobs';
-import { JobOfferForCreation } from 'src/app/shared/models/job-offer/job-offer-for-creation';
-import { RecruiterService } from 'src/app/shared/services/recruiter.service';
-import { RecruiterListVM } from 'src/app/shared/models/recruiter/recruiter-list-vm';
-import { JobOfferVM } from 'src/app/shared/models/job-offer/job-offer-vm';
-import { JobOfferForUpdate } from 'src/app/shared/models/job-offer/job-offer-for-update';
+import { JobPositionVM } from '../../shared/models/job-position/job-position-vm';
+import { RecruiterVM } from '../../shared/models/recruiter/recruiter-vm';
+import { JOBPOSITIONS } from '../../shared/models/opened-jobs';
+import { JobOfferForCreation } from '../../shared/models/job-offer/job-offer-for-creation';
+import { RecruiterService } from '../../shared/services/recruiter.service';
+import { RecruiterListVM } from '../../shared/models/recruiter/recruiter-list-vm';
+import { JobOfferVM } from '../../shared/models/job-offer/job-offer-vm';
+import { JobOfferForUpdate } from '../../shared/models/job-offer/job-offer-for-update';
 
 @Component({
   selector: 'app-form-edit',
@@ -21,8 +21,8 @@ export class FormEditComponent implements OnInit {
 
   viewModel: JobOfferForUpdate;
 
-  @Input() jobOfferId: string;
-  //jobOfferId = '';
+  //@Input() jobOfferId: string;
+  jobOfferId = '7e56b414-411b-4fee-ba42-2eba50bfec6f';
 
   jobPositions: JobPositionVM[];
   owners: RecruiterVM[];
@@ -35,7 +35,10 @@ export class FormEditComponent implements OnInit {
               private recruiterService: RecruiterService,
               private jobOfferService: JobOfferService) {
     this.jobOfferService.getJobOffer(this.jobOfferId).subscribe(
-      vm => vm ? this.viewModel = this.convertModelFromDBToUpdate(vm) : null,
+      vm => {
+        vm ? this.viewModel = this.convertModelFromDBToUpdate(vm) : null;
+        //this.jobOfferForm = this.createFormGroup(this.formBuilder);
+      },
       error => console.log(error)
     );
 
@@ -51,6 +54,7 @@ export class FormEditComponent implements OnInit {
       },
       error => console.log(error)
     );
+    //this.jobOfferForm = this.createFormGroup(this.formBuilder);
   }
 
 
@@ -100,13 +104,15 @@ export class FormEditComponent implements OnInit {
   convertModelFromDBToUpdate(model: JobOfferVM): JobOfferForUpdate {
     let modelResult: JobOfferForUpdate;
 
-    modelResult.dateOfExpiration = model.dateOfExpiration;
-    modelResult.description = model.description;
-    modelResult.jobPositionId = model.jobPosition.id;
-    modelResult.ownerId = model.owner.id;
-    modelResult.requirements = model.requirements;
+    return modelResult = {
+      dateOfExpiration: model.dateOfExpiration,
+      description: model.description,
+      jobPositionId: model.jobPosition.id,
+      ownerId: model.owner.id,
+      requirements: model.requirements
+    };
 
-    return modelResult;
+    //return modelResult;
   }
 
 }
