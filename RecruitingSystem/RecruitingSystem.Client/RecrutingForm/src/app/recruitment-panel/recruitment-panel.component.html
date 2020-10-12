@@ -10,10 +10,10 @@
         <div class="joboffer-link-wrapper">
           <div class="row">
             <div class="col-10">
-              <p class="joboffer-title"> {{ offer.jobPosition }}</p>
+              <p class="joboffer-title"> {{ offer.jobPosition.name }}</p>
             </div>
             <div class="col-2">
-              <div class="button button-normal">Open</div>
+              <div class="button button-normal" (click)="apply(offer)" >Open</div>
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@ import { JobOfferService } from './../shared/services/job-offer.service';
 import { Component, OnInit } from '@angular/core';
 import { JobOfferVM } from '../shared/models/job-offer/job-offer-vm';
 import { JobOfferListVM } from '../shared/models/job-offer/job-offer-list-vm';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recruitment-panel',
@@ -11,16 +12,14 @@ import { JobOfferListVM } from '../shared/models/job-offer/job-offer-list-vm';
 export class RecruitmentPanelComponent implements OnInit {
 
   isAdmin = false;
-  //objectKeys = Object.keys;
 
-  //jobOffers: JobOfferVM[] = [];
-  //jobOffers: Array<JobOfferVM>;
   jobOffersListVM: JobOfferListVM = {
     jobOffers: null,
     pagination: null
   };
 
-  constructor(private jobOfferService: JobOfferService) {
+  constructor(private jobOfferService: JobOfferService,
+              private routerService: Router) {
     this.jobOfferService.getJobOffers().subscribe(
       res => this.jobOffersListVM = res,
       error => console.log(error)
@@ -28,7 +27,10 @@ export class RecruitmentPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.jobOffers
+  }
+
+  apply(offer: JobOfferVM) {
+    this.routerService.navigate(['../job-offers', offer.id, 'view']);
   }
 
 }

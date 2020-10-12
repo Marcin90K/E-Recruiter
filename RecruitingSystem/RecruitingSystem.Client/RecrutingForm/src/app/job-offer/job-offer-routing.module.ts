@@ -5,15 +5,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { JobOfferComponent } from './job-offer.component';
 import { FormComponent } from './form/form.component';
 
-const jobOfferChildRoutes: Routes = [
-  { path: 'form', component: FormComponent },
-  { path: 'edit', component: FormEditComponent },
-  { path: 'view', component: JobOfferViewComponent}
-];
 
 const routes: Routes = [
   { path: 'job-offers', component: JobOfferComponent,
-    children: jobOfferChildRoutes}
+    children: [
+      { path: 'form', component: FormComponent }
+    ]
+  },
+  { path: 'job-offers/:id', component: JobOfferComponent,
+    children: [
+      { path: 'edit', component: FormEditComponent },
+      { path: 'view', component: JobOfferViewComponent}
+    ]
+  }
 ];
 
 @NgModule({
