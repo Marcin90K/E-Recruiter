@@ -89,15 +89,9 @@ export class SummaryComponent implements OnInit {
   }
 
   submit() {
-    //if (this.isAgreementChecked) {
       this.sendData();
       this.candidateDataService.clearAll();
-      this.routeService.navigate(['../submitted'], { relativeTo: this.activatedRoute });
-    //}
-    // else {
-    //   alert("Please tick Privacy clause");
-    // }
-
+      this.routeService.navigate(['submitted']);
   }
 
   sendData() {

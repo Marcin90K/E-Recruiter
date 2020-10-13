@@ -17,6 +17,7 @@ import { AuthModule } from './auth/auth.module';
 import { DatePipe } from '@angular/common';
 import { JobOfferModule } from './job-offer/job-offer.module';
 import { RecruitmentPanelComponent } from './recruitment-panel/recruitment-panel.component';
+import { SubmittedPageComponent } from './shared/submitted-page/submitted-page.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { RecruitmentPanelComponent } from './recruitment-panel/recruitment-panel
     MainTopBarComponent,
     HomeComponent,
     RecruitmentPanelComponent,
+    SubmittedPageComponent,
   ],
   imports: [
     BrowserModule,

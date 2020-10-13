@@ -1,8 +1,10 @@
 import { JobOfferService } from './../../shared/services/job-offer.service';
 import { Component, OnInit } from '@angular/core';
 import { JobOfferVM } from 'src/app/shared/models/job-offer/job-offer-vm';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
+import { CandidateVM } from 'src/app/shared/models/candidate/candidate-vm';
 
 @Component({
   selector: 'app-job-offer-view',
@@ -24,12 +26,16 @@ export class JobOfferViewComponent implements OnInit {
     owner: null
   };
 
+  private candidate: CandidateVM;
+
   private jobOfferId: string;
   private dateOfExpiration: string;
   private dateFormat = 'yyyy-MM-dd';
 
   constructor(private jobOfferService: JobOfferService,
+              private candidateDataService: CandidateSharingDataService,
               private activatedRoute: ActivatedRoute,
+              private router: Router,
               private datePipe: DatePipe ) {
     this.jobOfferId = this.activatedRoute.snapshot.parent.params['id'];
     console.log(this.jobOfferId);
@@ -42,6 +48,8 @@ export class JobOfferViewComponent implements OnInit {
       },
       error => console.log(error)
     );
+
+    this
   }
 
   ngOnInit() {
@@ -49,7 +57,7 @@ export class JobOfferViewComponent implements OnInit {
 
 
   apply() {
-
+    this.router.navigate(['submitted']);
   }
 
   parseDate(date: Date) {
