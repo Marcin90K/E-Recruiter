@@ -1,3 +1,4 @@
+import { RecruitmentPanelComponent } from './recruitment-panel/recruitment-panel.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -20,6 +21,8 @@ const routes: Routes = [
   // { path: 'submitted', component: SubmittedComponent }
   { path: 'candidate', component: CandidateComponent },
   { path: 'job-offers', component: JobOfferComponent },
+  { path: 'recruitment-panel', component: RecruitmentPanelComponent },
+  { path: 'submitted', component: SubmittedComponent},
   { path: 'home', component: HomeComponent },
   { path: 'auth', component: AuthComponent }
 ];

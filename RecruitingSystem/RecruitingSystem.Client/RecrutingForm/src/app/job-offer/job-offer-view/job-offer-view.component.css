@@ -1,0 +1,10 @@
+.container {
+  margin-top: 24px;
+}
+
+.content-textbox {
+  width: 100%;
+  padding-left: 10px;
+  margin-bottom: 30px;
+  font-size: 26px;
+}
