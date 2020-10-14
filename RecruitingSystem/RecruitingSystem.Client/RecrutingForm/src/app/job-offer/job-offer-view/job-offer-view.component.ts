@@ -48,8 +48,6 @@ export class JobOfferViewComponent implements OnInit {
       },
       error => console.log(error)
     );
-
-    this
   }
 
   ngOnInit() {
