@@ -1,3 +1,4 @@
+import { JobOfferForUpdate } from './../../shared/models/job-offer/job-offer-for-update';
 import { JobOfferService } from './../../shared/services/job-offer.service';
 import { Component, OnInit } from '@angular/core';
 import { JobOfferVM } from 'src/app/shared/models/job-offer/job-offer-vm';
@@ -23,17 +24,18 @@ export class JobOfferViewComponent implements OnInit {
     dateOfAdding: null,
     dateOfExpiration: null,
     requirements: '',
-    owner: null
+    owner: null,
+    candidateIds: []
   };
 
-  private candidate: CandidateVM;
+  private candidateId: string;
 
   private jobOfferId: string;
   private dateOfExpiration: string;
   private dateFormat = 'yyyy-MM-dd';
 
   constructor(private jobOfferService: JobOfferService,
-              private candidateDataService: CandidateSharingDataService,
+              private candidateSharingDataService: CandidateSharingDataService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
               private datePipe: DatePipe ) {
@@ -48,6 +50,11 @@ export class JobOfferViewComponent implements OnInit {
       },
       error => console.log(error)
     );
+
+    this.candidateSharingDataService.getCandidateId().subscribe(
+      result => this.candidateId = result,
+      error => console.log(error)
+    );
   }
 
   ngOnInit() {
@@ -55,11 +62,33 @@ export class JobOfferViewComponent implements OnInit {
 
 
   apply() {
+    const jobOfferForUpdate = this.convertViewModelToModerForUpdate(this.viewModel);
+    jobOfferForUpdate.candidateId = this.candidateId;
+    this.jobOfferService.updateJobOffer(jobOfferForUpdate).subscribe(
+      result => console.log('Candidate with id ' + result.candidateId + 'has successfully applied for the job offer.' + result.id),
+      error => console.log('Error when job offer applying by candidate.' + error)
+    )
     this.router.navigate(['submitted']);
   }
 
+
+
   parseDate(date: Date) {
     return this.datePipe.transform(date, this.dateFormat);
+  }
+
+  convertViewModelToModerForUpdate(model: JobOfferVM): JobOfferForUpdate {
+    let modelResult: JobOfferForUpdate;
+
+    return modelResult = {
+      id: model.id,
+      jobPositionId: model.jobPosition.id,
+      description: model.description,
+      dateOfExpiration: model.dateOfExpiration,
+      requirements: model.requirements,
+      ownerId: model.owner.id,
+      candidateId: null
+    }
   }
 
 }

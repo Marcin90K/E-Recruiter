@@ -3,10 +3,12 @@ import { RecruiterForManipulation } from '../recruiter/recruiter-for-manipulatio
 
 export interface JobOfferForUpdate {
   //jobPosition: JobPopsitionForManipulation;
+  id: string;
   jobPositionId: string;
   description: string;
   dateOfExpiration: Date;
   requirements: string;
   //owner: RecruiterForManipulation;
   ownerId: string;
+  candidateId: string;
 }

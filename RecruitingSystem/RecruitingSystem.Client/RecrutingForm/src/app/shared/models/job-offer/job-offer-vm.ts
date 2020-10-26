@@ -9,4 +9,5 @@ export interface JobOfferVM {
   dateOfExpiration: Date;
   requirements: string;
   owner: RecruiterVM;
+  candidateIds: string[];
 }

@@ -16,7 +16,7 @@ export class CandidateSharingDataService {
   private candidateEducationData = new BehaviorSubject<EducationForManipulation[]>([]);
   private candidateExperienceData = new BehaviorSubject<ExperienceForManipulation[]>([]);
   private candidateViewModel = new BehaviorSubject<CandidateVM>(null);
-  private candidateId = new BehaviorSubject(null);
+  private candidateId = new BehaviorSubject<string>(null);
 
   constructor() { }
 
@@ -75,6 +75,7 @@ export class CandidateSharingDataService {
   // Updates candidate view model data
   updateCandidateViewModel(candidate: CandidateVM) {
     this.candidateViewModel.next(candidate);
+    this.updateCandidateId(candidate.id);
   }
 
   // Gets candidate view model data
@@ -98,6 +99,7 @@ export class CandidateSharingDataService {
     this.candidateEducationData.next(null);
     this.candidateExperienceData.next(null);
     this.candidateViewModel.next(null);
+    this.candidateId.next(null);
   }
 
 }
