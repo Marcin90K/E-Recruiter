@@ -13,6 +13,7 @@ namespace Application.JobOffers.Commands.UpdateJobOffer
         public string Requirements { get; set; }
         public DateTime DateOfExpiration { get; set; }
         public Guid OwnerId { get; set; }
+        public Guid CandidateId { get; set; }
 
         public void Mapping(MappingProfile profile)
         {
