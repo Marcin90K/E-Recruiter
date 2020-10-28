@@ -65,7 +65,7 @@ export class JobOfferViewComponent implements OnInit {
     const jobOfferForUpdate = this.convertViewModelToModerForUpdate(this.viewModel);
     jobOfferForUpdate.candidateId = this.candidateId;
     this.jobOfferService.updateJobOffer(jobOfferForUpdate).subscribe(
-      result => console.log('Candidate with id ' + result.candidateId + 'has successfully applied for the job offer.' + result.id),
+      result => console.log('Candidate with id ' + this.candidateId + ' has successfully applied for the job offer ' + result.id),
       error => console.log('Error when job offer applying by candidate.' + error)
     )
     this.router.navigate(['submitted']);
