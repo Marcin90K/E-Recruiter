@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 import { CandidateVM } from 'src/app/shared/models/candidate/candidate-vm';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-job-offer-view',
@@ -34,11 +36,14 @@ export class JobOfferViewComponent implements OnInit {
   private dateOfExpiration: string;
   private dateFormat = 'yyyy-MM-dd';
 
+  modalHeader = 'Do you want to aplly for this job?';
+
   constructor(private jobOfferService: JobOfferService,
               private candidateSharingDataService: CandidateSharingDataService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private datePipe: DatePipe ) {
+              private datePipe: DatePipe,
+              private modalService: NgbModal ) {
     this.jobOfferId = this.activatedRoute.snapshot.parent.params['id'];
     console.log(this.jobOfferId);
 
@@ -61,14 +66,13 @@ export class JobOfferViewComponent implements OnInit {
   }
 
 
-  apply() {
-    const jobOfferForUpdate = this.convertViewModelToModerForUpdate(this.viewModel);
-    jobOfferForUpdate.candidateId = this.candidateId;
-    this.jobOfferService.updateJobOffer(jobOfferForUpdate).subscribe(
-      result => console.log('Candidate with id ' + this.candidateId + ' has successfully applied for the job offer ' + result.id),
-      error => console.log('Error when job offer applying by candidate.' + error)
-    )
-    this.router.navigate(['submitted']);
+  apply(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', centered: true})
+      .result.then((result) => {
+        if (result === 'yes') {
+          this.assignResult();
+        }
+      });
   }
 
 
@@ -89,6 +93,16 @@ export class JobOfferViewComponent implements OnInit {
       ownerId: model.owner.id,
       candidateId: null
     }
+  }
+
+  assignResult() {
+    const jobOfferForUpdate = this.convertViewModelToModerForUpdate(this.viewModel);
+    jobOfferForUpdate.candidateId = this.candidateId;
+    this.jobOfferService.updateJobOffer(jobOfferForUpdate).subscribe(
+      result => console.log('Candidate with id ' + this.candidateId + ' has successfully applied for the job offer ' + result.id),
+      error => console.log('Error when job offer applying by candidate.' + error)
+    );
+    this.router.navigate(['submitted']);
   }
 
 }

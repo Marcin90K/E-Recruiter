@@ -10,7 +10,12 @@ import { FormEditComponent } from './form-edit/form-edit.component';
 import { JobOfferViewComponent } from './job-offer-view/job-offer-view.component';
 
 @NgModule({
-  declarations: [JobOfferComponent, FormComponent, FormEditComponent, JobOfferViewComponent],
+  declarations: [
+    JobOfferComponent,
+    FormComponent,
+    FormEditComponent,
+    JobOfferViewComponent
+  ],
   imports: [
     CommonModule,
     NgSelectModule,
