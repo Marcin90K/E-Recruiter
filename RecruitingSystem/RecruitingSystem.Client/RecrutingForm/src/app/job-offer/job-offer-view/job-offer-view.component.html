@@ -34,10 +34,26 @@
             </div>
           </div>
 
+
+          <ng-template #content let-modal >
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">
+                {{ modalHeader }}
+              </h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+              <button type="button" class="button button-normal" (click)="modal.close('no')">No</button>
+              <button type="button" class="button button-submit" (click)="modal.close('yes')">Yes</button>
+            </div>
+          </ng-template>
+
+
+
           <div class="row my-2 justify-content-center">
             <button class="my-4 mr-2 button button-normal" [routerLink]="['/recruitment-panel']"
               routerLinkActive="router-link-active">Exit</button>
-            <button class="my-4 ml-2 button button-submit" (click)="apply()">Apply</button>
+            <button  class="my-4 ml-2 button button-submit" (click)="apply(content)">Apply</button>
           </div>
 
         </div>

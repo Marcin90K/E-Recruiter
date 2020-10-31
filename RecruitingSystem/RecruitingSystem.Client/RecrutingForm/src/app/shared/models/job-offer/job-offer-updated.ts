@@ -7,4 +7,5 @@ export interface JobOfferUpdated {
   dateOfExpiration: Date;
   requirements: string;
   ownerId: string;
+  candidateId: string;
 }

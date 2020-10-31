@@ -1,0 +1,12 @@
+<ng-template #content let-modal >
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      {{ header }}
+    </h4>
+  </div>
+  <div class="modal-body"></div>
+  <div class="modal-footer">
+    <button type="button" class="button button-normal" (click)="modal.close('no')">No</button>
+    <button type="button" class="button button-submit" (click)="modal.close('yes')">Yes</button>
+  </div>
+</ng-template>

@@ -46,8 +46,9 @@ export class JobOfferService {
   }
 
   updateJobOffer(jobOffer: JobOfferForUpdate): Observable<JobOfferUpdated> {
+    const url = this.baseUrl + '/' + jobOffer.id;
     console.log('Job offer for update: ' + JSON.stringify(jobOffer));
-    return this.http.put<JobOfferUpdated>(this.baseUrl, jobOffer);
+    return this.http.put<JobOfferUpdated>(url, jobOffer);
   }
 
   deleteJobOffer(id: string): Observable<{}> {

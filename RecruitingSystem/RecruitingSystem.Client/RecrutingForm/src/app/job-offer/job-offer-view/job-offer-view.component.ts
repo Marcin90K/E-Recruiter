@@ -1,3 +1,4 @@
+import { JobOfferForUpdate } from './../../shared/models/job-offer/job-offer-for-update';
 import { JobOfferService } from './../../shared/services/job-offer.service';
 import { Component, OnInit } from '@angular/core';
 import { JobOfferVM } from 'src/app/shared/models/job-offer/job-offer-vm';
@@ -5,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 import { CandidateVM } from 'src/app/shared/models/candidate/candidate-vm';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-job-offer-view',
@@ -23,20 +26,24 @@ export class JobOfferViewComponent implements OnInit {
     dateOfAdding: null,
     dateOfExpiration: null,
     requirements: '',
-    owner: null
+    owner: null,
+    candidateIds: []
   };
 
-  private candidate: CandidateVM;
+  private candidateId: string;
 
   private jobOfferId: string;
   private dateOfExpiration: string;
   private dateFormat = 'yyyy-MM-dd';
 
+  modalHeader = 'Do you want to aplly for this job?';
+
   constructor(private jobOfferService: JobOfferService,
-              private candidateDataService: CandidateSharingDataService,
+              private candidateSharingDataService: CandidateSharingDataService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private datePipe: DatePipe ) {
+              private datePipe: DatePipe,
+              private modalService: NgbModal ) {
     this.jobOfferId = this.activatedRoute.snapshot.parent.params['id'];
     console.log(this.jobOfferId);
 
@@ -48,18 +55,54 @@ export class JobOfferViewComponent implements OnInit {
       },
       error => console.log(error)
     );
+
+    this.candidateSharingDataService.getCandidateId().subscribe(
+      result => this.candidateId = result,
+      error => console.log(error)
+    );
   }
 
   ngOnInit() {
   }
 
 
-  apply() {
-    this.router.navigate(['submitted']);
+  apply(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', centered: true})
+      .result.then((result) => {
+        if (result === 'yes') {
+          this.assignResult();
+        }
+      });
   }
+
+
 
   parseDate(date: Date) {
     return this.datePipe.transform(date, this.dateFormat);
+  }
+
+  convertViewModelToModerForUpdate(model: JobOfferVM): JobOfferForUpdate {
+    let modelResult: JobOfferForUpdate;
+
+    return modelResult = {
+      id: model.id,
+      jobPositionId: model.jobPosition.id,
+      description: model.description,
+      dateOfExpiration: model.dateOfExpiration,
+      requirements: model.requirements,
+      ownerId: model.owner.id,
+      candidateId: null
+    }
+  }
+
+  assignResult() {
+    const jobOfferForUpdate = this.convertViewModelToModerForUpdate(this.viewModel);
+    jobOfferForUpdate.candidateId = this.candidateId;
+    this.jobOfferService.updateJobOffer(jobOfferForUpdate).subscribe(
+      result => console.log('Candidate with id ' + this.candidateId + ' has successfully applied for the job offer ' + result.id),
+      error => console.log('Error when job offer applying by candidate.' + error)
+    );
+    this.router.navigate(['submitted']);
   }
 
 }

@@ -32,6 +32,7 @@ namespace Application.JobOffers.Commands.UpdateJobOffer
                 jobOfferEntity.DateOfAdding = DateTime.Now;
 
                 await _context.JobOffers.AddAsync(jobOfferEntity);
+                UpdateCandidate(request.CandidateId, request.Id);
                 if (!(await _context.SaveChangesAsync(cancellationToken) > 0))
                 {
                     throw new ResourceManipulationException("Error during upserting Job offer.");
@@ -43,6 +44,7 @@ namespace Application.JobOffers.Commands.UpdateJobOffer
             {
                 var jobOfferForUpdate = _mapper.Map(request, jobOfferEntity);
                 _context.JobOffers.Update(jobOfferForUpdate);
+                UpdateCandidate(request.CandidateId, request.Id);
 
                 if (!(await _context.SaveChangesAsync(cancellationToken) > 0))
                 {
@@ -52,6 +54,15 @@ namespace Application.JobOffers.Commands.UpdateJobOffer
                 return _mapper.Map<JobOfferUpdatedVm>(jobOfferForUpdate);
             }
         
+        }
+
+
+        private void UpdateCandidate(Guid candidateId, Guid jobOfferId)
+        {
+            if (!_context.CandidateJobOffers.Any(cjo => cjo.CandidateId == candidateId && cjo.JobOfferId == jobOfferId))
+            {
+                _context.CandidateJobOffers.Add(new CandidateJobOffer { CandidateId = candidateId, JobOfferId = jobOfferId });
+            }
         }
     }
 }

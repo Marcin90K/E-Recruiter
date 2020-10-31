@@ -1,3 +1,4 @@
+import { ConfirmModalComponent } from './shared/components/confirm-modal/confirm-modal.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -18,7 +19,7 @@ import { DatePipe } from '@angular/common';
 import { JobOfferModule } from './job-offer/job-offer.module';
 import { RecruitmentPanelComponent } from './recruitment-panel/recruitment-panel.component';
 import { SubmittedPageComponent } from './shared/submitted-page/submitted-page.component';
-
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SubmittedPageComponent } from './shared/submitted-page/submitted-page.c
     HomeComponent,
     RecruitmentPanelComponent,
     SubmittedPageComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,7 @@ import { SubmittedPageComponent } from './shared/submitted-page/submitted-page.c
     JobOfferModule,
     HttpClientModule,
     AppRoutingModule,
+    NgbModalModule
   ],
   providers: [
     CandidateSharingDataService,

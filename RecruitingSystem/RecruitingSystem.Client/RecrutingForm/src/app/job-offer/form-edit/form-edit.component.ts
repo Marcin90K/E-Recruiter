@@ -105,11 +105,13 @@ export class FormEditComponent implements OnInit {
     let modelResult: JobOfferForUpdate;
 
     return modelResult = {
+      id: model.id,
       dateOfExpiration: model.dateOfExpiration,
       description: model.description,
       jobPositionId: model.jobPosition.id,
       ownerId: model.owner.id,
-      requirements: model.requirements
+      requirements: model.requirements,
+      candidateId: null
     };
 
     //return modelResult;

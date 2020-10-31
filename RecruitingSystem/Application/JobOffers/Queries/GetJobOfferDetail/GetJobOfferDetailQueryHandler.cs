@@ -29,6 +29,7 @@ namespace Application.JobOffers.Queries.GetJobOfferDetail
             var entity = _context.JobOffers.Where(j => j.Id == request.Id)
                 .Include(j => j.JobPosition)
                 .Include(j => j.Owner)
+                .Include(j => j.CandidateJobOffers)
                 .FirstOrDefault();
 
             if (entity == null)
