@@ -1,3 +1,21 @@
-<p>
-  This is the home page
-</p>
+<div *ngIf="isLogged" class="container">
+  <p class="element-title text-center">Hello, {{ candidateName }}!</p>
+
+  <div class="row widget-container">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <app-widget [widgetContent]="widgetJobOffers"
+        [redirectLink]="jobOffersRedirectLink"></app-widget>
+    </div>
+    <div class="col-md-4">
+      <app-widget [widgetContent]="widgetEditProfile"
+        [redirectLink]="editProfileRedirectLink"></app-widget>
+    </div>
+    <div class="col-md-3">
+      <app-widget [widgetContent]="widgetOffersApplied"
+        [redirectLink]="appliedJobOffersRedirectLink"></app-widget>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+
+</div>
