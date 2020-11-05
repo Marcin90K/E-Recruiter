@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'candidate', component: CandidateComponent },
   { path: 'job-offers', component: JobOfferComponent },
   { path: 'recruitment-panel', component: RecruitmentPanelComponent },
+  { path: 'recruitment-panel/:id', component: RecruitmentPanelComponent },
   { path: 'submitted', component: SubmittedComponent},
   { path: 'home', component: HomeComponent },
   { path: 'auth', component: AuthComponent }

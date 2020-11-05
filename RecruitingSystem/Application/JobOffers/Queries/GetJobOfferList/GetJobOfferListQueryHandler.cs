@@ -44,6 +44,7 @@ namespace Application.JobOffers.Queries.GetJobOfferList
                 var jobOffersFromDb = await _context.JobOffers
                     .Include(j => j.JobPosition)
                     .Include(j => j.Owner)
+                    .Include(j => j.CandidateJobOffers)
                     .ProjectTo<JobOfferDTO>(_mapper.ConfigurationProvider)
                     .ToListAsync();
 
@@ -71,10 +72,13 @@ namespace Application.JobOffers.Queries.GetJobOfferList
             return _context.JobOffers
                 .Include(j => j.JobPosition)
                 .Include(j => j.Owner)
+                .Include(j => j.CandidateJobOffers)
                 .AsEnumerable()
                 .Where(j => j.JobPosition.Name.ToLowerInvariant().Contains(searchQuery) ||
                     j.Owner.EmployeeId.ToString().ToLowerInvariant().Contains(searchQuery) ||
-                    j.Requirements.ToLowerInvariant().Contains(searchQuery));
+                    j.Requirements.ToLowerInvariant().Contains(searchQuery) ||
+                    //j.CandidateJobOffers.Where(cjo => cjo.CandidateId.ToString() == searchQuery).All());
+                    j.CandidateJobOffers.Any(cjo => cjo.CandidateId.ToString() == searchQuery));
         }
 
 

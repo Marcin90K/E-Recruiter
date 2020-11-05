@@ -20,6 +20,7 @@ import { JobOfferModule } from './job-offer/job-offer.module';
 import { RecruitmentPanelComponent } from './recruitment-panel/recruitment-panel.component';
 import { SubmittedPageComponent } from './shared/submitted-page/submitted-page.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { WidgetComponent } from './shared/components/widget/widget.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     HomeComponent,
     RecruitmentPanelComponent,
     SubmittedPageComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    WidgetComponent
   ],
   imports: [
     BrowserModule,
