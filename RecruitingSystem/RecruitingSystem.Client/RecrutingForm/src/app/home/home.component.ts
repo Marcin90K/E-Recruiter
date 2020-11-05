@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   widgetOffersApplied = "Check offers that you applied";
   jobOffersRedirectLink = "/recruitment-panel";
   editProfileRedirectLink = "/candidate/basic-info";
-  appliedJobOffersRedirectLink = '';
+  appliedJobOffersRedirectLink = "/recruitment-panel/";
 
 
   constructor(private candidateSharingService: CandidateSharingDataService) {
@@ -28,11 +28,12 @@ export class HomeComponent implements OnInit {
         this.candidateVM = result;
         this.candidateName = this.candidateVM.candidateBasicData.personBasicData.firstName;
         this.candidateId = this.candidateVM.id;
+        this.appliedJobOffersRedirectLink += this.candidateId;
       },
       error => console.log(error)
     );
 
-    this.isLogged = true; //temp
+    this.isLogged = true;
   }
 
   ngOnInit() {
