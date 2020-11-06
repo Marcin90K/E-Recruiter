@@ -1,5 +1,14 @@
 <div class="login-page">
+
   <div [formGroup]="loginForm" class="form">
+
+    <div class="row form-group">
+      <div class="form-check">
+        <input type="checkbox" formControlName="isEmployee" name="employeeCheckbox" class="form-check-input">
+        <label for="employeeCheckbox" class="form-check-label">I am employee of the company</label>
+      </div>
+    </div>
+
     <div class="row form-group">
       <input type="text" formControlName="username" name="username" class="form-control" placeholder="username">
     </div>
@@ -12,7 +21,9 @@
       <button type="submit" class="btn button-submit" (click)="submit()">Login</button>
     </div>
     <div class="row form-group">
-      <p class="message">Are you not registered?<a href="#">Create account</a></p>
+      <p class="message">Are you not registered?
+        <a [routerLink]="['/candidate/basic-info']">Create account</a>
+      </p>
     </div>
 
   </div>
