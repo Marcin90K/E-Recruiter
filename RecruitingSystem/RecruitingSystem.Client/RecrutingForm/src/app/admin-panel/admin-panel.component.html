@@ -1,0 +1,18 @@
+<div class="container">
+  <p class="element-title text-center">Administration panel</p>
+
+  <div class="row widget-container">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <app-widget [widgetContent]="widgetAddJobOffer" [redirectLink]="addJobOfferRedirectLink"></app-widget>
+    </div>
+    <div class="col-md-4">
+      <app-widget [widgetContent]="widgetJobOffers" [redirectLink]="jobOffersRedirectLink"></app-widget>
+    </div>
+    <div class="col-md-3">
+      <app-widget [widgetContent]="widgetViewCandidates" [redirectLink]="viewCandidatesRedirectLink"></app-widget>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+
+</div>
