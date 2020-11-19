@@ -10,6 +10,8 @@ const routes: Routes = [
   { path: 'job-offers', component: JobOfferComponent,
     children: [
       { path: 'form', component: FormComponent }
+      // { path: 'edit/:id', component: FormEditComponent },
+      // { path: 'view/:id', component: JobOfferViewComponent}
     ]
   },
   { path: 'job-offers/:id', component: JobOfferComponent,

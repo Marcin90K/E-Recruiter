@@ -13,7 +13,8 @@
               <p class="joboffer-title"> {{ offer.jobPosition.name }}</p>
             </div>
             <div class="col-2">
-              <div class="button button-normal" (click)="apply(offer)" >Open</div>
+              <div *ngIf="!isAdmin" class="button button-normal" (click)="viewJobOffer(offer)" >Open</div>
+              <div *ngIf="isAdmin" class="button button-normal" (click)="editJobOffer(offer)" >Edit</div>
             </div>
           </div>
         </div>

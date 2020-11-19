@@ -1,3 +1,4 @@
+import { JobOfferSharingDataService } from './../../shared/services/job-offer-sharing-data.service';
 import { JobOfferService } from './../../shared/services/job-offer.service';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -9,6 +10,10 @@ import { RecruiterService } from '../../shared/services/recruiter.service';
 import { RecruiterListVM } from '../../shared/models/recruiter/recruiter-list-vm';
 import { JobOfferVM } from '../../shared/models/job-offer/job-offer-vm';
 import { JobOfferForUpdate } from '../../shared/models/job-offer/job-offer-for-update';
+import { ActivatedRoute } from '@angular/router';
+import { forEach } from '@angular/router/src/utils/collection';
+import { DatePipe } from '@angular/common';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-form-edit',
@@ -21,8 +26,7 @@ export class FormEditComponent implements OnInit {
 
   viewModel: JobOfferForUpdate;
 
-  //@Input() jobOfferId: string;
-  jobOfferId = '7e56b414-411b-4fee-ba42-2eba50bfec6f';
+  jobOfferId = '';
 
   jobPositions: JobPositionVM[];
   owners: RecruiterVM[];
@@ -30,14 +34,24 @@ export class FormEditComponent implements OnInit {
   description: string;
   requirements: string[] = [];
 
+  private dateFormat = 'yyyy-MM-dd'
+
 
   constructor(private formBuilder: FormBuilder,
               private recruiterService: RecruiterService,
-              private jobOfferService: JobOfferService) {
+              private jobOfferService: JobOfferService,
+              private activatedRoute: ActivatedRoute,
+              private datePipe: DatePipe) {
+
+    this.jobOfferId = this.activatedRoute.snapshot.parent.params['id'];
+    console.log(this.jobOfferId);
+
+
     this.jobOfferService.getJobOffer(this.jobOfferId).subscribe(
       vm => {
         vm ? this.viewModel = this.convertModelFromDBToUpdate(vm) : null;
-        //this.jobOfferForm = this.createFormGroup(this.formBuilder);
+        this.requirements = this.fillRequirementsFromDb(this.viewModel.requirements);
+        this.jobOfferForm = this.createFormGroup(this.formBuilder);
       },
       error => console.log(error)
     );
@@ -54,17 +68,19 @@ export class FormEditComponent implements OnInit {
       },
       error => console.log(error)
     );
-    //this.jobOfferForm = this.createFormGroup(this.formBuilder);
   }
 
 
   createFormGroup(fb: FormBuilder) {
+    console.log(this.viewModel)
+    let requirementsFromDb = this.viewModel ? this.fillRequirementsFromDb(this.viewModel.requirements) : null;
+    console.log(requirementsFromDb)
+
     return fb.group({
       jobPositionId: [this.viewModel ? this.viewModel.jobPositionId : ''],
       ownerId: [this.viewModel ? this.viewModel.ownerId : ''],
       description: [this.viewModel ? this.viewModel.description : ''],
-      requirements: [this.viewModel ? this.viewModel.requirements : null],
-      dateOfExpiration: [this.viewModel ? this.viewModel.dateOfExpiration : null]
+      dateOfExpiration: [this.viewModel ? this.convertDateFormatFromDb(this.viewModel.dateOfExpiration) : null]
     });
   }
 
@@ -101,6 +117,10 @@ export class FormEditComponent implements OnInit {
     return owners;
   }
 
+  fillRequirementsFromDb(requirements: string): string[] {
+    return requirements.split(', ');
+  }
+
   convertModelFromDBToUpdate(model: JobOfferVM): JobOfferForUpdate {
     let modelResult: JobOfferForUpdate;
 
@@ -113,8 +133,10 @@ export class FormEditComponent implements OnInit {
       requirements: model.requirements,
       candidateId: null
     };
+  }
 
-    //return modelResult;
+  convertDateFormatFromDb(date: Date): string {
+    return this.datePipe.transform(date, this.dateFormat);
   }
 
 }

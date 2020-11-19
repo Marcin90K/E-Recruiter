@@ -1,3 +1,5 @@
+import { JobOfferSharingDataService } from './../shared/services/job-offer-sharing-data.service';
+import { CandidateSharingDataService } from './../shared/services/candidate-sharing-data.service';
 import { JobOfferService } from './../shared/services/job-offer.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { JobOfferVM } from '../shared/models/job-offer/job-offer-vm';
@@ -13,6 +15,7 @@ export class RecruitmentPanelComponent implements OnInit {
 
   isAdmin = false;
 
+
   @Input() title = 'Opened Job Offers';
   private candidateSearchQuery = '';
 
@@ -21,10 +24,35 @@ export class RecruitmentPanelComponent implements OnInit {
     pagination: null
   };
 
-  constructor(private jobOfferService: JobOfferService,
+  constructor(private candidateSharingDataService: CandidateSharingDataService,
+              private jobOfferService: JobOfferService,
               private routerService: Router,
-              private activatedRouteService: ActivatedRoute) {
+              private activatedRouteService: ActivatedRoute,
+              private jobOfferSharingDataService: JobOfferSharingDataService) {
 
+    this.candidateSharingDataService.getCandidateViewModel().subscribe(
+      result => {
+        this.isAdmin = result ? false : true;
+      }
+    );
+
+    this.checkSearchQuery();
+  }
+
+  ngOnInit() {
+  }
+
+  viewJobOffer(offer: JobOfferVM) {
+    this.routerService.navigate(['../job-offers', offer.id, 'view']);
+  }
+
+  editJobOffer(offer: JobOfferVM) {
+    this.jobOfferSharingDataService.updateJobOfferData(offer);
+    this.routerService.navigate(['../job-offers', offer.id, 'edit']);
+  }
+
+
+  checkSearchQuery() {
     this.candidateSearchQuery = this.activatedRouteService.snapshot.params['id'];
     console.log(this.candidateSearchQuery);
 
@@ -39,13 +67,6 @@ export class RecruitmentPanelComponent implements OnInit {
         error => console.log(error)
       );
     }
-  }
-
-  ngOnInit() {
-  }
-
-  apply(offer: JobOfferVM) {
-    this.routerService.navigate(['../job-offers', offer.id, 'view']);
   }
 
 }

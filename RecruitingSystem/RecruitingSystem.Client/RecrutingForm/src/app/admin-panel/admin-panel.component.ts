@@ -18,12 +18,8 @@ export class AdminPanelComponent implements OnInit {
   jobOffersRedirectLink = "/recruitment-panel";
   viewCandidatesRedirectLink = "";
 
-  constructor(private candidateSharingDataService: CandidateSharingDataService) {
-    // this.candidateSharingDataService.getCandidateViewModel().subscribe(
-    //   result => this.candidateVM = result,
-    //   error => console.log(error)
-    // );
-   }
+  constructor() {
+  }
 
   ngOnInit() {
   }
