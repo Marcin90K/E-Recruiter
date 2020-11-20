@@ -1,3 +1,4 @@
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { RecruitmentPanelComponent } from './recruitment-panel/recruitment-panel.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
@@ -13,18 +14,13 @@ import { AuthComponent } from './auth/auth.component';
 import { JobOfferComponent } from './job-offer/job-offer.component';
 
 const routes: Routes = [
-  // { path: 'intro', component: IntroComponent },
-  // { path: 'basic', component: BasicInfoComponent },
-  // { path: 'education', component: EducationComponent },
-  // { path: 'experience', component: ExperienceComponent },
-  // { path: 'summary', component: SummaryComponent},
-  // { path: 'submitted', component: SubmittedComponent }
   { path: 'candidate', component: CandidateComponent },
   { path: 'job-offers', component: JobOfferComponent },
   { path: 'recruitment-panel', component: RecruitmentPanelComponent },
   { path: 'recruitment-panel/:id', component: RecruitmentPanelComponent },
   { path: 'submitted', component: SubmittedComponent},
   { path: 'home', component: HomeComponent },
+  { path: 'admin-panel', component: AdminPanelComponent },
   { path: 'auth', component: AuthComponent }
 ];
 

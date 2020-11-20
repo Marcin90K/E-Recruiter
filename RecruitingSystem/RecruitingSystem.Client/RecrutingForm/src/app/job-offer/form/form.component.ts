@@ -1,4 +1,3 @@
-import { JobOfferForUpdate } from './../../shared/models/job-offer/job-offer-for-update';
 import { JobOfferService } from './../../shared/services/job-offer.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -7,8 +6,6 @@ import { RecruiterVM } from 'src/app/shared/models/recruiter/recruiter-vm';
 import { JOBPOSITIONS } from 'src/app/shared/models/opened-jobs';
 import { JobOfferForCreation } from 'src/app/shared/models/job-offer/job-offer-for-creation';
 import { RecruiterService } from 'src/app/shared/services/recruiter.service';
-import { RecruiterListVM } from 'src/app/shared/models/recruiter/recruiter-list-vm';
-import { JobOfferVM } from 'src/app/shared/models/job-offer/job-offer-vm';
 
 @Component({
   selector: 'app-form',
@@ -19,9 +16,6 @@ export class FormComponent implements OnInit {
 
   jobOfferForm: FormGroup;
   viewModel: JobOfferForCreation;
-  //viewModelForUpdate: JobOfferForUpdate;
-  //viewModelFromDB: JobOfferVM;
-  //isEditing = false;
   jobOfferId: string;
 
   jobPositions: JobPositionVM[];

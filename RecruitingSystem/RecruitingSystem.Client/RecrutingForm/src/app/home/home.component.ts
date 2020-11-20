@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     this.candidateSharingService.getCandidateViewModel().subscribe(
       result => {
         this.candidateVM = result;
-        this.candidateName = this.candidateVM.candidateBasicData.personBasicData.firstName;
+        this.candidateName = this.candidateVM.candidateBasicData ? this.candidateVM.candidateBasicData.personBasicData.firstName : '';
         this.candidateId = this.candidateVM.id;
         this.appliedJobOffersRedirectLink += this.candidateId;
       },

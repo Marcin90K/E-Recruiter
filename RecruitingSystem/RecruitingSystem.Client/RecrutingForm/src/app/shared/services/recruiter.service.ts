@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { APPLICATION_MODULE_PROVIDERS } from '@angular/core/src/application_module';
 import { RecruiterVM } from '../models/recruiter/recruiter-vm';
 import { Observable } from 'rxjs';
 import { RecruiterListVM } from '../models/recruiter/recruiter-list-vm';

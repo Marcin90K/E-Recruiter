@@ -1,4 +1,3 @@
-import { ConfirmModalComponent } from './shared/components/confirm-modal/confirm-modal.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -21,6 +20,7 @@ import { RecruitmentPanelComponent } from './recruitment-panel/recruitment-panel
 import { SubmittedPageComponent } from './shared/submitted-page/submitted-page.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { WidgetComponent } from './shared/components/widget/widget.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +29,8 @@ import { WidgetComponent } from './shared/components/widget/widget.component';
     HomeComponent,
     RecruitmentPanelComponent,
     SubmittedPageComponent,
-    ConfirmModalComponent,
-    WidgetComponent
+    WidgetComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,

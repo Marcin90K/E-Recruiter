@@ -1,8 +1,6 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { JobPositionVM } from '../shared/models/job-position/job-position-vm';
 import { JOBPOSITIONS } from '../shared/models/opened-jobs';
-import {FormControl, FormGroup, ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {NgSelectModule, NgOption} from '@ng-select/ng-select';
 import { CandidateSharingDataService } from '../shared/services/candidate-sharing-data.service';
 import { CandidateForCreation } from '../shared/models/Candidate/candidate-for-creation';
 
@@ -33,11 +31,6 @@ export class CandidateComponent implements OnInit {
     this.candidateDataService.getCandidateBasicData().subscribe(res => {
       this.candidateData.candidateBasicData = Object.assign({}, res);
     });
-  }
-
-  submit() {
-     console.log("test");
-     console.log(this.candidateData.candidateBasicData);
   }
 
 }
