@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { EducationForManipulation } from '../models/education/education-for-manipulation';
 import { ExperienceForManipulation } from '../models/experience/experience-for-manipulation';
 import { JobBasicInfo } from '../models/basic-job-info';

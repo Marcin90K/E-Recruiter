@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CandidateBasicDataForManipulation } from '../../shared/models/candidate-basic-data/candidate-basic-data-for-manipulation';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CandidateBasicDataVM } from 'src/app/shared/models/candidate-basic-data/candidate-basic-data-vm';

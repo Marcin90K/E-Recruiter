@@ -1,4 +1,3 @@
-import { ConfirmModalComponent } from './shared/components/confirm-modal/confirm-modal.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -30,7 +29,6 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     HomeComponent,
     RecruitmentPanelComponent,
     SubmittedPageComponent,
-    ConfirmModalComponent,
     WidgetComponent,
     AdminPanelComponent
   ],

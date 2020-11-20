@@ -5,7 +5,6 @@ import { JobOfferVM } from 'src/app/shared/models/job-offer/job-offer-vm';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
-import { CandidateVM } from 'src/app/shared/models/candidate/candidate-vm';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -45,7 +44,6 @@ export class JobOfferViewComponent implements OnInit {
               private datePipe: DatePipe,
               private modalService: NgbModal ) {
     this.jobOfferId = this.activatedRoute.snapshot.parent.params['id'];
-    console.log(this.jobOfferId);
 
     this.jobOfferService.getJobOffer(this.jobOfferId).subscribe(
       result => {

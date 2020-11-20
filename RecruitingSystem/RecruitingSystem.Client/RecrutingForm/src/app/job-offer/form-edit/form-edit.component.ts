@@ -1,19 +1,14 @@
-import { JobOfferSharingDataService } from './../../shared/services/job-offer-sharing-data.service';
 import { JobOfferService } from './../../shared/services/job-offer.service';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { JobPositionVM } from '../../shared/models/job-position/job-position-vm';
 import { RecruiterVM } from '../../shared/models/recruiter/recruiter-vm';
 import { JOBPOSITIONS } from '../../shared/models/opened-jobs';
-import { JobOfferForCreation } from '../../shared/models/job-offer/job-offer-for-creation';
 import { RecruiterService } from '../../shared/services/recruiter.service';
-import { RecruiterListVM } from '../../shared/models/recruiter/recruiter-list-vm';
 import { JobOfferVM } from '../../shared/models/job-offer/job-offer-vm';
 import { JobOfferForUpdate } from '../../shared/models/job-offer/job-offer-for-update';
 import { ActivatedRoute } from '@angular/router';
-import { forEach } from '@angular/router/src/utils/collection';
 import { DatePipe } from '@angular/common';
-import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-form-edit',
@@ -72,10 +67,6 @@ export class FormEditComponent implements OnInit {
 
 
   createFormGroup(fb: FormBuilder) {
-    console.log(this.viewModel)
-    let requirementsFromDb = this.viewModel ? this.fillRequirementsFromDb(this.viewModel.requirements) : null;
-    console.log(requirementsFromDb)
-
     return fb.group({
       jobPositionId: [this.viewModel ? this.viewModel.jobPositionId : ''],
       ownerId: [this.viewModel ? this.viewModel.ownerId : ''],
@@ -88,7 +79,7 @@ export class FormEditComponent implements OnInit {
   apply() {
     this.viewModel = this.jobOfferForm.value;
     this.viewModel.requirements = this.requirements.join('\n');
-    this.jobOfferService.addJobOffer(this.viewModel).subscribe(
+    this.jobOfferService.updateJobOffer(this.viewModel).subscribe(
       result => console.log("Job offer updated: " + result.id),
       error => console.log(error)
     );

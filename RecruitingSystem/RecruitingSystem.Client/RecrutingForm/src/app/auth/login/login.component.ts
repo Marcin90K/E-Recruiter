@@ -1,10 +1,8 @@
 import { RecruiterVM } from 'src/app/shared/models/recruiter/recruiter-vm';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { LoginBasic } from 'src/app/shared/models/auth/login-basic';
 import { CandidateVM } from 'src/app/shared/models/candidate/candidate-vm';
 import { CandidateService } from 'src/app/shared/services/candidate.service';
-import { BehaviorSubject } from 'rxjs';
 import { CandidateSharingDataService } from 'src/app/shared/services/candidate-sharing-data.service';
 import { Router } from '@angular/router';
 import { RecruiterService } from 'src/app/shared/services/recruiter.service';
